@@ -1,7 +1,10 @@
-# server files to ignore
+# uniserver files to ignore
 
 server/node_modules
 server/dist
 
 # client files to ignore
 
+client/node_modules
+client/dist
+client/.angular
