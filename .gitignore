@@ -1,0 +1,9 @@
+# server files to ignore
+
+server/node_modules
+server/dist
+
+# client files to ignore
+
+client/node_modules
+client/dist
