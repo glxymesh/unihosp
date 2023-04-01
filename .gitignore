@@ -1,7 +1,11 @@
 # server files to ignore
 
-server/node_modules
-server/dist
+uniserver/node_modules
+uniserver/dist
 
 # client files to ignore
 
+client/node_modules
+client/dist
+
+.DS_Store
