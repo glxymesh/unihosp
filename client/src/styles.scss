@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    /* position: relative; */
+    background-color: #0b2424;
+    /* overflow-x: hidden; */
+    margin: 0;
+    overflow-x: hidden;
+    /* background:linear-gradient(45deg, #77a1d3 0%, #79cbca 55%, #e684ae 100%); */
+    /* background:linear-gradient(45deg, #ddf7f8 0%, #9ab8ba 35%, #045256 100%); */
+    /* background:linear-gradient(45deg, #46a094 0%, #6bbd99 35%, #aecfa4 70%, #c4ebc2 100%); */
+    background: linear-gradient(45deg, #c4ebc2 0%, #aecfa4 30%, #6bbd99 60%, #3b887e 90%);
+    /* background: linear-gradient(45deg, #44a08d 0%, #093637 100%); */
+    /* background: linear-gradient(90deg, #A7BFE8 0%, #6190E8 100%); */
+    /* height: 100vh; */
+    z-index: -9;
+    position: inherit;
+}
+
+// add for profile styles in body
+// accent-color: #3b887e;
