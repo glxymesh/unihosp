@@ -35,7 +35,7 @@ button {
     position: relative;
     text-align: center;
     /* background-color: rgba(240, 248, 255, 0.155); */
-    padding: 10vw 10vw 10vw 15vw;
+    padding: 10vw 10vw 5vw 15vw;
     z-index: -1;
 }
 
@@ -50,6 +50,7 @@ button {
     /* padding: 6rem; */
     padding-bottom: 10rem;
     margin: 3rem;
+    margin-bottom: 0;
 }
 
 .blurcontent {

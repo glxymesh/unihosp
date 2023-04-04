@@ -35,7 +35,7 @@ button {
     position: relative;
     text-align: center;
     /* background-color: rgba(240, 248, 255, 0.155); */
-    padding: 10vw 10vw 10vw 15vw;
+    padding: 10vw 10vw 5vw 15vw;
     z-index: -1;
 }
 
@@ -49,6 +49,7 @@ button {
    box-shadow: 5px 5px 25px #04525693, -5px 0px 25px #04525693;
    /* padding: 6rem; */
    margin: 3rem;
+   margin-bottom: 0;
 }
 
 .blurcontent {
