@@ -1,10 +1,38 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+
+import { AuthController } from './authentication/authentication.controller';
+import { MailService } from './authentication/mail/mail.service';
+import { AuthService } from './authentication/services/auth.service';
+import { MSGService } from './authentication/services/msg.service';
+import { PrismaService } from './database/prisma.service';
+import { DevelopmentGuard } from './guards/development.guards';
+import { HospitalGuard } from './hospital/guard/hospital.guard';
+import { HospitalController } from './hospital/hospital.controller';
+import { HospitalService } from './hospital/services/hospital.service';
+import { NotifierGateway } from './notifier/notifier.gateway';
+import { NotifierService } from './notifier/notifier.service';
+import { PatientController } from './patient/patient.controller';
+import { PatientService } from './patient/service/patient.service';
+import { UserService } from './user/user.service';
+
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    JwtModule.registerAsync({
+      imports: [],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get("PRIVATE_TOKEN_KEY"),
+        signOptions: {
+          expiresIn: parseInt(configService.get("JWT_REFRESH_EXPIRE"))
+        }
+      }),
+      inject: [ConfigService]
+    })
+  ],
+  controllers: [AuthController, PatientController, HospitalController],
+  providers: [PrismaService, AuthService, DevelopmentGuard, PatientService, UserService, MailService, MSGService, HospitalGuard, HospitalService, NotifierGateway, NotifierService],
 })
-export class AppModule {}
+export class AppModule { }
