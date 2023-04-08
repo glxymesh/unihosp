@@ -1,27 +1,4 @@
-.glass{
-    height: 30rem;
-    width: 20rem;
-    margin: 4rem;
-    background-color: #ecf0f3;
-    padding: 2.5rem 2rem;
-    border-radius: 1.5rem;
-    box-shadow: 20px 20px 20px #cbced1, -20px -20px 20px rgba(255, 255, 255, 0.699) ;
-}
-.loginhead{
-    font-size: 2rem;
-    text-align: center;
-    margin-top: 1rem;
-    font-family: 'Segoe UI','Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 500;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: #045256;
-}
-
-fieldset{
-    margin: 2rem 0;
-}
-.maincont1{
+.maincont1 {
     background-color: #ecf0f3;
     border-radius: 1.5rem;
     box-shadow: 10px 10px 10px 1px #cbced1 inset, -10px -10px 10px 1px rgba(255, 255, 255, 0.699) inset;
@@ -39,6 +16,7 @@ fieldset{
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
+
 .maincont2 input:focus::-webkit-input-placeholder  {
     opacity: 0;
     -webkit-transition: all 200ms linear;
@@ -67,11 +45,10 @@ fieldset{
     background-color: transparent;
     border: 0;
     padding: 0.1rem;
-    
     width: 100%;
 }
 .mailnum:focus {
-     outline: none; 
+     outline: none;
 }
 .mailnum1{
     background-color: transparent;
@@ -80,17 +57,9 @@ fieldset{
     width: 100%;
 }
 .mailnum1:focus {
-     outline: none; 
+     outline: none;
 }
-/* .mainform button{
-    border-radius: 1.5rem;
-    padding: 0.5rem 1.5rem;
-    width: 100%;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #045256;
 
-} */
 
 .mainform button {
     font-size: 1rem;
@@ -119,7 +88,7 @@ fieldset{
     transition: 200ms;
 }
 .right{
-    float: right;    
+    float: right;
     color: #045256;
     text-decoration: none;
     font-family: 'Segoe UI','Open Sans', 'Helvetica Neue', sans-serif;
@@ -132,44 +101,3 @@ fieldset{
     margin-left: 3rem;
 }
 
-/* FALTU KA CODE!!! */
-
-/* .maincont input:-ms-input-placeholder  {
-    color: #c4c3ca;
-    opacity: 0.7;
-    -webkit-transition: all 200ms linear;
-      transition: all 200ms linear;
-  } */
-  /* .maincont input::-moz-placeholder  {
-    color: #c4c3ca;
-    opacity: 0.7;
-    -webkit-transition: all 200ms linear;
-      transition: all 200ms linear;
-  } */
-  /* .maincont input:-moz-placeholder  {
-    color: #c4c3ca;
-    opacity: 0.7;
-    -webkit-transition: all 200ms linear;
-      transition: all 200ms linear;
-  } */
-  /* .maincont input::-webkit-input-placeholder  {
-    color: #c4c3ca;
-    opacity: 0.7;
-    -webkit-transition: all 200ms linear;
-      transition: all 200ms linear;
-  } */
-  /* .maincont input:focus:-ms-input-placeholder  {
-    opacity: 0;
-    -webkit-transition: all 200ms linear;
-      transition: all 200ms linear;
-  } */
-  /* .maincont input:focus::-moz-placeholder  {
-    opacity: 0;
-    -webkit-transition: all 200ms linear;
-      transition: all 200ms linear;
-  } */
-  /* .maincont input:focus:-moz-placeholder  {
-    opacity: 0;
-    -webkit-transition: all 200ms linear;
-      transition: all 200ms linear;
-  } */
