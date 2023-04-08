@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_ROOT")
+}
+
+model User {
+  id            String          @id @default(uuid())
+  email         String          @unique
+  password      String
+  name          String?
+  contact       String?
+  role          Role            @default(Patient)
+  patient       Patient?
+  doctor        Doctor?
+  refreshTokens RefreshTokens[]
+  documents     Documents[]
+  notification  Notification[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime?
+  preferences   Preferences?
+  verified      Boolean         @default(false)
+}
+
+model RefreshTokens {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  authToken Bytes
+  expireIn  DateTime
+  createdAt DateTime @default(now())
+}
+
+model Hospital {
+  id                     String         @id @default(uuid())
+  name                   String
+  handle                 String         @unique
+  location               String?
+  doctor                 Doctor[]
+  allowedPatientProfiles Patient[]
+  Appointments           Appointments[]
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime?
+}
+
+model Patient {
+  id               String         @id @default(uuid())
+  handle           String         @unique
+  Appointments     Appointments[]
+  owner            User           @relation(fields: [userId], references: [id])
+  allowedHospitals Hospital[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime?
+  userId           String         @unique
+  allowedDoctors   Doctor[]
+}
+
+model Doctor {
+  id                     String         @id @default(uuid())
+  hospital               Hospital       @relation(fields: [hospitalId], references: [id])
+  handle                 String         @unique
+  Appointments           Appointments[]
+  hospitalId             String
+  allowedPatientProfiles Patient[]
+  owner                  User           @relation(fields: [userId], references: [id])
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime?
+  userId                 String         @unique
+}
+
+model Documents {
+  id        String    @id @default(uuid())
+  name      String
+  type      String
+  buffer    Bytes
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+}
+
+model Appointments {
+  id              String    @id @default(uuid())
+  appointmentDate DateTime
+  patient         Patient   @relation(fields: [patientId], references: [id])
+  patientId       String
+  doctor          Doctor    @relation(fields: [doctorId], references: [id])
+  doctorId        String
+  hospital        Hospital  @relation(fields: [hospitalId], references: [id])
+  hospitalId      String
+  location        String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime?
+}
+
+model Preferences {
+  id                  String    @id @default(uuid())
+  owner               User      @relation(fields: [userId], references: [id])
+  userId              String    @unique
+  notificationAllowed Boolean   @default(false)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime?
+}
+
+model Notification {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  createAt    DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  redirectUrl String?
+  checked     Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
+}
+
+model VerificationMailRequest {
+  id       String   @id
+  email    String   @unique
+  contact  String   @unique
+  code     Int
+  expireAt DateTime
+
+  @@index([email])
+}
+
+enum Role {
+  Patient
+  Doctor
+  Admin
+}
