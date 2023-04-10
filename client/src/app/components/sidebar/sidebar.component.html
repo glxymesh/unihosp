@@ -1,0 +1,32 @@
+<div class="stick">
+  <div class="sidepanelextended" [ngClass]="{'hmb': !open}" #sidebarExtented>
+    <div class="hamlogo" (click)="open ? closeSidebar() : openSidebar($event)">
+      <i class="icon fa-solid fa-close"></i>
+    </div>
+    <ul>
+      <li *ngFor="let route of routes;let i = index;" class="box1">
+        <a [ngClass]="{'hovered': route.hovered}" [routerLink]="'/dashboard/'+route.routerLink"
+          (mouseover)="mouseOver(i)" (mouseleave)="mouseOverOut(i)">
+          <div class="circle1">
+            <h3>{{route.title}}</h3>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidepannel">
+    <div class="hamlogo" (click)="open ? closeSidebar() : openSidebar($event)">
+      <i class="icon fa-solid fa-bars"></i>
+    </div>
+    <ul>
+      <li class="box" *ngFor="let route of routes; let i = index;">
+        <a class="linkNoDec" [ngClass]="{'hovered': route.hovered}" [routerLink]="'/dashboard/'+route.routerLink"
+          (mouseover)="mouseOver(i)" (mouseleave)="mouseOverOut(i)">
+          <div class="circle"><i [class]="['icon', 'fa-solid', route.icon]"></i></div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="hideHider" [@hideHider]="stateName" class="hhdr" #hhdr (click)="closeSidebar()"></div>

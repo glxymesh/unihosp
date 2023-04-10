@@ -1,0 +1,35 @@
+.content {
+  color: #333 !important;
+  background-color: rgba(4, 82, 86, 0.1568627451);
+  border: 3px solid transparent;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  gap: 16px;
+  padding: 20px;
+  position: relative;
+}
+.content > div:nth-child(1) {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.userimage {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.userimage img {
+  height: 7rem;
+  border-radius: 500px;
+  border: 1px black solid;
+}/*# sourceMappingURL=common.style.css.map */

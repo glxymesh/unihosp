@@ -1,44 +1,44 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterModule, Routes } from '@angular/router';
-
-import { TopbarComponent } from './components/topbar/topbar.component';
+import { AddAppointmentModule } from '../components/add-appointment/add-appointment.module';
+import { SidebarModule } from '../components/sidebar/sidebar.module';
+import { TopbarModule } from '../components/topbar/topbar.module';
+import { UserGuard } from '../guards/user.guard';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { AppointmentComponent } from './pages/appointment/appointment.component';
+import { AppointmentService } from './pages/appointment/appointments.service';
 import { DocumentComponent } from './pages/document/document.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HospitalComponent } from './pages/hospital/hospital.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
-const routes: Routes = [
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    children: [
-      { path: '', component: HomeComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'hospital', component: HospitalComponent },
-      { path: 'appointments', component: AppointmentComponent },
-      { path: 'documents', component: DocumentComponent },
-    ],
-  },
-]
+
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    TopbarComponent,
     HomeComponent,
     ProfileComponent,
     HospitalComponent,
     AppointmentComponent,
-    DocumentComponent
+    DocumentComponent,
   ],
   imports: [
-    RouterModule.forChild(routes),
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DashboardRoutingModule,
+    TopbarModule,
+    SidebarModule,
+    AddAppointmentModule,
+  ],
+  exports: [
+    DashboardComponent
+  ],
+  providers: [
+    AppointmentService,
+    UserGuard
   ]
 })
 export class DashboardModule { }

@@ -1,10 +1,34 @@
-// Here are all css styles of all dashboard pages
-
-/* common navbar styles */
 .dashboard-container {
-    // display: grid;
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    background: linear-gradient(225deg, rgba(195, 235, 193, 0.656) 0%, rgba(107, 189, 153, 0.501) 100%);
+  width: 100%;
+  height: 100vh;
+  min-height: 768px;
+  // position: relative;
+  background: var(--primary-color);
+  display: grid;
+  grid-template-areas:
+    "topbar topbar"
+    "sidebar content";
+  grid-template-rows: 60px auto;
+  grid-template-columns: 60px calc(100% - 60px);
+  gap: 10px;
+}
+
+uni-atp {
+  grid-area: topbar;
+}
+
+utp-sde {
+  grid-area: sidebar;
+}
+
+.ctn {
+  grid-area: content;
+  // overflow: scroll;
+  // background: #25cc259b;
+  max-width: 1200px;
+  padding: 1rem 1.5rem;
+  margin: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
 }

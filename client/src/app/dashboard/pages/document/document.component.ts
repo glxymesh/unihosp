@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'uni-doc',
   templateUrl: 'document.component.html',
-  styleUrls: ["document.component.scss"]
+  styleUrls: ["document.component.scss", "../../common.style.scss"]
 })
 
 export class DocumentComponent implements OnInit {

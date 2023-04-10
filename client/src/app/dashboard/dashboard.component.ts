@@ -8,16 +8,19 @@ import { OutletContext, RouterOutlet, UrlSegment } from '@angular/router';
   styleUrls: ['./dashboard.component.scss'],
   animations: [
     trigger('routerAnimation', [
-      transition('* => *', [
-        style({
-          background: 'blue'
-        }),
-        animate(1000)
-      ])
+      //   transition('* => *', [
+      //     style({
+      //       background: 'blue'
+      //     }),
+      //     animate(1000)
+      //   ])
     ])
   ]
 })
 export class DashboardComponent {
+
+  constructor() { }
+
 
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated)
