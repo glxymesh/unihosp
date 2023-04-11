@@ -1,6 +1,9 @@
 .content {
+  --background-1: white;
+  --background-2: #04525628;
+
   color: #333 !important;
-  background-color: #04525628;
+  background-color: var(--background-1);
   border: 3px solid transparent;
   border-radius: 1.5rem;
   display: flex;

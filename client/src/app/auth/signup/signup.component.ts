@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "@unihosp/auth";
 import { FieldType, HUIcon } from "../interfaces";
 
 
@@ -32,7 +31,6 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
   ) {
   }
   passwordControl = new FormControl("", [
@@ -81,9 +79,9 @@ export class SignupComponent implements OnInit {
     console.log(this.signupForm.value);
     const values = this.signupForm.value;
     if (values.password === values["confirm-password"]) {
-      this.authService.signup(values.email, values.password).subscribe((user) => {
-        this.navigate(values.email, values.contact,);
-      });
+      // this.authService.signup(values.email, values.password).subscribe((user) => {
+      this.navigate(values.email, values.contact,);
+      // });
     } else {
       alert(`Password's doesn't match.`);
     }

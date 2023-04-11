@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthModule } from "@unihosp/auth";
 
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
 import { AuthenticationComponent } from "./authentication.component";
@@ -28,7 +27,6 @@ import { SignupComponent } from "./signup/signup.component";
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    AuthModule,
     AuthenticationRoutingModule,
     BrowserAnimationsModule,
   ]

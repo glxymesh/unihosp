@@ -1,9 +1,9 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthModule } from '@unihosp/auth';
+
 import { AboutComponent } from './aboutpage/about.component';
 import { AppComponent } from './app.component';
 import { AuthenticationModule } from './auth/authentication.module';
@@ -12,6 +12,9 @@ import { TopbarModule } from './components/topbar/topbar.module';
 import { CreateprofileComponent } from './createprofile/createprofile.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NotificationService } from './notification/notification.service';
+import { RequestsInterceptor } from "./requests.interceptor";
+import { ProfileService } from './services/profile.service';
+import { UserService } from './services/user.service';
 
 
 
@@ -31,12 +34,13 @@ const routes: Routes = [
     DashboardModule,
     TopbarModule,
     SidebarModule,
+    HttpClientModule,
     AuthenticationModule,
-    AuthModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
-  providers: [NotificationService],
+  providers: [NotificationService, ProfileService, UserService, RequestsInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

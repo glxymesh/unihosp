@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { NotificationService } from './notification/notification.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'uni-root',
@@ -8,12 +10,22 @@ import { NotificationService } from './notification/notification.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
+
+  value = ""
+
+  exists = false
+
 
   ngOnInit(): void {
-    // this.notification.listen().subscribe(observe => {
-    //   console.log(observe);
-    // })
+
+  }
+
+  onChange() {
+    console.log(this.value)
+    this.userService.getUsersByMail(this.value).subscribe(observe => {
+      console.log(observe);
+    })
   }
 
 

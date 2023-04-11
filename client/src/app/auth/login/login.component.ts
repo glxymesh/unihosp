@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   login($event: any) {
     $event.preventDefault();
 
-    this.router.navigate(["/"])
+    this.router.navigate(["/createprofile"])
       .then(console.log);
   }
 }
