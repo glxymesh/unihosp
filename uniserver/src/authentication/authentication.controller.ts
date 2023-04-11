@@ -5,7 +5,6 @@ import {
   Get,
   Headers,
   Logger,
-  Param,
   Post,
   Query,
   Redirect,
@@ -35,13 +34,13 @@ export class AuthController {
 
   private logger = new Logger(AuthController.name);
 
-  @Get('users')
+  @Post('users')
   getAllUsers(@Body() data: any) {
     return this.userService.users({ ...data });
   }
 
-  @Get('exists')
-  doesExists(@Body() data: { handle?: string; email?: string }) {
+  @Post('exists')
+  async doesExists(@Body() data: { handle?: string; email?: string }) {
     const { handle, email } = data;
 
     const toCheck = email
@@ -49,21 +48,23 @@ export class AuthController {
       : data.handle
         ? ToCheckType.Handle
         : null;
+    console.log(toCheck);
+    let response: any;
 
     switch (toCheck) {
       case ToCheckType.Email:
-        if (this.userService.user({ email }) != null)
-          return {
+        if (await this.userService.user({ email })) {
+          this.logger.log(this.userService.user({ email }));
+          response = {
             email: true,
           };
-
+        }
         break;
       case ToCheckType.Handle:
         if (this.patientService.findPatientProfiles({ handle }) != null)
-          return {
-            email: true,
+          response = {
+            handle: true,
           };
-
         break;
       default:
         return {
@@ -72,6 +73,12 @@ export class AuthController {
           handle: false,
         };
     }
+
+    return response ? response : {
+      error: '401',
+      email: false,
+      handle: false,
+    };
   }
 
   @Post('signup')

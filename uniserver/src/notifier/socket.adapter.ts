@@ -1,7 +1,7 @@
 import { INestApplication, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { IoAdapter } from "@nestjs/platform-socket.io";
-import { ServerOptions, Server } from "socket.io";
+import { Server, ServerOptions } from "socket.io";
 import { SocketWithAuth } from "src/interfaces/socketWithAuth";
 
 export class SocketIOAdapter extends IoAdapter {
@@ -47,6 +47,7 @@ export class SocketIOAdapter extends IoAdapter {
           `http://127.0.0.1:4200`,
           `http://localhost:5500`,
           `http://127.0.0.1:5500`,
+          'http://192.168.56.249:4200/'
         ]
       }
     };

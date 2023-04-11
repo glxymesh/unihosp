@@ -11,10 +11,11 @@ async function bootstrap() {
       'http://127.0.0.1:4200',
       'http://localhost:5500',
       'http://127.0.0.1:5500',
+      'http://192.168.56.249:4200/'
     ]
   })
 
-  app.setGlobalPrefix("api/v1/");
+  // app.setGlobalPrefix("api/v1/");
 
   app.useWebSocketAdapter(new SocketIOAdapter(app));
   await app.listen(3000);
