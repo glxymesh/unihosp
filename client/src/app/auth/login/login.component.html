@@ -6,7 +6,7 @@
             Email address
         </label>
         <i class="far fa-user"></i>
-        <input class="mailnum" type="email" autocomplete="username, email" formControlName="email" name="email"
+        <input hovered class="mailnum" type="email" autocomplete="username, email" formControlName="email" name="email"
             id="email" placeholder="example@xyz.com" />
     </div>
 
@@ -16,7 +16,7 @@
             Password
         </label>
         <i class="fas fa-key"></i>
-        <input [type]="fieldType" formControlName="password" autocomplete="new-password" id="pas-1"
+        <input hovered [type]="fieldType" formControlName="password" autocomplete="new-password" id="pas-1"
             placeholder="238#7br83@2r5!4" />
         <span class="span3" (click)="hide()">
             <i [class]="classList" aria-hidden="true"></i>

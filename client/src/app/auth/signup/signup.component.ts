@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { UserService } from "src/app/services/user.service";
+import { EmailValidator } from "../Validators/EmailValidator";
 import { FieldType, HUIcon } from "../interfaces";
 
 
@@ -10,6 +12,13 @@ import { FieldType, HUIcon } from "../interfaces";
   styleUrls: ["./signup.component.scss", "../common-styles/common.css", "../common-styles/password-field.component.scss"]
 })
 export class SignupComponent implements OnInit {
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService
+  ) {
+  }
 
 
   passInputFields: {
@@ -28,11 +37,7 @@ export class SignupComponent implements OnInit {
   }
 
   signupForm!: FormGroup;
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-  ) {
-  }
+
   passwordControl = new FormControl("", [
     Validators.required,
     Validators.minLength(8),
@@ -42,11 +47,15 @@ export class SignupComponent implements OnInit {
     Validators.required,
     Validators.minLength(8)
   ]);
+
+
   ngOnInit() {
+    document.title = "Signup - UniHosp"
     this.signupForm = this.formBuilder.group({
       "email": new FormControl("", [
         Validators.required,
-        Validators.email
+        Validators.email,
+        EmailValidator.CheckUserName(this.userService)
       ]),
       "contact": new FormControl("", [
         Validators.required,
@@ -56,10 +65,14 @@ export class SignupComponent implements OnInit {
       "confirm-password": this.confirmPasswordControl,
       "userType": new FormControl()
     });
-    this.signupForm.valueChanges.subscribe((observe) => {
-      console.log("Form is ", observe);
-      console.log(this.signupForm);
-    })
+    // this.signupForm.valueChanges.subscribe((observe) => {
+    //   console.log("Form is ", observe);
+    //   console.log(this.signupForm);
+    // })
+  }
+
+  get email() {
+    return this.signupForm.get('email');
   }
 
   userTypeChange(event: any) {

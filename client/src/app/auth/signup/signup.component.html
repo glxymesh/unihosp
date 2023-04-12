@@ -1,21 +1,30 @@
 <h1 class="login-head">Register yourself.</h1>
 <form [formGroup]="signupForm" (submit)="handleRegistration($event)" class="mainform">
-  <div class="maincont">
-    <div></div>
-    <label class="span0" for="email">
-      Email address
-    </label>
-    <i class="far fa-user"></i>
-    <input class="mailnum" type="email" autocomplete="username, email" formControlName="email" name="email" id="email"
-      placeholder="example@xyz.com" />
+  <div>
+    <div class="maincont">
+      <div></div>
+      <label class="span0" for="email">
+        Email address
+      </label>
+      <i class="far fa-user"></i>
+      <input hovered class="mailnum" type="email" autocomplete="username, email" formControlName="email" name="email"
+        id="email" placeholder="example@xyz.com" />
+    </div>
+    <div *ngIf="email?.invalid && email?.pristine">
+      Email Already Exists
+    </div>
+    <div *ngIf="email?.pending">
+      Waiting for response
+    </div>
   </div>
+
   <div class="maincont">
     <div></div>
     <label class="span0" for="mob">
       Contact number
     </label>
     <i class="far fa-user"></i>
-    <input class="mailnum" type="text" autocomplete="mobile" formControlName="contact" name="number" id="mob"
+    <input hovered class="mailnum" type="text" autocomplete="mobile" formControlName="contact" name="number" id="mob"
       placeholder="+91-1254875645" />
   </div>
 
@@ -25,7 +34,7 @@
       {{field.title}}
     </label>
     <i class="fas fa-key"></i>
-    <input [type]="field.fieldType" formControlName="{{field.title|lowercase}}" autocomplete="new-password"
+    <input hovered [type]="field.fieldType" formControlName="{{field.title|lowercase}}" autocomplete="new-password"
       id="pas-{{i}}" placeholder="238#7br83@2r5!4" />
     <span class="span3" (click)="hide(i)">
       <i [class]="field.classList" aria-hidden="true"></i>
@@ -34,7 +43,7 @@
 
   <div class="btn-container">
     <label class="switch btn-color-mode-switch">
-      <input type="checkbox" formControlName="userType" id="color_mode" (change)="userTypeChange($event)" />
+      <input hovered type="checkbox" formControlName="userType" id="color_mode" (change)="userTypeChange($event)" />
       <label for="color_mode" data-on="Doctor" data-off="Individual" class="btn-color-mode-switch-inner"></label>
     </label>
   </div>

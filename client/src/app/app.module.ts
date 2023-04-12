@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -40,7 +40,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [NotificationService, ProfileService, UserService, RequestsInterceptor],
+  providers: [NotificationService, ProfileService, UserService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestsInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

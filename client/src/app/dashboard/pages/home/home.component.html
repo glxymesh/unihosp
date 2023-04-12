@@ -72,7 +72,7 @@
         <div class="boxmain b1" *ngIf="lastTwoAppointments$ | async as appointment">
             <h1>Emergency Notification</h1>
             <ul class="notification" *ngIf="appointment.length > 0">
-                <li class="ntfy" *ngFor="let appointment of lastTwoAppointments$ | async">
+                <li class="ntfy" *ngFor="let appointment of lastTwoAppointments$ | async | slice: -2">
                     <a routerLink="/dashboard/notification">
                         <div class="apt">
                             <span class="arvl">{{ dt | date : 'h:mm a, MMM d' }}</span>

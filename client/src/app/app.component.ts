@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     console.log(this.value)
     this.userService.getUsersByMail(this.value).subscribe(observe => {
       console.log(observe);
+      this.exists = observe.email  ? observe.email : false;
     })
   }
 
