@@ -36,10 +36,6 @@
 .span1{
     margin-right: 1rem;
 }
-.title{
-    float: top;
-    float: left;
-}
 .mailnum{
     background-color: transparent;
     border: 0;
@@ -50,41 +46,22 @@
 .mailnum:focus {
      outline: none;
 }
-.mailnum1{
-    background-color: transparent;
-    border: 0;
-    padding: 0.1rem;
-    width: 100%;
-}
-.mailnum1:focus {
-     outline: none;
-}
-/* .mainform button{
-    border-radius: 1.5rem;
-    padding: 0.5rem 1.5rem;
-    width: 100%;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #045256;
-
-} */
-
-.mainform button {
-    font-size: 1rem;
-    color: white;
-    border: 0;
-    background: linear-gradient(90deg, #045256 10%, #045256 60%, #0b1516c2 100%);
-    padding: 0.6rem 2rem;
-    width: 100%;
-    font-weight: 100;
-    border-radius: 1.5rem;
-    margin: 3rem 0 2rem 0;
-    letter-spacing: 4px;
-}
-.mainform button:hover{
-    opacity: 0.90;
-    transition: 350ms;
-}
+// .mainform button {
+//     font-size: 1rem;
+//     color: white;
+//     border: 0;
+//     background: linear-gradient(90deg, #045256 10%, #045256 60%, #0b1516c2 100%);
+//     padding: 0.6rem 2rem;
+//     width: 100%;
+//     font-weight: 100;
+//     border-radius: 1.5rem;
+//     margin: 3rem 0 2rem 0;
+//     letter-spacing: 4px;
+// }
+// .mainform button:hover{
+//     opacity: 0.90;
+//     transition: 350ms;
+// }
 .left{
     float: left;
     color: black;
@@ -95,19 +72,19 @@
     opacity: 0.8;
     transition: 200ms;
 }
-.right{
-    float: right;
-    color: #045256;
-    text-decoration: none;
-    font-family: 'Segoe UI','Open Sans', 'Helvetica Neue', sans-serif;
-}
-.right:hover{
-    opacity: 0.8;
-    transition: 200ms;
-}
-.span3{
-    margin-left: 3rem;
-}
+// .right{
+//     float: right;
+//     color: #045256;
+//     text-decoration: none;
+//     font-family: 'Segoe UI','Open Sans', 'Helvetica Neue', sans-serif;
+// }
+// .right:hover{
+//     opacity: 0.8;
+//     transition: 200ms;
+// }
+// .span3{
+//     margin-left: 3rem;
+// }
 
 /* FALTU KA CODE!!! */
 
