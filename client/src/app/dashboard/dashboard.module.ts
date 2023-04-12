@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { UniDirectivesModule } from 'src/app/directives/unidirectives.module';
 import { AddAppointmentModule } from '../components/add-appointment/add-appointment.module';
 import { SidebarModule } from '../components/sidebar/sidebar.module';
 import { TopbarModule } from '../components/topbar/topbar.module';
@@ -32,6 +34,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     TopbarModule,
     SidebarModule,
     AddAppointmentModule,
+    UniDirectivesModule
   ],
   exports: [
     DashboardComponent

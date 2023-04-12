@@ -18,6 +18,6 @@ export class UserService {
   getUsersByMail(query: string) {
     return this.http.post<{ email?: boolean, handle?: boolean }>(this.rootQuery + "exists", {
       email: query
-    }).pipe(debounceTime(500));
+    });
   }
 }

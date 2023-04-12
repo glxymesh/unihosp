@@ -1,5 +1,5 @@
+export * from "./appConfig";
 export * from "./appointment";
-
 /**
  * Model User
  * 

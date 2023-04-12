@@ -38,7 +38,7 @@ uni-searchbar {
 }
 
 .logo0 {
-  font-family: "Chivo Mono", sans-serif;
+  font-family: var(--logo-font-family);
   font-size: 1.8rem;
   font-weight: 700;
   color: rgb(44, 148, 212);

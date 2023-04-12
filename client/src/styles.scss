@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Righteous&family=ZCOOL+XiaoWei&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,300;0,500;0,600;1,300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 :root {
@@ -23,6 +22,7 @@
   --box-shadow-color: #25cc2562;
   --shadow-color: #ecf0f3;
   --shadow-color-secondary: rgba(126, 206, 126, 0.15);
+  --logo-font-family: "Poppins", sans-serif;
 }
 
 @media (prefers-color-scheme: light) {
@@ -46,6 +46,7 @@
     --box-shadow-color: #25cc2562;
     --shadow-color: #ecf0f3;
     --shadow-color-secondary: rgba(126, 206, 126, 0.15);
+    --logo-font-family: "Poppins", sans-serif;
   }
 }
 * {
@@ -57,10 +58,16 @@
 
 body {
   background-color: var(--primary-color);
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 // add for profile styles in body
 // accent-color: #3b887e;
+
+i {
+  color: black;
+  font-weight: bold;
+}
+
+ion-icon {
+  --ionicon-stroke-width: 42px;
+}

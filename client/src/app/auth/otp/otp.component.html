@@ -1,14 +1,17 @@
 <h1 class="login-head" style="text-align: left">
     Enter OTP
 </h1>
-<form class="mainform">
-    <div class="maincont1">
-        <span class="span0"><p>Enter OTP</p></span>
-        <span class="span1"><i class="fas fa-key"></i></span><span class="span2">
-        <input class="mailnum" type="email" name="email" id="email" placeholder="724398"></span>
+<form class="mainform" (submit)="handleOTPCheck()">
+    <div class="maincont">
+        <div></div>
+        <label class="span0" for="ot-01">
+            Enter OTP
+        </label>
+        <i class="fas fa-key"></i>
+        <input hovered class="mailnum" type="text" autocomplete="none" name="otp" id="ot-01" placeholder="U-091323" />
     </div>
     <p class="left">
-      Enter the otp sent to you on you email address
+        Enter the otp sent to you on you email address
     </p>
-    <button type="submit" >VERIFY</button>
+    <button type="submit">VERIFY</button>
 </form>

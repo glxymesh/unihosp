@@ -8,56 +8,56 @@
     </h2>
     <form [formGroup]="createProfileForm" (submit)="handleFormSubmission()">
 
-      <div class="maincont" [ngClass]="{'focused': focused[0]}">
+      <div class="maincont">
         <div></div>
         <label class="span0" for="f-name">
           First Name
         </label>
         <i class="far fa-user"></i>
-        <input type="text" autofocus autocomplete="firstname" formControlName="firstname" name="email" id="f-name"
-          placeholder="Name" (focus)="onFocus(0)" (blur)="onBlur(0)" />
+        <input hovered type="text" autofocus autocomplete="firstname" formControlName="firstname" name="email"
+          id="f-name" placeholder="Name" />
       </div>
 
-      <div class="maincont" [ngClass]="{'focused': focused[1]}">
+      <div class="maincont">
         <div></div>
         <label class="span0" for="l-name">
           Last Name
         </label>
         <i class="far fa-user"></i>
-        <input type="text" autocomplete="lastname" formControlName="lastname" name="email" id="l-name"
-          placeholder="Surname" (focus)="onFocus(1)" (blur)="onBlur(1)" />
+        <input hovered type="text" autocomplete="lastname" formControlName="lastname" name="email" id="l-name"
+          placeholder="Surname" />
       </div>
 
-      <div class="maincont s2" [ngClass]="{'focused': focused[2]}">
+      <div class="maincont s2">
         <div></div>
         <label class="span0" for="hndle">
           UniID
         </label>
         <i class="far fa-user"></i>
-        <input type="text" autocomplete="username" formControlName="handle" name="email" id="hndle"
-          placeholder="Uni Id (Optional)" (focus)="onFocus(2)" (blur)="onBlur(2)" />
+        <input hovered type="text" autocomplete="username" formControlName="handle" name="email" id="hndle"
+          placeholder="Uni Id (Optional)" />
         <div id="sfx">
           <span>{{predefinedSuffix}}</span>
         </div>
       </div>
 
-      <div class="maincont" [ngClass]="{'focused': focused[3]}">
+      <div class="maincont">
         <div></div>
         <label class="span0" for="dOb">
           Date Of Birth
         </label>
         <i class="far fa-user"></i>
-        <input type="date" autocomplete="lastname" [max]="maxDate" formControlName="dateOfBirth" name="email" id="dOb"
-          placeholder="Surname" (focus)="onFocus(3)" (blur)="onBlur(3)" />
+        <input hovered type="date" autocomplete="lastname" [max]="maxDate" formControlName="dateOfBirth" name="email"
+          id="dOb" placeholder="Surname" />
       </div>
 
-      <div class="maincont" [ngClass]="{'focused': focused[4]}">
+      <div class="maincont">
         <div></div>
         <label class="span0" for="bgrp">
           Blood Group
         </label>
         <i class="far fa-user"></i>
-        <select formControlName="bloodGroup" name="email" id="bgrp" (focus)="onFocus(4)" (blur)="onBlur(4)">
+        <select hovered formControlName="bloodGroup" name="email" id="bgrp" (focus)="onFocus(4)" (blur)="onBlur(4)">
           <option value="">Select Blood Type</option>
           <option *ngFor="let type of bloodTypes" value="{{type}}">{{type}}</option>
         </select>

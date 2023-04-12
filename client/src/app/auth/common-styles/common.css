@@ -1,9 +1,9 @@
-.login-head{
+.login-head {
   font-size: 1.2rem;
   text-align: center;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
-  font-family: 'Segoe UI','Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
   color: #045256;
@@ -11,7 +11,7 @@
 
 button[type="submit"] {
   font-weight: 600;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .mainform button {
@@ -23,12 +23,15 @@ button[type="submit"] {
   width: 100%;
   border-radius: 1.5rem;
   margin: 24px 0 1rem 0;
-  letter-spacing: 4px;
 }
 
 .mainform button:hover {
   opacity: 0.9;
   transition: 350ms;
+}
+
+.mainform button:active {
+  transform: scale(0.95);
 }
 
 label {
@@ -59,4 +62,3 @@ label {
 .span3 {
   margin-left: 3rem;
 }
-

@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'uni-otp',
@@ -7,9 +8,15 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class OtpComponent implements OnInit {
-  constructor() {
-  }
 
-  ngOnInit() {
+  formGroup!: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
+
+
+  ngOnInit() { }
+
+  handleOTPCheck() {
+
   }
 }
