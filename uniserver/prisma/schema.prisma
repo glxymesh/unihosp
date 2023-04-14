@@ -17,12 +17,12 @@ model User {
   patient       Patient?
   doctor        Doctor?
   refreshTokens RefreshTokens[]
-  documents     Documents[]
   notification  Notification[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime?
   preferences   Preferences?
   verified      Boolean         @default(false)
+  History       History?
 }
 
 model RefreshTokens {
@@ -75,15 +75,26 @@ model Doctor {
   userId                 String         @unique
 }
 
+model History {
+  id          String      @id @default(cuid())
+  title       String
+  description Bytes
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String      @unique
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime?
+  Documents   Documents[]
+}
+
 model Documents {
   id        String    @id @default(uuid())
   name      String
   type      String
   buffer    Bytes
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String
   createdAt DateTime  @default(now())
   updatedAt DateTime?
+  history   History   @relation(fields: [historyId], references: [id])
+  historyId String
 }
 
 model Appointments {

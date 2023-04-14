@@ -190,8 +190,7 @@ export class AuthController {
 
   @Post('accesstoken')
   getAccessToken(
-    @Headers('RefreshToken') authorization: string,
-    @Body('userId') userId: string,
+    @Headers('refreshToken') authorization: string,
   ) {
     this.logger.debug(`RefreshToken: ${authorization}`);
     try {
