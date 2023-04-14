@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { NotificationService } from './notification/notification.service';
 import { UserService } from './services/user.service';
@@ -10,7 +11,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   value = ""
 
@@ -18,14 +19,14 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    console.log(this.router.url)
   }
 
   onChange() {
     console.log(this.value)
     this.userService.getUsersByMail(this.value).subscribe(observe => {
       console.log(observe);
-      this.exists = observe.email  ? observe.email : false;
+      this.exists = observe.email ? observe.email : false;
     })
   }
 

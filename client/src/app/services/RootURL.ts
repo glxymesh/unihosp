@@ -1,1 +1,0 @@
-export const ROOT_ENDPOINT = "http://localhost:3000"

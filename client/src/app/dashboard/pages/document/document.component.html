@@ -1,9 +1,9 @@
-<div class="content">
+<div class="content" *ngIf="paitentProfile$|async as patient">
     <div class="userimage">
         <img src="/assets/profile.png" alt="" />
     </div>
 
-    <h1>Your Documents, Abhishek</h1>
+    <h1>Your Documents, {{patient.fName + " " + patient.lName}}</h1>
     <p id="p">
         This dashboard is wholeheartedly designed to manage almost everything about
         you health.
@@ -60,3 +60,4 @@
         <i class="fa-sharp fa-solid fa-plus"></i>
     </div>
 </div>
+<uni-loading *ngIf="!(paitentProfile$|async)"></uni-loading>

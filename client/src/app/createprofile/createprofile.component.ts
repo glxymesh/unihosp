@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'uni-createprofile',
@@ -18,16 +19,24 @@ export class CreateprofileComponent implements OnInit {
 
   maxDate = new Date();
 
-  constructor(private formBuilder: FormBuilder) { }
+  loading = false;
+
+  trySubmit = false;
+
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) { }
 
   ngOnInit(): void {
+    document.title = "Profile - UniHosp"
+
     this.createProfileForm = this.formBuilder.group({
-      'firstname': "",
-      'lastname': "",
+      'firstname': ['', [Validators.required]],
+      'lastname': ['', [Validators.required]],
       'handle': "",
-      'dateOfBirth': "",
-      'bloodGroup': ""
+      'dateOfBirth': ['', [Validators.required]],
+      'bloodGroup': ['', Validators.maxLength(2)]
     });
+
+    this.createProfileForm.valueChanges.subscribe((v) => console.log(this.createProfileForm.valid))
   }
 
   onFocus(index: number) {
@@ -38,7 +47,22 @@ export class CreateprofileComponent implements OnInit {
     this.focused[index] = false;
   }
 
-  handleFormSubmission() {
+  get handle() {
+    return this.createProfileForm.get('handle')
+  }
 
+  handleFormSubmission($event: any) {
+    $event.preventDefault()
+    this.trySubmit = true;
+    console.log(this.handle);
+    const value = this.createProfileForm.value;
+    if (this.createProfileForm.valid) {
+      this.loading = true;
+      this.profileService.createPatientProfile({ ...value, handle: value['handle'] + this.predefinedSuffix, fName: value['firstname'], lName: value['lastname'] })
+        .subscribe((profile) => {
+          console.log(profile);
+          this.loading = false;
+        })
+    }
   }
 }

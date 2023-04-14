@@ -7,10 +7,10 @@ export * from "./appointment";
 export type User = {
   id: string
   email: string
-  password: string
   name: string | null
   contact: string | null
-  role: Role
+  role: Role,
+  patient: string | null,
   createdAt: Date
   updatedAt: Date | null
   verified: boolean
@@ -48,10 +48,23 @@ export type Hospital = {
 export type Patient = {
   id: string
   handle: string
+  fName: string
+  lName: string
+  dateOfBirth: Date | null
+  bloodGroup: BloodGroupType
   createdAt: Date
   updatedAt: Date | null
   userId: string
 }
+
+export const BloodGroupType = {
+  A: 'A',
+  B: 'B',
+  AB: 'AB',
+  O: 'O'
+};
+
+export type BloodGroupType = (typeof BloodGroupType)[keyof typeof BloodGroupType]
 
 /**
  * Model Doctor

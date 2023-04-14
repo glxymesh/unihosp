@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'uni-doc',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DocumentComponent implements OnInit {
-  constructor() { }
+
+  paitentProfile$ = this.profileService.current;
+
+  constructor(private profileService: ProfileService) { }
 
   ngOnInit() { }
 }

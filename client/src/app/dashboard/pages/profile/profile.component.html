@@ -1,15 +1,15 @@
-<div class="content">
+<div class="content" *ngIf="paitentProfile$ | async as patient">
+    <uni-loading *ngIf="!patient"></uni-loading>
     <div>
         <div class="userimage">
             <img src="/assets/profile.png" alt="" />
         </div>
 
-        <h1>Your Profile, Abhishek</h1>
+        <h1>Your Profile, {{ patient.fName + " " + patient.lName}} </h1>
         <p id="p">
             This dashboard is wholeheartedly designed to manage almost everything about
             you health.
         </p>
-
     </div>
     <div class="mainsec">
         <div class="firstsec">
@@ -21,7 +21,9 @@
             <input placeholder="Enter patient ID" type="text" name="patientid" id="patientid" />
         </div>
     </div>
-
+    <div>
+        Uni ID: {{patient.handle}}
+    </div>
     <div class="mainsec">
         <div class="fullsec">
             <label for="Bio">Bio</label><br />
@@ -48,19 +50,19 @@
             <input type="radio" name="bldgrp" id="bldgrp">O -->
             <label style="width: 100%; margin-bottom: 1rem; float: left" for="bldgrp">Blood Group</label><br />
             <label class="container">A
-                <input type="radio" checked="checked" name="radio" />
+                <input type="radio" checked="checked" name="bloodGroup" />
                 <span class="checkmark"></span>
             </label>
             <label class="container">B
-                <input type="radio" name="radio" />
+                <input type="radio" name="bloodGroup" />
                 <span class="checkmark"></span>
             </label>
             <label class="container">AB
-                <input type="radio" name="radio" />
+                <input type="radio" name="bloodGroup" />
                 <span class="checkmark"></span>
             </label>
             <label class="container">O
-                <input type="radio" name="radio" />
+                <input type="radio" name="bloodGroup" />
                 <span class="checkmark"></span>
             </label>
         </div>

@@ -49,9 +49,11 @@
       <label for="color_mode" data-on="Doctor" data-off="Individual" class="btn-color-mode-switch-inner"></label>
     </label>
   </div>
-  <button type="submit" (click)="trySubmit = true">Register</button>
+  <button type="submit" (click)="trySubmit = true" [disabled]="loading">Register</button>
 
 </form>
 <div style="text-align: center;">
   <a routerLink="/auth/login">Already have an account?</a>
 </div>
+
+<uni-loading *ngIf="loading"></uni-loading>

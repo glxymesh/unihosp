@@ -1,9 +1,9 @@
-<div class="content">
+<div class="content" *ngIf="paitentProfile$|async as patient">
     <div class="userimage">
         <img src="/assets/profile.png" alt="" />
     </div>
 
-    <h1 style="font-weight: 600">Hospitals near you, Abhishek</h1>
+    <h1 style="font-weight: 600">Nearby Hospitals, {{ patient.fName }}</h1>
     <p id="p">
         This dashboard is wholeheartedly designed to manage almost everything about
         you health.
@@ -20,11 +20,11 @@
             <h2>Bombay Hospital Indore</h2>
             <br />
             <p>
-        Bombay Hospital in Indore is premier healthcare institute that
-        exemplifies excellence, trustand compassion. The hospitaoffers
-        unparalleled healthcare servicewith top talents and cutting-edge
-        technology for the quickesrecovery of patients. Despitbeing
-        well-equipped, it is easilaccessible to people from alwalks of life.
+                Bombay Hospital in Indore is premier healthcare institute that
+                exemplifies excellence, trustand compassion. The hospitaoffers
+                unparalleled healthcare servicewith top talents and cutting-edge
+                technology for the quickesrecovery of patients. Despitbeing
+                well-equipped, it is easilaccessible to people from alwalks of life.
             </p>
         </div>
     </div>

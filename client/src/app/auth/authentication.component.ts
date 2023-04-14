@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {RouterOutlet} from "@angular/router";
-import {animate, group, query, style, transition, trigger} from "@angular/animations";
+import { animate, group, query, style, transition, trigger } from "@angular/animations";
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'uni-auth',
   templateUrl: 'authentication.component.html',
-  styleUrls: [ "authentication.component.scss"],
+  styleUrls: ["authentication.component.scss"],
   animations: [
     trigger("routerAnimation", [
       transition("* => reset", [
@@ -28,7 +28,7 @@ import {animate, group, query, style, transition, trigger} from "@angular/animat
               opacity: 0,
               transform: "translateX(-100%)"
             }))
-          ], {optional: true}),
+          ], { optional: true }),
           query(":enter", [
             style({
               transform: "translate(100%)",
@@ -47,10 +47,11 @@ import {animate, group, query, style, transition, trigger} from "@angular/animat
 
 export class AuthenticationComponent implements OnInit {
   constructor() {
+
   }
 
   switchPage(outlet: RouterOutlet) {
-    if(outlet.isActivated)
+    if (outlet.isActivated)
       return outlet.activatedRoute.snapshot.url;
     return null
   }

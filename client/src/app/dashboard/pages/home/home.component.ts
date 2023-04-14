@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, map, of } from 'rxjs';
 import { Appointments } from 'src/app/interfaces';
+import { ProfileService } from 'src/app/services/profile.service';
 import { AppointmentService } from '../appointment/appointments.service';
 
 @Component({
@@ -21,11 +22,12 @@ export class HomeComponent implements OnInit {
     })
   );
 
+  paitentProfile$ = this.profileService.current;
 
-  constructor(private appointmentService: AppointmentService) { }
+
+  constructor(private profileService: ProfileService, private appointmentService: AppointmentService) { }
 
   ngOnInit() {
-
     this.appointmentService.requestAppointments();
   }
 }

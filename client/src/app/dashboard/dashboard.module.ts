@@ -7,6 +7,8 @@ import { AddAppointmentModule } from '../components/add-appointment/add-appointm
 import { SidebarModule } from '../components/sidebar/sidebar.module';
 import { TopbarModule } from '../components/topbar/topbar.module';
 import { UserGuard } from '../guards/user.guard';
+import { LoadingComponent } from '../loading/loading.component';
+import { LoadingModule } from '../loading/loading.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { AppointmentComponent } from './pages/appointment/appointment.component';
@@ -34,7 +36,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     TopbarModule,
     SidebarModule,
     AddAppointmentModule,
-    UniDirectivesModule
+    UniDirectivesModule,
+    LoadingModule
   ],
   exports: [
     DashboardComponent

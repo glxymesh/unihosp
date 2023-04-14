@@ -5,14 +5,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 import { UniDirectivesModule } from 'src/app/directives/unidirectives.module';
-import { CustomEmailValidatorDirective } from './Validators/custom-email-validator.directive';
+import { ValidatorsModule } from '../Validators/validators.module';
+import { LoadingModule } from '../loading/loading.module';
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
 import { AuthenticationComponent } from "./authentication.component";
 import { ForgotComponent } from "./forgot/forgot.component";
 import { LoginComponent } from "./login/login.component";
 import { OtpComponent } from "./otp/otp.component";
 import { ResetPasswordComponent } from "./resetpassword/resetpassword.component";
-import UniCookieService from './services/unicookie.service';
 import { SignupComponent } from "./signup/signup.component";
 
 @NgModule({
@@ -23,7 +23,6 @@ import { SignupComponent } from "./signup/signup.component";
     ResetPasswordComponent,
     OtpComponent,
     AuthenticationComponent,
-    CustomEmailValidatorDirective,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -37,10 +36,11 @@ import { SignupComponent } from "./signup/signup.component";
     FormsModule,
     AuthenticationRoutingModule,
     BrowserAnimationsModule,
-    UniDirectivesModule
+    UniDirectivesModule,
+    LoadingModule,
+    ValidatorsModule
   ],
   providers: [
-    UniCookieService
   ]
 })
 export class AuthenticationModule { }

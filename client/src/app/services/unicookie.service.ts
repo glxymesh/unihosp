@@ -17,7 +17,9 @@ type CookieName = "aupl" | "ascel" | "aexpl" |
   "rupl" | "rscel" | "rexpl" |
   "uid" | "rid";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export default class UniCookieService {
 
   constructor(private cookie: CookieService) { }
@@ -32,25 +34,34 @@ export default class UniCookieService {
     return { rupl, rsecl, rexpl }
   }
 
-  storeAccessToken(payload: string, expire?: number) {
+  storeAccessToken(payload: string, options: { expire?: number, path?: string } = {}) {
+    let { path, expire } = options;
     const cookies = this.divideAccessToken(payload);
     expire = expire || 7200;
-    this.cookie.set("aupl", cookies.aupl, expire);
-    this.cookie.set("asecl", cookies.asecl, expire);
-    this.cookie.set("aexpl", cookies.aexpl, expire);
+    this.cookie.set("aupl", cookies.aupl, expire, path);
+    this.cookie.set("asecl", cookies.asecl, expire, path);
+    this.cookie.set("aexpl", cookies.aexpl, expire, path);
   }
 
-  store(name: CookieName, payload: string, expire?: number) {
+  store(name: CookieName, payload: string, options: { expire?: number, path?: string } = {}) {
+    let { path, expire } = options;
     expire = expire || 2592000;
-    this.cookie.set(name, payload, expire);
+    this.cookie.set(name, payload, expire, path);
   }
 
   getAccessToken() {
-    return this.cookie.get("aupl") + this.cookie.get("asecl") + this.cookie.get("aexpl");
+    const aupl = this.cookie.get("aupl")
+    const asecl = this.cookie.get("asecl");
+    const aexpl = this.cookie.get("aexpl");
+    return aupl && asecl && aexpl ? `${aupl}.${asecl}.${aexpl}` : null;
   }
 
   getRefreshToken() {
-    return this.cookie.get("rupl") + this.cookie.get("rsecl") + this.cookie.get("rexpl");
+    const rupl = this.cookie.get("rupl")
+    const rsecl = this.cookie.get("rsecl");
+    const rexpl = this.cookie.get("rexpl");
+    return rupl && rsecl && rexpl ? `${rupl}.${rsecl}.${rexpl}` : null;
+    // return `${}.${this.cookie.get("rsecl")}.${this.cookie.get("rexpl")}`;
   }
 
   retrieve(name: CookieName) {

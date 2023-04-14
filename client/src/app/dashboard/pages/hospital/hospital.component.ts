@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'uni-hospital',
@@ -6,10 +7,18 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
   styleUrls: ["hospital.component.scss", "../../common.style.scss"]
 })
 
-export class HospitalComponent implements AfterViewInit {
+export class HospitalComponent implements AfterViewInit, OnInit {
 
 
-  constructor() { }
+  constructor(private profileService: ProfileService) { }
+
+  ngOnInit(): void {
+
+  }
+
+  paitentProfile$ = this.profileService.current;
+
+
 
 
   ngAfterViewInit() {

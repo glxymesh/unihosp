@@ -6,9 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { PassInputField } from '../interfaces/passInputField';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: `uni-signup`,
@@ -23,11 +22,16 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService,
     private authService: AuthService
   ) { }
 
   trySubmit = false;
+
+  loading = false;
+
+  signupForm!: FormGroup;
+
+  passMatch = true;
 
   passInputFields: PassInputField[] = [
     { title: 'Password', classList: 'fa fa-eye', fieldType: 'password' },
@@ -46,9 +50,7 @@ export class SignupComponent implements OnInit {
     this.passInputFields[index].fieldType = comparison ? 'text' : 'password';
   }
 
-  signupForm!: FormGroup;
 
-  passMatch = true;
 
   passwordControl = new FormControl('', [
     Validators.required,
@@ -60,7 +62,6 @@ export class SignupComponent implements OnInit {
     Validators.minLength(8),
   ]);
 
-  loading = false;
 
   ngOnInit() {
     document.title = 'Signup - UniHosp';
@@ -112,9 +113,11 @@ export class SignupComponent implements OnInit {
       this.validatePass(values.password, values['confirm-password']) &&
       this.signupForm.valid
     ) {
+      this.loading = true;
       this.authService
         .signup(values.email, values.password, values.contact)
         .subscribe((user) => {
+          this.loading = false;
           this.navigate(values.email, values.contact);
         });
     } else {

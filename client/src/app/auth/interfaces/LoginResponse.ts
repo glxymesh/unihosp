@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "src/app/interfaces";
 
 export interface LoginResponse {
   accessToken: string,

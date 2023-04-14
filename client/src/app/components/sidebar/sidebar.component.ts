@@ -1,5 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'uni-sde',
@@ -27,7 +29,9 @@ export class SidebarComponent {
   open = false;
   hideHider = false;
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) {
+    this.logout = this.logout.bind(this);
+  }
 
   routes = [
     { routerLink: "", title: "Home", icon: "fa-house", hovered: false },
@@ -35,8 +39,15 @@ export class SidebarComponent {
     { routerLink: "documents", title: "Documents", icon: "fa-file", hovered: false },
     { routerLink: "hospital", title: "Hospitals", icon: "fa-hospital", hovered: false },
     { routerLink: "appointments", title: "Appointments", icon: "fa-calendar", hovered: false },
-    { routerLink: "settings", title: "Settings", icon: "fa-gear", hovered: false },
+    { title: "Logout", icon: "fa-arrow-right-from-bracket", hovered: false, onClick: this.logout },
   ];
+
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate([""])
+    });
+  }
 
   mouseOver(index: number) {
     this.routes[index].hovered = true;
@@ -51,8 +62,6 @@ export class SidebarComponent {
   }
 
   closeSidebar() {
-    console.log("Clicked");
-
     this.open = false;
     setTimeout(this.hideHiderHandle, 600);
   }

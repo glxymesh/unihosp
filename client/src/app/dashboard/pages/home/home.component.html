@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" *ngIf="paitentProfile$ | async as patient">
     <div>
         <div class="userimage">
             <img src="/assets/profile.png" alt="" />
@@ -93,3 +93,4 @@
         </div>
     </div>
 </div>
+<uni-loading *ngIf="!(paitentProfile$| async)"></uni-loading>

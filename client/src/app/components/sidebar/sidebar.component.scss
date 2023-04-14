@@ -62,7 +62,14 @@ ul {
 .box,
 li.box1 {
   margin-bottom: 2rem;
-  a {
+
+  button {
+    background: none;
+    border: none;
+  }
+
+  a,
+  button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,17 +95,25 @@ li.box1 {
       height: 40px;
     }
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 li.box1 {
   width: 100%;
   padding: 0 20px;
-  a {
+  a,
+  button {
     width: 100%;
 
     div {
       width: 100%;
     }
+  }
+  button {
+    cursor: pointer;
   }
 }
 

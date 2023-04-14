@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import UniCookieService from 'src/app/services/unicookie.service';
+import { AuthService } from '../../services/auth.service';
 import { FieldType, HUIcon } from '../interfaces';
 
 @Component({
@@ -15,15 +17,28 @@ export class LoginComponent implements OnInit {
 
   fieldType: FieldType = 'password';
   classList: HUIcon = 'fa fa-eye';
+  loading = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      "email": "",
-      "password": ""
+      "email": [
+        "", [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+      "password": ['',
+        Validators.required
+      ]
     })
   }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
 
   hide() {
     const comparison = this.fieldType === "password";
@@ -33,8 +48,13 @@ export class LoginComponent implements OnInit {
 
   login($event: any) {
     $event.preventDefault();
+    if (this.loginForm.valid) {
+      const formValue = this.loginForm.value;
+      this.loading = true;
+      this.authService.login(formValue['email'], formValue['password']).subscribe((data) => {
+        this.loading = false;
 
-    this.router.navigate(["/createprofile"])
-      .then(console.log);
+      })
+    }
   }
 }

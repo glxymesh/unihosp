@@ -1,22 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { debounceTime } from 'rxjs';
+import { BehaviorSubject, Subject, map, of } from 'rxjs';
 import { User } from '../interfaces';
-import { ROOT_ENDPOINT } from './RootURL';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  readonly rootQuery = `${ROOT_ENDPOINT}/auth/`
+  private user = new Subject<User | null>();
+
+  get currentUser() {
+    return this.user;
+  }
+
+  setCurrentUser(user: User) {
+    this.user.next(user);
+  }
 
   constructor(private http: HttpClient) {
-    console.log(UserService.name, "Initialized");
+    this.http.get<User>('/auth/user').subscribe({
+      next: (user) => {
+        this.user.next(user);
+      },
+      error: (err) => {
+        console.error(err.message);
+        this.user.next(null)
+        of(null);
+      }
+    });
   }
 
   getUsersByMail(query: string) {
-    return this.http.post<{ email?: boolean, handle?: boolean }>(this.rootQuery + "exists", {
+    return this.http.post<{ email?: boolean, handle?: boolean }>("/auth/exists", {
       email: query
     });
   }

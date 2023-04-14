@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { LoginGuard } from "../guards/login.guard";
 import { UserGuard } from "../guards/user.guard";
 import { DashboardComponent } from "./dashboard.component";
 import { AppointmentComponent } from "./pages/appointment/appointment.component";
@@ -12,7 +13,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivateChild: [UserGuard],
-    canLoad: [UserGuard],
+    canLoad: [LoginGuard, UserGuard],
     component: DashboardComponent,
     children: [
       { path: '', component: HomeComponent },
