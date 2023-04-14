@@ -6,6 +6,8 @@ import { AuthController } from './authentication/authentication.controller';
 import { MailService } from './authentication/mail/mail.service';
 import { AuthService } from './authentication/services/auth.service';
 import { MSGService } from './authentication/services/msg.service';
+import { RunCronJobs } from './cron/RunCronJobs';
+import { CronModule } from './cron/cron.module';
 import { PrismaService } from './database/prisma.service';
 import { DevelopmentGuard } from './guards/development.guards';
 import { HospitalGuard } from './hospital/guard/hospital.guard';
@@ -17,22 +19,34 @@ import { PatientController } from './patient/patient.controller';
 import { PatientService } from './patient/service/patient.service';
 import { UserService } from './user/user.service';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     JwtModule.registerAsync({
       imports: [],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get("PRIVATE_TOKEN_KEY"),
+        secret: configService.get('PRIVATE_TOKEN_KEY'),
         signOptions: {
-          expiresIn: parseInt(configService.get("JWT_REFRESH_EXPIRE"))
-        }
+          expiresIn: parseInt(configService.get('JWT_REFRESH_EXPIRE')),
+        },
       }),
-      inject: [ConfigService]
-    })
+      inject: [ConfigService],
+    }),
+    // CronModule,
   ],
   controllers: [AuthController, PatientController, HospitalController],
-  providers: [PrismaService, AuthService, DevelopmentGuard, PatientService, UserService, MailService, MSGService, HospitalGuard, HospitalService, NotifierGateway, NotifierService],
+  providers: [
+    PrismaService,
+    AuthService,
+    DevelopmentGuard,
+    PatientService,
+    UserService,
+    MailService,
+    MSGService,
+    HospitalGuard,
+    HospitalService,
+    NotifierGateway,
+    NotifierService
+  ],
 })
 export class AppModule { }

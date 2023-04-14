@@ -1,5 +1,8 @@
-import { Body, Controller, Delete, Get, Patch, Post, Put, UseGuards } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Body, Controller, Delete, Get, Header, Headers, Patch, Post, Put, UseGuards } from '@nestjs/common';
+import { Patient, Prisma, User } from '@prisma/client';
+import { AuthService } from 'src/authentication/services/auth.service';
+import { AccessTokenGuard } from 'src/guards/accesstoken.guard';
+import { UserService } from 'src/user/user.service';
 import { PatientGuard } from './guard/patient.guard';
 import { PatientService } from './service/patient.service';
 
@@ -16,38 +19,50 @@ interface AddToAllowedPatientUserInput {
 }
 
 @Controller('patient')
+@UseGuards(AccessTokenGuard)
 @UseGuards(PatientGuard)
 export class PatientController {
 
-  constructor(private readonly patient: PatientService) { }
+  constructor(private readonly patientService: PatientService, private authService: AuthService) { }
 
   @Get()
   findPatient(@Body() data: Prisma.PatientWhereUniqueInput) {
-    return this.patient.findPatientProfile({
+    return this.patientService.findPatientProfile({
       userId: data.userId,
       id: data.id,
       handle: data.handle
     })
   }
 
+  @Get('/user')
+  async getPatientByUserID(@Headers('user') user: User) {
+    return this.patientService.findPatientProfile({
+      userId: user.id
+    })
+  }
+
   @Get("/search")
   findAllPatient(@Body('query') query: string) {
-    return this.patient.findPatientProfiles({
+    return this.patientService.findPatientProfiles({
       handle: query
     });
   }
 
+  @Post('exists')
+  exists(@Body() data: { handle: string }) {
+    return this.patientService.exists(data.handle);
+  }
   @Post()
-  createPatientProfile(@Body() data: { handle: string, userId: string }) {
-    if (data.handle.startsWith("@")) data.handle = data.handle.slice(1, data.handle.length);
-    return this.patient.createPatientProfile(data.handle, data.userId)
+  createPatientProfile(@Headers('user') user: User, @Body() data: Prisma.PatientCreateInput) {
+    console.log(user)
+    return this.patientService.createPatientProfile({ ...data, ownerId: user.id });
   }
 
   @Put()
   addToAllowedList(@Body() data: AddToAllowedPatientUserInput) {
     switch (data.type) {
       case 'Hospital':
-        return this.patient.updatePatientProfile({
+        return this.patientService.updatePatientProfile({
           handle: data.patientHandle,
         }, {
           allowedHospitals: {
@@ -57,7 +72,7 @@ export class PatientController {
           }
         })
       case 'Doctor':
-        return this.patient.updatePatientProfile({
+        return this.patientService.updatePatientProfile({
           handle: data.patientHandle,
         }, {
           allowedHospitals: {
@@ -71,7 +86,7 @@ export class PatientController {
 
   @Delete()
   deletePatientProfile(@Body() data: PatientDeleteInput) {
-    return this.patient.deleteProfile({
+    return this.patientService.deleteProfile({
       id: data.id,
       handle: data.handle
     })

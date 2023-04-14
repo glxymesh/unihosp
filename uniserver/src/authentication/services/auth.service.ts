@@ -6,6 +6,9 @@ import { createHash } from 'crypto';
 
 import { TokenType } from 'src/interfaces';
 import { UserService } from 'src/user/user.service';
+import excludePassword from 'src/utils/excludePassword';
+import { MailService } from '../mail/mail.service';
+import { MSGService } from './msg.service';
 
 
 @Injectable({})
@@ -14,7 +17,9 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private readonly jwtService: JwtService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private mailService: MailService,
+    private msgService: MSGService
   ) { }
 
 
@@ -22,47 +27,38 @@ export class AuthService {
 
   async login(authData: { email: string, password: string }) {
 
-    const user = await this.userService.user({ email: authData.email });
+    const user = await this.userService.user({ email: authData.email }, { patient: true });
 
     authData.password = this.hash(authData.password)
 
-    if (user.password === authData.password) {
-      const accessToken = this.generateToken(user);
-      const refreshToken = this.generateToken(user, TokenType.RefreshToken);
-      const refreshTokenSaved = await this.userService.usersAddAuthToken(user.id, refreshToken);
-
-      return {
-        accessToken,
-        refreshToken,
-        refreshTokenId: refreshTokenSaved.id,
-        message: "Authentication has been done successfully",
-        user
+    if (user) {
+      if (user.password === authData.password) {
+        const accessToken = this.generateToken(user);
+        const refreshToken = this.generateToken(user, TokenType.RefreshToken);
+        const refreshTokenSaved = await this.userService.usersAddAuthToken(user.id, refreshToken);
+        const nUser = excludePassword(user, ['password'])
+        return {
+          accessToken,
+          refreshToken,
+          refreshTokenId: refreshTokenSaved.id,
+          message: "Authentication has been done successfully",
+          user: {
+            ...nUser,
+            patient: nUser.patient.id
+          }
+        }
+      } {
+        return {
+          message: 'Authentication Failed',
+          description: "Wrong Username or Password"
+        }
       }
+    } else {
+      return { message: "Authentication Failed", description: 'User doesn\'t exists' }
     }
-    return { message: "Authentication Failed" }
   }
 
-  verify(authorization: string) {
-    const accessToken = this.splitAuthToken(authorization);
-    let result = this.jwtService.verify(accessToken);
-    return { user: result }
-  }
 
-  private isCorrectBearer(bearer: string) {
-    this.logger.log(`Bearer: ${this.configService.get('BEARER')}`)
-    return this.configService.get('BEARER') === bearer;
-  }
-
-  private splitAuthToken(authorization: string) {
-    const auth = authorization.split(' ');
-    if (auth.length !== 2)
-      throw { errorCode: 401, message: 'Access Token Not found' };
-    const [bearer, token] = auth;
-    if (!this.isCorrectBearer(bearer)) {
-      throw { errorCode: 401, message: 'Wrong Bearer' };
-    }
-    return token;
-  }
 
   async generateFromToken(authorization: string) {
     const receivedToken = this.splitAuthToken(authorization);
@@ -98,12 +94,70 @@ export class AuthService {
     }
   }
 
+  async signup(signUpData: Prisma.UserCreateInput) {
+    this.logger.debug(`Signing Up: ${JSON.stringify(signUpData)}`);
+
+    if (!/^(\+\d{1,2})-(\d{10})$/.test(signUpData.contact)) {
+      return {
+        statusCode: 403,
+        message: 'Wrong Contact details',
+      };
+    }
+
+    const id = await this.userService.verifyMailAndContact(
+      signUpData.email,
+      signUpData.contact,
+    );
+
+    const response = await this.mailService.sendMail(
+      signUpData.email,
+      signUpData.email,
+      id.uri,
+      id.code,
+    );
+
+    if (signUpData.contact) {
+      const message = await this.msgService.sendMessage(
+        signUpData.contact,
+        id.code,
+      );
+      this.logger.debug(`MessageSent: ${JSON.stringify(message)}`);
+    }
+
+    this.logger.debug(`MailSent: ${JSON.stringify(response)}`);
+
+    signUpData.password = this.hash(signUpData.password);
+    return this.userService.createUser(signUpData);
+  }
+
+
   private hash(input: string) {
     return createHash("sha256").update(input).digest().toString("hex");
   }
 
-  async signup(data: Prisma.UserCreateInput) {
-    data.password = this.hash(data.password);
-    return this.userService.createUser(data);
+  verify(authorization: string): { user: User } {
+    const accessToken = this.splitAuthToken(authorization);
+    try {
+      let result = this.jwtService.verify(accessToken);
+      return { user: result }
+    } catch (error) {
+      return { ...error, user: null }
+    }
+  }
+
+  private isCorrectBearer(bearer: string) {
+    this.logger.log(`Bearer: ${this.configService.get('BEARER')}`)
+    return this.configService.get('BEARER') === bearer;
+  }
+
+  private splitAuthToken(authorization: string) {
+    const auth = authorization.split(' ');
+    if (auth.length !== 2)
+      throw { errorCode: 401, message: 'Access Token Not found' };
+    const [bearer, token] = auth;
+    if (!this.isCorrectBearer(bearer)) {
+      throw { errorCode: 401, message: 'Wrong Bearer' };
+    }
+    return token;
   }
 }

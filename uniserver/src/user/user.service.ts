@@ -1,18 +1,8 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { Prisma, User } from "@prisma/client";
-import * as crypto from "crypto";
-import { PrismaService } from "src/database/prisma.service";
-
-function exclude<User, Key extends keyof User>(
-  obj: User,
-  keys: Key[],
-): Omit<User, Key> {
-  for (const key of keys) {
-    delete obj[key];
-  }
-  return obj;
-}
-
+import { Injectable, Logger } from '@nestjs/common';
+import { Prisma, User } from '@prisma/client';
+import * as crypto from 'crypto';
+import { PrismaService } from 'src/database/prisma.service';
+import excludePassword from 'src/utils/excludePassword';
 
 @Injectable()
 export class UserService {
@@ -22,9 +12,10 @@ export class UserService {
     this.logger.debug('Initialized');
   }
 
-  async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput) {
+  async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput, include?: { patient: boolean }) {
     return this.prismaService.user.findUnique({
       where: userWhereUniqueInput,
+      include
     });
   }
 
@@ -38,7 +29,7 @@ export class UserService {
     const response = await this.prismaService.user.findMany({
       ...params,
     });
-    return response.map((user) => exclude(user, ['password']));
+    return response.map((user) => excludePassword(user, ['password']));
   }
 
   async usersAddAuthToken(userId: string, refreshToken: string) {
@@ -68,41 +59,55 @@ export class UserService {
     return this.prismaService.refreshTokens.findMany({ where: { userId } });
   }
 
-  async createUser(data: Prisma.UserCreateInput): Promise<User> {
-    return this.prismaService.user.create({
-      data,
-    });
+  async createUser(data: Prisma.UserCreateInput) {
+    try {
+      const user = await this.prismaService.user.create({ data });
+      return excludePassword(user, ['password']);
+    } catch (err) {
+      this.logger.debug(err.message);
+    }
   }
 
   async verifyMailAndContact(email: string, contact: string) {
-    const mailCreate = await this.prismaService.verificationMailRequest.create({
-      data: {
-        id: crypto.randomBytes(64).toString("hex"),
-        expireAt: new Date(Date.now() + 600000),
-        code: Math.round(Math.random() * 1000000),
-        contact,
-        email
-      }
-    });
-    return {
-      uri: mailCreate.id,
-      code: mailCreate.code
+    try {
+      await this.prismaService.verificationMailRequest.deleteMany({
+        where: {
+          OR: [{ email: email }, { contact: email }],
+        },
+      });
+      const mailCreate =
+        await this.prismaService.verificationMailRequest.create({
+          data: {
+            id: crypto.randomBytes(64).toString('hex'),
+            expireAt: new Date(Date.now() + 600000),
+            code: Math.round(Math.random() * 1000000),
+            contact,
+            email,
+          },
+        });
+      this.logger.debug(JSON.stringify(mailCreate));
+      return {
+        uri: mailCreate.id,
+        code: mailCreate.code,
+      };
+    } catch (err) {
+      this.logger.debug(err.message);
     }
   }
 
   getAndDeleteVerifyMailById(id: string) {
     return this.prismaService.verificationMailRequest.delete({
       where: {
-        id
-      }
+        id,
+      },
     });
   }
 
   getAndDeleteVerifyMailByEmail(email: string, contact: string) {
     return this.prismaService.verificationMailRequest.delete({
       where: {
-        email: email
-      }
+        email: email,
+      },
     });
   }
 
@@ -123,4 +128,3 @@ export class UserService {
     });
   }
 }
-

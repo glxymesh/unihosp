@@ -49,6 +49,10 @@ model Hospital {
 model Patient {
   id               String         @id @default(uuid())
   handle           String         @unique
+  fName            String
+  lName            String
+  dateOfBirth      DateTime?
+  bloodGroup       BloodGroupType
   Appointments     Appointments[]
   owner            User           @relation(fields: [userId], references: [id])
   allowedHospitals Hospital[]
@@ -132,4 +136,11 @@ enum Role {
   Patient
   Doctor
   Admin
+}
+
+enum BloodGroupType {
+  A
+  B
+  AB
+  O
 }

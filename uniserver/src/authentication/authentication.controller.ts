@@ -3,14 +3,18 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   Headers,
   Logger,
+  Param,
   Post,
   Query,
   Redirect,
   UseGuards,
 } from '@nestjs/common';
-import { Role } from '@prisma/client';
+
+import { Role, User } from '@prisma/client';
+import { AccessTokenGuard } from 'src/guards/accesstoken.guard';
 import { DevelopmentGuard } from 'src/guards/development.guards';
 import { PatientService } from 'src/patient/service/patient.service';
 import { UserService } from 'src/user/user.service';
@@ -39,32 +43,33 @@ export class AuthController {
     return this.userService.users({ ...data });
   }
 
+  @Get('user')
+  @UseGuards(AccessTokenGuard)
+  getCurrentUser(@Headers('user') user: User) {
+    return this.userService.user({
+      id: user.id,
+    }, {
+      patient: true
+    });
+  }
+
   @Post('exists')
-  async doesExists(@Body() data: { handle?: string; email?: string }) {
-    const { handle, email } = data;
+  async doesExists(@Body() data: { email?: string }) {
+    const { email } = data;
 
     const toCheck = email
       ? ToCheckType.Email
-      : data.handle
-        ? ToCheckType.Handle
-        : null;
-    console.log(toCheck);
+      : null;
     let response: any;
 
     switch (toCheck) {
       case ToCheckType.Email:
         if (await this.userService.user({ email })) {
-          this.logger.log(this.userService.user({ email }));
+          console.log(await this.userService.user({ email }));
           response = {
             email: true,
           };
         }
-        break;
-      case ToCheckType.Handle:
-        if (this.patientService.findPatientProfiles({ handle }) != null)
-          response = {
-            handle: true,
-          };
         break;
       default:
         return {
@@ -91,58 +96,21 @@ export class AuthController {
       role?: Role;
     },
   ) {
-    this.logger.debug(`Signing Up: ${JSON.stringify(signUpData)}`);
-
-    if (!/^(\+\d{1,2})-(\d{10})$/.test(signUpData.contact)) {
-      return {
-        statusCode: 403,
-        message: 'Wrong Contact details',
-      };
-    }
-
-    const id = await this.userService.verifyMailAndContact(
-      signUpData.email,
-      signUpData.contact,
-    );
-    const response = await this.mailService.sendMail(
-      signUpData.email,
-      signUpData.email,
-      id.uri,
-      id.code,
-    );
-
-    if (signUpData.contact) {
-      const message = await this.msgService.sendMessage(
-        signUpData.contact,
-        id.code,
-      );
-      this.logger.debug(`MessageSent: ${JSON.stringify(message)}`);
-    }
-
-    this.logger.debug(`MailSent: ${JSON.stringify(response)}`);
-
     return this.authService.signup(signUpData);
   }
 
-  @Post('verify')
+
+  @Post('v/:id')
   @Redirect()
   async verifyCode(
-    @Body() vData: { email: string; contact: string; otpCode: number },
+    @Param('id') id: string,
+    @Body() vData: { otpCode: number },
   ) {
+    this.logger.debug('Verifying OTP');
+
     try {
-      if (/^(\+\d{1,2})-(\d{10})$/.test(vData.contact)) {
-        return {
-          statusCode: 403,
-          message: 'Wrong Contact details',
-        };
-      }
-
-      const data = await this.userService.getAndDeleteVerifyMailByEmail(
-        vData.email,
-        vData.contact,
-      );
-
-      if (data.code !== vData.otpCode) {
+      const mail = await this.userService.getAndDeleteVerifyMailById(id);
+      if (mail.code !== vData.otpCode) {
         return {
           statusCode: 403,
           message: "OTP doesn't match",
@@ -151,7 +119,7 @@ export class AuthController {
 
       const update = await this.userService.updateUser({
         where: {
-          email: data.email,
+          email: mail.email,
         },
         data: {
           verified: true,
@@ -159,10 +127,11 @@ export class AuthController {
         },
       });
 
+
       this.logger.debug(
-        `Mail ${data.email}  is Verified With Code: ${data.id}`,
+        `Mail ${mail.email}  is Verified With Code: ${mail.id}`,
       );
-      this.logger.debug(`Email Verified: ${update.email} = ${update.verified}`);
+      this.logger.debug(`Email Verified using OTP: ${update.email} = ${update.verified}`);
 
       return {
         uri: 'http://localhost:4200',
@@ -232,8 +201,10 @@ export class AuthController {
     }
   }
 
-  @Post('verify')
-  checkLoggedInStatus() { }
+  // @Post('verify')
+  // checkLoggedInStatus() {
+
+  // }
 
   @Delete('logout')
   deleteRefreshToken(@Body('refreshTokenId') refreshTokenId: string) {

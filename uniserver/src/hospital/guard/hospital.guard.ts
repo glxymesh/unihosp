@@ -16,23 +16,15 @@ export class HospitalGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const role = this.reflector.get<Role>('role', context.getClass());
-    const request: Request = context.switchToHttp().getRequest();
-    if (request.headers["x-api-key"] === "2cf9919ceb964f398984cf7bb98416ca")
-      return true
-    else {
-      this.logger.debug(`Validating`);
-      const user = request.headers['authorization'] ? this.validate(request.headers['authorization']) : undefined;
-      this.logger.debug(`Matching roles: ${this.matchRoles(role, user.role)}`)
-      return this.matchRoles(role, user.role);
-    }
-  }
 
+    const request: Request = context.switchToHttp().getRequest();
+    const user: User = request['user'];
+
+    this.logger.debug(`Matching roles: ${this.matchRoles(role, user.role)}`)
+    return this.matchRoles(role, user.role)
+  }
   private matchRoles(roles: Role, userRole: Role) {
     return roles === userRole;
   }
 
-  private validate(authorization: string): User {
-    const { user } = this.authService.verify(authorization);
-    return user;
-  }
 }

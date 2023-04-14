@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { BloodGroupType, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
@@ -11,23 +11,58 @@ export class PatientService {
     this.logger.debug(`Initialized`);
   }
 
-  createPatientProfile(handle: string, ownerId: string) {
+  async createHandle(fName: string, lName: string): Promise<string> {
+    const generated = fName.slice(-3) + lName.slice(-3) + `${Math.round(Math.random() * 100)}@unihosp`
+    const alreadyThere = await this.prismaService.patient.findUnique({ where: { handle: generated } });
+    if (alreadyThere) {
+      return this.createHandle(fName, lName);
+    }
+    return generated;
+  }
+
+  async createPatientProfile(newProfileData: Prisma.PatientCreateInput & { ownerId: string }) {
+    const { fName, lName, ownerId, handle, dateOfBirth, bloodGroup } = newProfileData;
+    await this.prismaService.user.update({
+      where: { id: ownerId },
+      data: {
+        name: fName + " " + lName,
+      }
+    });
+    // try {
     return this.prismaService.patient.create({
       data: {
-        handle: `@${handle}`,
+        fName,
+        lName,
+        dateOfBirth: new Date(dateOfBirth),
+        bloodGroup,
+        handle: handle && handle !== "" ? `${handle}@unihosp` : await this.createHandle(fName, lName),
         owner: {
           connect: {
             id: ownerId
           }
         }
       }
-    })
+    }).catch((err) => ({ err: 401, message: 'Profile Already Exists' }))
+  }
+
+  async exists(handle?: string) {
+    if (/\w*@\w*/.test(handle) && await this.prismaService.patient.findUnique({ where: { handle } })) {
+      return {
+        message: "Handle Available",
+        handle: true,
+      };
+    }
+
+    return {
+      error: '401',
+      email: false,
+    };
   }
 
 
   findPatientProfile(data: { id?: string, handle?: string, userId: string }) {
     const include = {
-      owner: true,
+      owner: false,
       allowedDoctors: true,
       allowedHospitals: true
     }
