@@ -1,16 +1,19 @@
-<div class="content" *ngIf="paitentProfile$|async as patient">
-    <div class="userimage">
-        <img src="/assets/profile.png" alt="" />
+<!-- <div class="content" *ngIf="paitentProfile$|async as patient"> -->
+<div class="content">
+    <div>
+        <div class="userimage">
+            <img src="/assets/profile.png" alt="" />
+        </div>
+
+        <!-- <h1 style="font-weight: 600">Nearby Hospitals, {{ patient.fName }}</h1> -->
+        <h1 style="font-weight: 600">Nearby Hospitals, Abhishek</h1>
+        <p id="p">
+            This dashboard is wholeheartedly designed to manage almost everything about
+            you health.
+        </p>
     </div>
 
-    <h1 style="font-weight: 600">Nearby Hospitals, {{ patient.fName }}</h1>
-    <p id="p">
-        This dashboard is wholeheartedly designed to manage almost everything about
-        you health.
-    </p>
-
-    <div id="map" #map style="position:relative;">
-    </div>
+    <div id="map" #map style="position: relative"></div>
 
     <h1 style="margin-bottom: 5rem">Hospitals you've previously visited...</h1>
 

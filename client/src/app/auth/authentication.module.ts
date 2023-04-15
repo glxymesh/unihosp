@@ -4,10 +4,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
+import { RouterModule } from '@angular/router';
 import { UniDirectivesModule } from 'src/app/directives/unidirectives.module';
 import { ValidatorsModule } from '../Validators/validators.module';
 import { LoadingModule } from '../loading/loading.module';
-import { AuthenticationRoutingModule } from "./authentication-routing.module";
 import { AuthenticationComponent } from "./authentication.component";
 import { ForgotComponent } from "./forgot/forgot.component";
 import { LoginComponent } from "./login/login.component";
@@ -34,11 +34,11 @@ import { SignupComponent } from "./signup/signup.component";
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    AuthenticationRoutingModule,
     BrowserAnimationsModule,
     UniDirectivesModule,
     LoadingModule,
-    ValidatorsModule
+    ValidatorsModule,
+    RouterModule
   ],
   providers: [
   ]

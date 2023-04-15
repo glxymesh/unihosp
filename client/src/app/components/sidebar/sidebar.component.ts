@@ -36,7 +36,7 @@ export class SidebarComponent {
   routes = [
     { routerLink: "", title: "Home", icon: "fa-house", hovered: false },
     { routerLink: "profile", title: "Profile", icon: "fa-user", hovered: false },
-    { routerLink: "documents", title: "Documents", icon: "fa-file", hovered: false },
+    { routerLink: "history", title: "History", icon: "fa-file", hovered: false },
     { routerLink: "hospital", title: "Hospitals", icon: "fa-hospital", hovered: false },
     { routerLink: "appointments", title: "Appointments", icon: "fa-calendar", hovered: false },
     { title: "Logout", icon: "fa-arrow-right-from-bracket", hovered: false, onClick: this.logout },

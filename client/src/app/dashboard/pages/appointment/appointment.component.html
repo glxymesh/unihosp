@@ -1,4 +1,5 @@
-<div class="content" *ngIf="paitentProfile$|async as patient">
+<!-- <div class="content" *ngIf="paitentProfile$|async as patient"> -->
+<div class="content">
     <div>
         <div class="userimage">
             <img src="/assets/profile.png" alt="" />
@@ -15,26 +16,7 @@
         <input type="search" name="search" id="search" placeholder="Search..." />
     </div>
 
-    <!-- <div class="container1">
-        <div class="row height d-flex justify-content-center align-items-center">
-            <div class="col-md-6">
-                <div class="form">
-                    <i class="fa fa-search"></i>
-                    <input type="text" class="form-control form-input" placeholder="Search anything...">
-                    <span class="left-pan"><i class="fa fa-microphone"></i></span>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    <h1 style="
-      margin: 5rem 0 3rem 10rem;
-      text-align: left;
-      font-size: 2rem;
-      text-decoration: none;
-    ">
-        Nearby doctors
-    </h1>
+    <h1>Nearby doctors</h1>
 
     <div class="hosInfo">
         <img src="/assets/dr neelima deshmukh.jpg" alt="" />
@@ -135,4 +117,4 @@ Insurance information, if applicable
 </div> -->
 
 <uni-add-appointment></uni-add-appointment>
-<uni-loading *ngIf="!(paitentProfile$|async)"></uni-loading>
+<!-- <uni-loading *ngIf="!(paitentProfile$|async)"></uni-loading> -->
