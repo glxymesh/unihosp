@@ -1,0 +1,41 @@
+.content {
+  --background-1: white;
+  --background-2: #04525628;
+
+  color: #333 !important;
+  background-color: var(--background-1);
+  border: 3px solid transparent;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  gap: 16px;
+  padding: 20px;
+  position: relative;
+
+  & > div:nth-child(1) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    user-select: none;
+
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.userimage {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.userimage img {
+  height: 7rem;
+  border-radius: 500px;
+  border: 1px black solid;
+}

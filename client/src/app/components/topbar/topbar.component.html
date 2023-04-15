@@ -1,0 +1,33 @@
+<div class="navbar">
+  <div class="navleft">
+    <a href="/" class="logo0">Uni<span>Hosp</span></a>
+  </div>
+
+  <div *ngIf="searchBar" class="searchBar">
+    <uni-searchbar></uni-searchbar>
+  </div>
+
+  <div class="navright">
+    <div class="darkcontainer">
+      <a class="ddark0" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="/dashboard"
+        rel="noopener noreferrer">
+        <i class="sociallogo fa-solid fa-house"></i> <span>Home</span>
+      </a>
+    </div>
+    <div class="darkcontainer">
+      <a class="ddark0" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"
+        routerLink="/dashboard/profile">
+        <i class="sociallogo fa-solid fa-user"></i><span>Profile</span>
+      </a>
+    </div>
+    <!-- <div class="darkcontainer">
+      <a class="ddark0" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"
+        routerLink="/dashboard/hospital">
+        <i class="sociallogo fa-solid fa-gear"></i><span>Settings</span>
+      </a>
+    </div> -->
+    <div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="searchbar">
+  <input type="text" placeholder="Search" (focus)="onFocus($event)" (blur)="onBlur($event)">
+  <div class="result" *ngIf="focused && result.length > 0">
+    <ul>
+      <li *ngFor="let rs of result">
+        <a routerLink="/">
+          <div class="sr-title">{{rs.title}}</div>
+          <div class="sr-desc">
+            {{rs.description}}
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

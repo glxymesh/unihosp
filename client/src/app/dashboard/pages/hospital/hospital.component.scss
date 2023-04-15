@@ -1,0 +1,66 @@
+#map {
+  height: 600px;
+  width: 600px;
+  margin: 5rem auto;
+  background-color: #04525667;
+}
+.hosInfo {
+  margin: 1.5rem 8rem;
+  display: flex;
+}
+.hosInfo img {
+  height: 12rem;
+  width: 12rem;
+  margin: 0 auto;
+  /* margin-right: 2rem; */
+  border: 3px solid #2f776d;
+  border-radius: 1.5rem;
+}
+.hosInfo h2 {
+  font-size: 2.2rem;
+  margin: 0 auto;
+  text-align: left;
+  padding: 0;
+}
+.hosInfo p {
+  font-size: 1rem;
+  text-align: left;
+  margin: 0;
+}
+.hosDetail {
+  margin: auto;
+  margin-left: 2rem;
+}
+.hosDetail span {
+  text-decoration: underline;
+}
+.visited span {
+  text-decoration: underline;
+}
+.visited {
+  text-align: left;
+  margin-left: 8rem;
+  margin-bottom: 5rem;
+}
+.showmore {
+  margin-left: 8rem;
+  padding-bottom: 3rem;
+  text-align: left;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+}
+.showmore a {
+  text-decoration: none;
+  color: #2f2f2fa9;
+  font-weight: 700;
+  transition: 250ms;
+}
+.showmore a:hover {
+  color: #333;
+  transition: 250ms;
+}
+.clicked {
+  display: none;
+  transition: 500ms;
+}

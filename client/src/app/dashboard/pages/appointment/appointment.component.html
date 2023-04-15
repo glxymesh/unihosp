@@ -1,0 +1,120 @@
+<!-- <div class="content" *ngIf="paitentProfile$|async as patient"> -->
+<div class="content">
+    <div>
+        <div class="userimage">
+            <img src="/assets/profile.png" alt="" />
+        </div>
+
+        <h1>Set Appointments, Abhishek</h1>
+        <p id="p">
+            This dashboard is wholeheartedly designed to manage almost everything
+            about you health.
+        </p>
+    </div>
+    <div class="searchCont">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" name="search" id="search" placeholder="Search..." />
+    </div>
+
+    <h1>Nearby doctors</h1>
+
+    <div class="hosInfo">
+        <img src="/assets/dr neelima deshmukh.jpg" alt="" />
+        <div class="hosDetail">
+            <h2>Dr. Neelima Deshmukh</h2>
+            <br />
+            <h3>Specialist - Mental health</h3>
+            <h3>Distance - 4 km</h3>
+            <div id="btn" class="addmore">
+                <i class="fa-sharp fa-solid fa-plus"></i>
+            </div>
+        </div>
+    </div>
+    <div class="hosInfo">
+        <img src="/assets/dr kushagra jain.jpg" alt="" />
+        <div class="hosDetail">
+            <h2>Dr. Kushagra Jain</h2>
+            <br />
+            <h3>Specialist - Eye surgeon</h3>
+            <h3>Distance - 7 km</h3>
+            <div id="btn" class="addmore">
+                <i class="fa-sharp fa-solid fa-plus"></i>
+            </div>
+        </div>
+    </div>
+
+    <h1 style="
+      margin: 5rem 0 5rem 10rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 2.2rem;
+    ">
+        Doctors you've previously visited...
+    </h1>
+    <div class="hosInfo">
+        <img src="/assets/Dr_Ashok-Bajpai-Internal-Medicine.jpg" alt="" />
+        <div class="hosDetail">
+            <h2>Dr. Ashok Bhajpai</h2>
+            <br />
+            <h3>Visited in reference for diabetes</h3>
+            <h3>Dated - 8 feb 2023</h3>
+            <div id="btn" class="addmore">
+                <i class="fa-sharp fa-solid fa-plus"></i>
+            </div>
+        </div>
+    </div>
+    <div class="hosInfo">
+        <img src="/assets/dr ashutosh singh.jpg" alt="" />
+        <div class="hosDetail">
+            <h2>Dr. Ashutosh Singh</h2>
+            <br />
+            <h3>Visited in reference for Typhoid</h3>
+            <h3>Dated - 16 dec 2022</h3>
+            <div id="btn" class="addmore">
+                <i class="fa-sharp fa-solid fa-plus"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+
+Patient's full name
+Patient's date of birth
+Patient's contact information, such as phone number and email address
+Reason for the appointment or chief complaint
+Preferred date and time for the appointment
+Insurance information, if applicable
+
+-->
+
+<!-- <div class="popup">
+<div class="popupcont">
+    <h1 id="pophead">Set an appointment.</h1>
+    <span class="close">&times;</span>
+    <form action="">
+        <label for="name">Your name:</label>
+        <label style="float:right;" for="dob">Date of birth</label><br>
+        <input type="text" name="filename" id="filename" placeholder="Enter your name">
+        <input style="float:right;" type="date" name="date" id="date"><br>
+        <label for="contact">Contact information:</label><br>
+        <input type="text" name="contact" id="contact" placeholder="Phone number">
+        <input class="marginleft" type="email" name="mail" id="mail" placeholder="Email address"><br>
+        <label for="desccription">Enter Desccription:</label><br>
+        <input type="textarea" name="description" id="description" placeholder="Reason for appointment & desease details..."><br>
+        <label for="appDate">Appointment date:</label>
+        <label for="appTime">Appointment time:</label><br>
+        <input type="date" name="date" id="date">
+        <input type="time" name="" id=""><br>
+        <label for="insurance-toggle">Do you have medical insurance?</label>
+        <br><br>
+        <label for="false">No</label>
+        <input type="checkbox" id="insurance-toggle">
+        <label for="true">Yes</label>
+        <button class="subbtn" type="submit">Submit</button>
+    </form>
+</div>
+</div> -->
+
+<uni-add-appointment></uni-add-appointment>
+<!-- <uni-loading *ngIf="!(paitentProfile$|async)"></uni-loading> -->
