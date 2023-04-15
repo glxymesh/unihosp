@@ -29,7 +29,7 @@ export class AuthService {
   async requestAccessToken() {
     const refreshToken = this.cookie.getRefreshToken();
     if (!refreshToken) return;
-    const response = await fetch("http://localhost:3000/auth/accesstoken", {
+    const response = await fetch("https://unihosp.live/auth/accesstoken", {
       method: 'POST',
       headers: {
         refreshToken: `UNIHOSP ${refreshToken}`
@@ -46,12 +46,14 @@ export class AuthService {
     })
 
     response.subscribe((response) => {
+      console.log(response);
       this.cookie.storeAccessToken(response.accessToken, { expire: 7200, path: '/' });
-      this.cookie.storeRefreshToken(response.refreshToken);
+      this.cookie.storeRefreshToken(response.refreshToken, { path: '/' });
       this.cookie.store("uid", response.user.id, { path: "/" });
       this.cookie.store("rid", response.refreshTokenId, { path: "/" });
       this.userService.setCurrentUser(response.user);
       if (!response.user.patient) this.router.navigate(['/dashboard'])
+      console.log("Logged In redirecting")
       this.router.navigate(['/createprofile'])
     })
 

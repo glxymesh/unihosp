@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './aboutpage/about.component';
 import { AuthenticationComponent } from './auth/authentication.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
+import { LoggedInGuard } from './auth/guards/logged.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { OtpComponent } from './auth/otp/otp.component';
 import { ResetPasswordComponent } from './auth/resetpassword/resetpassword.component';
@@ -11,6 +12,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AddDocumentsComponent } from './components/add-documents/add-documents.component';
 import { CreateprofileComponent } from './createprofile/createprofile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardGuard } from './dashboard/dashboard.guard';
 import { AppointmentComponent } from './dashboard/pages/appointment/appointment.component';
 import { DocumentComponent } from './dashboard/pages/document/document.component';
 import { HomeComponent } from './dashboard/pages/home/home.component';
@@ -18,8 +20,6 @@ import { HospitalComponent } from './dashboard/pages/hospital/hospital.component
 import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 import { ErrorComponent } from './error/error.component';
 import { CreaterpofileGuard } from './guards/createrpofile.guard';
-import { LoginGuard } from './guards/login.guard';
-import { UserGuard } from './guards/user.guard';
 import { LandingPageComponent } from './landingpage/landingpage.component';
 
 const routes: Routes = [
@@ -29,8 +29,8 @@ const routes: Routes = [
     component: AuthenticationComponent,
     children: [
       { path: '', pathMatch: 'full', redirectTo: '/auth/login' },
-      { path: 'signup', canActivate: [], component: SignupComponent },
-      { path: 'login', canActivate: [], component: LoginComponent },
+      { path: 'signup', canActivate: [LoggedInGuard], component: SignupComponent },
+      { path: 'login', canActivate: [LoggedInGuard], component: LoginComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'forgot-password', component: ForgotComponent },
       { path: 'v/:id', component: OtpComponent },
@@ -40,8 +40,8 @@ const routes: Routes = [
   { path: "addDocs", component: AddDocumentsComponent },
   {
     path: 'dashboard',
-    canActivateChild: [UserGuard],
-    canLoad: [LoginGuard, UserGuard],
+    canActivate: [DashboardGuard],
+    canActivateChild: [DashboardGuard],
     component: DashboardComponent,
     children: [
       { path: '', component: HomeComponent },

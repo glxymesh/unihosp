@@ -11,7 +11,6 @@ import { AppointmentService } from '../appointment/appointments.service';
 })
 
 export class HomeComponent implements OnInit {
-  username: string = "Abhishek Mourya";
 
   dt = new Date();
 

@@ -9,6 +9,7 @@ export type User = {
   email: string
   name: string | null
   contact: string | null
+  avatarUrl: string | null
   role: Role,
   patient: string | null,
   createdAt: Date
@@ -41,6 +42,30 @@ export type Hospital = {
   updatedAt: Date | null
 }
 
+export type Doctor = {
+  id: string
+  fName: string
+  lName: string
+  handle: string
+  hospitalId: string
+  createdAt: Date
+  updatedAt: Date | null
+  userId: string
+}
+
+/**
+ * Model History
+ * 
+ */
+export type History = {
+  id: string
+  title: string
+  description: string
+  userId: string
+  createdAt: Date
+  updatedAt: Date | null
+}
+
 /**
  * Model Patient
  * 
@@ -54,7 +79,9 @@ export type Patient = {
   bloodGroup: BloodGroupType
   createdAt: Date
   updatedAt: Date | null
-  userId: string
+  userId: string,
+  allowedDoctors: Doctor[],
+  allowedHospitals: Hospital[]
 }
 
 export const BloodGroupType = {
@@ -66,18 +93,6 @@ export const BloodGroupType = {
 
 export type BloodGroupType = (typeof BloodGroupType)[keyof typeof BloodGroupType]
 
-/**
- * Model Doctor
- * 
- */
-export type Doctor = {
-  id: string
-  handle: string
-  hospitalId: string
-  createdAt: Date
-  updatedAt: Date | null
-  userId: string
-}
 
 /**
  * Model Documents

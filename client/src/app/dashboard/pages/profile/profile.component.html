@@ -1,12 +1,18 @@
-<!-- <div class="content" *ngIf="paitentProfile$ | async as patient"> -->
-<div class="content">
-    <!-- <uni-loading *ngIf="!patient"></uni-loading> -->
+<div class="content" *ngIf="paitentProfile$ | async as patient">
+    <!-- <div class="content"> -->
+    <uni-loading *ngIf="!patient || loading"></uni-loading>
     <div>
         <div class="userimage editable">
-            <img src="/assets/profile.png" alt="" />
+            <label style="width: 100%; height: 100%;" *ngIf="userService$ | async as user">
+                <div class="av_img" *ngIf="user.avatarUrl" style="background-image: url({{user.avatarUrl}});">
+                </div>
+                <div class="av_img" *ngIf="!user.avatarUrl" style="background-image: url('/assets/profile.png');">
+                </div>
+                <input accept=".jpg, .png, .jpeg, .heic" style="display: none;" type="file" #file
+                    (change)="handlePhotoUpload()">
+            </label>
         </div>
-        <!-- <h1>Your Profile, {{ patient.fName + " " + patient.lName}} </h1> -->
-        <h1>Your Profile, Abhishek </h1>
+        <h1>Your Profile, {{ patient.fName }} </h1>
         <p id="p">
             This dashboard is wholeheartedly designed to manage almost everything about
             you health.
@@ -17,37 +23,37 @@
             <div class="det-con">
                 <div class="det">
                     <h2>Full Name: </h2>
-                    <span>Abhishek Mourya</span>
+                    <span> {{ patient.fName + " " + patient.lName}} </span>
                 </div>
             </div>
             <div class="det-con">
                 <div class="det">
                     <h2>Uni Id: </h2>
-                    <span>@hekrya21</span>
+                    <span>{{ patient.handle }}</span>
                 </div>
             </div>
             <div class="det-con">
                 <div class="det">
                     <h2>Date of Birth: </h2>
-                    <span>12/23/32</span>
+                    <span>{{patient.dateOfBirth | date: 'mediumDate'}}</span>
                 </div>
             </div>
             <div class="det-con">
                 <div class="det">
                     <h2>Blood Group: </h2>
-                    <span>A</span>
+                    <span>{{patient.bloodGroup}}</span>
                 </div>
             </div>
-            <div class="det-con">
+            <div class="det-con" *ngIf="userService$ | async as user">
                 <div class="det">
                     <h2>Email: </h2>
-                    <span>abhishek@mail.com</span>
+                    <span>{{user.email}}</span>
                 </div>
             </div>
-            <div class="det-con">
+            <div class="det-con" *ngIf="userService$ | async as user">
                 <div class="det">
-                    <h2>Phone: </h2>
-                    <span>+91-9039515946</span>
+                    <h2>Mobile: </h2>
+                    <span>{{user.contact}}</span>
                 </div>
             </div>
             <!-- <div class="ed-btn">
@@ -57,7 +63,7 @@
         <!-- <div class="prof" *ngIf="!editable">
 
         </div> -->
-        <div class="ato">
+        <div class="ato" *ngIf="patient.allowedDoctors.length > 0 && patient.allowedDoctors.length>0">
             <h2>Profile Allowed to:</h2>
             <table>
                 <thead>
@@ -67,19 +73,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Dr. Sita Raman</td>
-                        <td>asd@unasf</td>
+                    <tr *ngFor="let doctors of patient.allowedDoctors">
+                        <td>{{doctors.fName}}</td>
+                        <td>{{doctors.handle}}</td>
                         <td><button>Remove</button></td>
                     </tr>
-                    <tr>
-                        <td>Dr. Sita Raman</td>
-                        <td>asd@unasf</td>
-                        <td><button>Remove</button></td>
-                    </tr>
-                    <tr>
-                        <td>Dr. Sita Raman</td>
-                        <td>asd@unasf</td>
+                    <tr *ngFor="let hospital of patient.allowedHospitals">
+                        <td>{{hospital.name}}</td>
+                        <td>{{hospital.location}}</td>
                         <td><button>Remove</button></td>
                     </tr>
                 </tbody>
@@ -87,7 +88,6 @@
         </div>
     </div>
 </div>
-
 <!-- <div class="mainsec">
     <div class="firstsec">
         <label for="name">Name</label><br />

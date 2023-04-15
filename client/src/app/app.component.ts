@@ -11,7 +11,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private notification: NotificationService) { }
 
   value = ""
 
