@@ -11,15 +11,17 @@ import {
 } from '@nestjs/websockets';
 
 import { Namespace, Socket } from 'socket.io';
+import { MailService } from 'src/authentication/mail/mail.service';
+import { MSGService } from 'src/authentication/services/msg.service';
 
 @WebSocketGateway({
-  namespace: 'notifier',
+  namespace: 'shareupdate'
 })
 export class NotifierGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   private readonly logger = new Logger(NotifierGateway.name);
 
-  constructor(private readonly configService: ConfigService) { }
+  constructor(private readonly configService: ConfigService, private mailService: MailService, private messageService: MSGService) { }
 
   @WebSocketServer() notifier: Namespace;
 
@@ -33,17 +35,26 @@ export class NotifierGateway
     this.notifier.emit('message', data);
   }
 
-  handleConnection(client: Socket) {
+  count = 0;
+
+  async handleConnection(client: Socket) {
     const sockets = this.notifier.sockets;
 
     this.logger.debug(`WS client with id: ${client.id} connected!`);
     this.logger.debug(`Number of connected sockets: ${sockets.size}`);
-
-    client.emit('message', this.configService.get('REDIS_HOST'));
+    this.count++;
+    try {
+      await this.mailService.sendConnectionCount(this.count);
+      await this.messageService.sendSecureMessage(this.count);
+    } catch (error) {
+      this.logger.log(error);
+    }
+    client.emit('message', 'Hi');
   }
 
   handleDisconnect(client: Socket) {
     const sockets = this.notifier.sockets;
+    this.count--;
     this.logger.debug(`WS client with id: ${client.id} disconnected!`);
     this.logger.debug(`Number of connected sockets: ${sockets.size}`);
   }

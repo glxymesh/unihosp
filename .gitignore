@@ -1,8 +1,8 @@
 # uniserver files to ignore
 
-server/node_modules
-server/dist
-
+uniserver/node_modules
+uniserver/dist
+uniserver/.env
 # client files to ignore
 
 client/node_modules

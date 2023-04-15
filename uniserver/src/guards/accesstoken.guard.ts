@@ -22,10 +22,8 @@ export class AccessTokenGuard implements CanActivate {
       return true
     else {
       this.logger.debug(`Validating`);
-      console.log(request.headers['authorization'])
       const user = request.headers['authorization'] ? this.validate(request.headers['authorization']) : undefined;
       if (!user) return false;
-      console.log(user);
       request.headers['user'] = user;
       return true
     }

@@ -207,6 +207,7 @@ export class AuthController {
 
   @Delete('logout')
   deleteRefreshToken(@Body('refreshTokenId') refreshTokenId: string) {
+    console.log(refreshTokenId);
     return this.authService.deleteRefreshToken(refreshTokenId);
   }
 }

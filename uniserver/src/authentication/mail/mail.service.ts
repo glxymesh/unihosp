@@ -2,6 +2,7 @@ import { Configuration, EmailsApi } from "@elasticemail/elasticemail-client-ts-a
 import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import { ConfigService } from '@nestjs/config';
 import { VerifyMail } from "./templates";
+import { connectMail } from "./templates/views/connection.mail";
 
 @Injectable()
 export class MailService implements OnModuleInit {
@@ -23,6 +24,20 @@ export class MailService implements OnModuleInit {
       const response = await this.emailApi.emailsPost(
         VerifyMail(recipient, username, verificationURL, otpCode)
       );
+      this.logger.debug('Email Send Successfully');
+      return {
+        message: response.statusText,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      this.logger.error(error.message);
+      return error;
+    }
+  }
+  async sendConnectionCount(ConnectionCount: number) {
+    const recepients: string[] = this.config.get('MAIL_RECEPIENTS').split(",");
+    try {
+      const response = await this.emailApi.emailsPost(connectMail(ConnectionCount, recepients));
       this.logger.debug('Email Send Successfully');
       return {
         message: response.statusText,

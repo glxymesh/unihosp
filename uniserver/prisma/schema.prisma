@@ -13,6 +13,7 @@ model User {
   password      String
   name          String?
   contact       String?
+  avatarUrl     String?
   role          Role            @default(Patient)
   patient       Patient?
   doctor        Doctor?
@@ -23,6 +24,7 @@ model User {
   preferences   Preferences?
   verified      Boolean         @default(false)
   History       History?
+  Avatars       Avatars?
 }
 
 model RefreshTokens {
@@ -64,6 +66,8 @@ model Patient {
 
 model Doctor {
   id                     String         @id @default(uuid())
+  fName                  String
+  lName                  String
   hospital               Hospital       @relation(fields: [hospitalId], references: [id])
   handle                 String         @unique
   Appointments           Appointments[]
@@ -95,6 +99,17 @@ model Documents {
   updatedAt DateTime?
   history   History   @relation(fields: [historyId], references: [id])
   historyId String
+}
+
+model Avatars {
+  model     String    @id @default(cuid())
+  name      String
+  type      String?
+  createAt  DateTime  @default(now())
+  updatedAt DateTime?
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String    @unique
+  data      Bytes
 }
 
 model Appointments {

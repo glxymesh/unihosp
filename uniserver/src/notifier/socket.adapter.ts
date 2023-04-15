@@ -47,7 +47,8 @@ export class SocketIOAdapter extends IoAdapter {
           `http://127.0.0.1:4200`,
           `http://localhost:5500`,
           `http://127.0.0.1:5500`,
-          'http://192.168.56.249:4200/'
+          'http://192.168.56.249:4200/',
+          'https://unihosp.live'
         ]
       }
     };

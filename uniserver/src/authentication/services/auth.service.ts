@@ -27,25 +27,29 @@ export class AuthService {
 
   async login(authData: { email: string, password: string }) {
 
-    const user = await this.userService.user({ email: authData.email }, { patient: true });
+    let user = await this.userService.user({ email: authData.email }, { patient: true });
 
+    this.logger.log(JSON.stringify(user))
     authData.password = this.hash(authData.password)
 
     if (user) {
       if (user.password === authData.password) {
-        const accessToken = this.generateToken(user);
-        const refreshToken = this.generateToken(user, TokenType.RefreshToken);
+        const patientId = user.patient.id;
+        const after = excludePassword(user, ['password', 'patient'])
+        this.logger.log(JSON.stringify(after))
+        let nUser = {
+          ...after,
+          patient: patientId
+        }
+        const accessToken = this.generateToken(nUser);
+        const refreshToken = this.generateToken(nUser, TokenType.RefreshToken);
         const refreshTokenSaved = await this.userService.usersAddAuthToken(user.id, refreshToken);
-        const nUser = excludePassword(user, ['password'])
         return {
           accessToken,
           refreshToken,
           refreshTokenId: refreshTokenSaved.id,
           message: "Authentication has been done successfully",
-          user: {
-            ...nUser,
-            patient: nUser.patient.id
-          }
+          user: nUser
         }
       } {
         return {
@@ -79,7 +83,7 @@ export class AuthService {
     return this.userService.removeAuthToken(refreshTokenId);
   }
 
-  private generateToken(user: User, tokenType: TokenType = TokenType.AccessToken) {
+  private generateToken(user: any, tokenType: TokenType = TokenType.AccessToken) {
     this.logger.debug(`Access token expire: ${this.configService.get('ACCESS_TOKEN_EXPIRATION')}`);
     this.logger.debug(`Refresh token expire: ${this.configService.get('ACCESS_TOKEN_EXPIRATION')}`);
     switch (tokenType) {

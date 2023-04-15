@@ -64,7 +64,7 @@ export class PatientService {
     const include = {
       owner: false,
       allowedDoctors: true,
-      allowedHospitals: true
+      allowedHospitals: true,
     }
     return this.prismaService.patient.findUnique({
       where: {
@@ -72,7 +72,7 @@ export class PatientService {
         handle: data.handle,
         userId: data.userId
       },
-      include
+      include: { ...include }
     })
   }
 
