@@ -68,15 +68,17 @@ export default class UniCookieService {
     return this.cookie.check(name) ? this.cookie.get(name) : undefined;
   }
 
-  storeRefreshToken(payload: string, expire?: number) {
+  storeRefreshToken(payload: string, options: { expire?: number, path?: string } = {}) {
+    let { path, expire } = options;
     const cookies = this.divideRefreshToken(payload);
     expire = expire || 2592000;
-    this.cookie.set("rupl", cookies.rupl, expire);
-    this.cookie.set("rsecl", cookies.rsecl, expire);
-    this.cookie.set("rexpl", cookies.rexpl, expire);
+    this.cookie.set("rupl", cookies.rupl, expire, path);
+    this.cookie.set("rsecl", cookies.rsecl, expire, path);
+    this.cookie.set("rexpl", cookies.rexpl, expire, path);
   }
 
   deleteAllCookie() {
+    console.log("Deleting")
     this.cookie.deleteAll();
   }
 }

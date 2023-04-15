@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 @Injectable({
@@ -13,15 +13,18 @@ export class CreaterpofileGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.user.currentUser.pipe(map(user => {
-      console.log('Create Profile Guard: ', user);
-      if (user?.patient) {
-        this.router.navigate(['/dashboard']);
-        return false;
-      }
-      return true
-    }))
+    return this.user.currentUser.pipe(
+      filter(user => user != undefined),
+      map(user => {
+        console.log('Create Profile Guard: ', user);
+        if (user?.patient) {
+          this.router.navigate(['/dashboard']);
+          return false;
+        }
+        return true
+      }))
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

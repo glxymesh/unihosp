@@ -1,6 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
-import { OutletContext, RouterOutlet, UrlSegment } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { OutletContext, Router, RouterOutlet, UrlSegment } from '@angular/router';
+import { map } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'uni-dashboard',
@@ -17,10 +19,17 @@ import { OutletContext, RouterOutlet, UrlSegment } from '@angular/router';
     ])
   ]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private userService: UserService) { }
 
+  ngOnInit(): void {
+    // this.userService.currentUser.subscribe(user => {
+    //   if (!user) {
+    //     this.router.navigate(['/auth/signup'])
+    //   }
+    // })
+  }
 
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated)

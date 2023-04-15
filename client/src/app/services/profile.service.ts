@@ -30,6 +30,10 @@ export class ProfileService {
     })
   }
 
+  updateAvatar(formData: FormData) {
+    return this.http.post("/avatars", formData);
+  }
+
   createPatientProfile({ fName, lName, dateOfBirth, handle, bloodGroup }: {
     fName: string,
     lName: string,

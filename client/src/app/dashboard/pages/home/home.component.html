@@ -1,10 +1,10 @@
-<!-- <div class="content" *ngIf="paitentProfile$ | async as patient"> -->
-<div class="content">
+<div class="content" *ngIf="paitentProfile$ | async as patient">
+    <!-- <div class="content"> -->
     <div>
         <div class="userimage">
             <img src="/assets/profile.png" alt="" />
         </div>
-        <h1>Welcome, {{ username }}</h1>
+        <h1>Welcome, {{ patient.fName }}</h1>
         <p>
             This dashboard is wholeheartedly designed to manage almost everything
             about you health.
@@ -94,5 +94,5 @@
         </div>
     </div>
 </div>
-<!-- <uni-loading *ngIf="!(paitentProfile$| async)"></uni-loading> -->
+<uni-loading *ngIf="!(paitentProfile$| async)"></uni-loading>
 <!-- <div class="content" *ngIf="paitentProfile$ | async as patient"> -->

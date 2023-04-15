@@ -22,6 +22,7 @@ import { NotificationService } from './notification/notification.service';
 import { RequestsInterceptor } from './requests.interceptor';
 import { ProfileService } from './services/profile.service';
 import { UserService } from './services/user.service';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 
@@ -32,6 +33,7 @@ import { UserService } from './services/user.service';
     CreateprofileComponent,
     LandingPageComponent,
     ErrorComponent,
+    FeedbackComponent,
   ],
   imports: [
     BrowserModule,

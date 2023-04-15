@@ -45,7 +45,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
   ],
   providers: [
     AppointmentService,
-    UserGuard
   ]
 })
 export class DashboardModule { }

@@ -8,6 +8,18 @@
     grid-auto-rows: minmax(clamp(200px, 40vh, 400px), auto);
   }
 }
+
+@media screen and (width < 750px) {
+  .content {
+    & > div:nth-child(2) {
+      gap: 24px 0px;
+      margin-top: 2rem;
+      width: 100%;
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
 .boxmain {
   padding: 1.5rem 2rem;
   width: 100%;
