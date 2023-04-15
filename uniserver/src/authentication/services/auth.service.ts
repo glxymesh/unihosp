@@ -97,37 +97,43 @@ export class AuthService {
   async signup(signUpData: Prisma.UserCreateInput) {
     this.logger.debug(`Signing Up: ${JSON.stringify(signUpData)}`);
 
-    if (!/^(\+\d{1,2})-(\d{10})$/.test(signUpData.contact)) {
-      return {
-        statusCode: 403,
-        message: 'Wrong Contact details',
-      };
-    }
+    try {
+      if (!/^(\+\d{1,2})-(\d{10})$/.test(signUpData.contact)) {
+        return {
+          statusCode: 403,
+          message: 'Wrong Contact details',
+        };
+      }
 
-    const id = await this.userService.verifyMailAndContact(
-      signUpData.email,
-      signUpData.contact,
-    );
-
-    const response = await this.mailService.sendMail(
-      signUpData.email,
-      signUpData.email,
-      id.uri,
-      id.code,
-    );
-
-    if (signUpData.contact) {
-      const message = await this.msgService.sendMessage(
+      const id = await this.userService.verifyMailAndContact(
+        signUpData.email,
         signUpData.contact,
+      );
+
+      const response = await this.mailService.sendMail(
+        signUpData.email,
+        signUpData.email,
+        id.uri,
         id.code,
       );
-      this.logger.debug(`MessageSent: ${JSON.stringify(message)}`);
+
+      if (signUpData.contact) {
+        const message = await this.msgService.sendMessage(
+          signUpData.contact,
+          id.code,
+        );
+        this.logger.debug(`MessageSent: ${JSON.stringify(message)}`);
+      }
+
+      this.logger.debug(`MailSent: ${JSON.stringify(response)}`);
+
+      signUpData.password = this.hash(signUpData.password);
+      return this.userService.createUser(signUpData);
+    } catch (err) {
+      return {
+        message: 'Something Went wrong please try again letter',
+      }
     }
-
-    this.logger.debug(`MailSent: ${JSON.stringify(response)}`);
-
-    signUpData.password = this.hash(signUpData.password);
-    return this.userService.createUser(signUpData);
   }
 
 

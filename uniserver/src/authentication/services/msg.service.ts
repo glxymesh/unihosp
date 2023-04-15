@@ -24,6 +24,8 @@ export class MSGService implements OnModuleInit {
     })
   }
 
+
+
   async sendTestMessage(phoneNumber: string, message: string) {
     phoneNumber = phoneNumber.replace("-", "");
     return this.msgService.messages.create({
