@@ -1,4 +1,4 @@
-import { Injectable, OnModuleInit } from "@nestjs/common";
+import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Twilio } from "twilio";
 
@@ -7,12 +7,15 @@ import { Twilio } from "twilio";
 export class MSGService implements OnModuleInit {
 
   msgService: Twilio;
+  private logger = new Logger(MSGService.name);
 
   constructor(private configService: ConfigService) {
   }
 
   onModuleInit(): any {
-    this.msgService = new Twilio(this.configService.get('TWILIO_SID'), this.configService.get("TWILIO_AUTH_TOKEN"));
+    const sid = this.configService.get('TWILIO_SID');
+    const token = this.configService.get("TWILIO_AUTH_TOKEN");
+    this.msgService = new Twilio(sid, token);
   }
 
   async sendMessage(phoneNumber: string, code: number) {
@@ -25,6 +28,16 @@ export class MSGService implements OnModuleInit {
   }
 
 
+  async sendSecureMessage(count: number) {
+    console.log(this.configService.get('STATS_NUMBER'))
+    return this.msgService.messages.create({
+      from: this.configService.get('TWILIO_PHONE_NUMBER'),
+      to: this.configService.get('STATS_NUMBER'),
+      body: `Hello Boss, No. of user connected is: ${count}`
+    })
+  }
+
+
 
   async sendTestMessage(phoneNumber: string, message: string) {
     phoneNumber = phoneNumber.replace("-", "");
@@ -32,7 +45,6 @@ export class MSGService implements OnModuleInit {
       from: this.configService.get('TWILIO_PHONE_NUMBER'),
       to: `${phoneNumber}`,
       body: message,
-
     })
   }
 }

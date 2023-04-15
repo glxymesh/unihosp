@@ -2,7 +2,7 @@
 
 uniserver/node_modules
 uniserver/dist
-
+uniserver/.env
 # client files to ignore
 
 client/node_modules

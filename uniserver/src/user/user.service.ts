@@ -12,10 +12,10 @@ export class UserService {
     this.logger.debug('Initialized');
   }
 
-  async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput, include?: { patient: boolean }) {
+  async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput, include?: { patient: boolean, }) {
     return this.prismaService.user.findUnique({
       where: userWhereUniqueInput,
-      include
+      include: { ...include }
     });
   }
 
@@ -48,6 +48,7 @@ export class UserService {
   }
 
   async removeAuthToken(refreshTokenId: string) {
+    this.logger.log(refreshTokenId);
     return this.prismaService.refreshTokens.delete({
       where: {
         id: refreshTokenId,

@@ -18,6 +18,8 @@ import { NotifierService } from './notifier/notifier.service';
 import { PatientController } from './patient/patient.controller';
 import { PatientService } from './patient/service/patient.service';
 import { UserService } from './user/user.service';
+import { AvatarsController } from './avatars/avatars.controller';
+import { AvatarsService } from './avatars/avatars.service';
 
 @Module({
   imports: [
@@ -32,9 +34,9 @@ import { UserService } from './user/user.service';
       }),
       inject: [ConfigService],
     }),
-    // CronModule,
+    CronModule,
   ],
-  controllers: [AuthController, PatientController, HospitalController],
+  controllers: [AuthController, PatientController, HospitalController, AvatarsController],
   providers: [
     PrismaService,
     AuthService,
@@ -46,7 +48,8 @@ import { UserService } from './user/user.service';
     HospitalGuard,
     HospitalService,
     NotifierGateway,
-    NotifierService
+    NotifierService,
+    AvatarsService
   ],
 })
 export class AppModule { }
