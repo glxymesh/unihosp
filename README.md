@@ -2,7 +2,6 @@
 ---
 UniHosp stands for United Hospitals acronym we made for our website name. We built this project with the thinking to convert entire health sector digital by recording all the medical history of the citizen of India into database and which they can by a given Uni ID which a user can create during the registration. We are trying built a prototype to connect  all the hospital like UPI connected all the banks for online revolution of Indian Financial Sector.
 
-
 ## Problem Being Addressed
 Suppose a person had a medical surgery in one state and changed city after few years. If he needed a new surgery the doctor might need past medical records and checkup reports. 
 Now If that is the case it can be possible that those documents got lost or damaged or not in very good condition to be read or understand. And if that's the case, that person might to go through another body check up which is cost him a lot money. As India's health sector is not cheap, If you are in India there is great chance you know that.
@@ -20,10 +19,12 @@ This service will work like UPI, Every Person will be given a Uni ID as we named
 4. Health Profile Access Management
 
 ### User Flow
-![userflow](https://github.com/glxymesh/unihosp/tree/main/source/userflow.png)
+
+![](https://github.com/glxymesh/unihosp/blob/main/source/userflow.png)
 
 ### Project Details
-![](https://github.com/glxymesh/unihosp/tree/main/source/project_structure.png)
+
+![](https://github.com/glxymesh/unihosp/blob/main/source/project_structure.png)
 
 To view the currently deployed app [Click Here](https://unihosp.live)
 
@@ -35,13 +36,14 @@ In main branch it is located at:
 
 
 
+
 `client`
 client consists of our app frontend design and app flow logic
 It's not fully completed yet so we have deployed a development build right some features might break. 
 ![userflow](https://github.com/glxymesh/unihosp/tree/main/source/registerpage.png)
 
 ##### Dashboard
-![userflow](https://github.com/glxymesh/unihosp/tree/main/source/welcome.png)
+![](https://github.com/glxymesh/unihosp/blob/main/source/welcome.png)
 
 
 Note:
@@ -84,7 +86,9 @@ UniHosp is a revolutionary digital platform that aims to make healthcare accessi
 2. Aryan Karma
 3. Nisha Rawat
 4. Madhav Gupta
+---
 
---- 
-UNIHOSP - UNITED HOSPITAL
-Thank you for viewing
+
+##### UNIHOSP - UNITED HOSPITAL
+---
+##### Thank you for viewing
