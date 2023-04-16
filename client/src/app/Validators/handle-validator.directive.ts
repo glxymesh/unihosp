@@ -18,7 +18,7 @@ export class HandleValidatorDirective implements AsyncValidator {
   constructor(private profile: ProfileService) { }
   validate(control: AbstractControl<any, any>): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     const handle: string = control.value + "@unihosp";
-    console.log(handle)
+    // console.log(handle)
     if (/\w*@\w/.test(handle))
       return this.profile.checkHandle(handle).pipe(map(val => val.handle ? { invalidHandle: 'Handle already exists' } : null))
     return of(null)

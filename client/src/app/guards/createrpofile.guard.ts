@@ -16,7 +16,7 @@ export class CreaterpofileGuard implements CanActivate, CanLoad {
     return this.user.currentUser.pipe(
       filter(user => user != undefined),
       map(user => {
-        console.log('Create Profile Guard: ', user);
+        // console.log('Create Profile Guard: ', user);
         if (user?.patient) {
           this.router.navigate(['/dashboard']);
           return false;

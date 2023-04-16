@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   lastTwoAppointments$ = this.appointmentService.appointments.pipe(
     catchError((err) => {
-      console.log(err);
+      // console.log(err);
       return of([]);
     })
   );

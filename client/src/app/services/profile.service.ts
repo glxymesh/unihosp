@@ -51,7 +51,7 @@ export class ProfileService {
     });
 
     patient.subscribe(patient => {
-      console.log(patient);
+      // console.log(patient);
       this.currentProfile.next(patient);
 
     })

@@ -40,15 +40,15 @@ export class ProfileComponent implements OnInit {
     formData.append('file', this.file.nativeElement.files[0]);
     this.loading = true;
     this.profileService.updateAvatar(formData).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this.userService.refereshCurrentUser();
       this.loading = false;
     });
   }
 
   ngOnInit() {
-    this.paitentProfile$.subscribe((patient) => {
-      console.log(patient);
-    });
+    // this.paitentProfile$.subscribe((patient) => {
+    // console.log(patient);
+    // });
   }
 }

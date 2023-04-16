@@ -20,7 +20,7 @@ export class CustomEmailValidatorDirective implements AsyncValidator {
 
   validate(control: AbstractControl<any, any>): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     const email: string = control.value;
-    console.log(email)
+    // console.log(email)
     if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email))
       return this.userService.getUsersByMail(email).pipe(map(val => val.email ? { invalidEmail: "Email already exists" } : null))
     return of(null);

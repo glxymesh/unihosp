@@ -42,7 +42,7 @@ export class LoggedInGuard implements CanActivate, CanLoad {
     return this.user.currentUser.pipe(
       filter(user => user !== undefined),
       map((user) => {
-        console.log('From LoggedInGuard', user);
+        // console.log('From LoggedInGuard', user);
         if (user && user.patient) {
           this.router.navigate(['/dashboard']);
         } else if (user) {
@@ -68,7 +68,7 @@ export class LoggedInGuard implements CanActivate, CanLoad {
 
     return this.user.currentUser.pipe(
       map((user) => {
-        console.log('From LoggedInGuard', user);
+        // console.log('From LoggedInGuard', user);
         if (user && user.patient) {
           this.router.navigate(['/dashboard']);
         } else if (user) {

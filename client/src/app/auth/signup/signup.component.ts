@@ -103,12 +103,12 @@ export class SignupComponent implements OnInit {
   async handleRegistration($event: any) {
     $event.preventDefault();
 
-    console.log(this.signupForm.value);
+    // console.log(this.signupForm.value);
     const values = this.signupForm.value;
-    console.log(
-      this.signupForm.valid,
-      this.validatePass(values.password, values['confirm-password'])
-    );
+    // console.log(
+    //   this.signupForm.valid,
+    //   this.validatePass(values.password, values['confirm-password'])
+    // );
     if (
       this.validatePass(values.password, values['confirm-password']) &&
       this.signupForm.valid

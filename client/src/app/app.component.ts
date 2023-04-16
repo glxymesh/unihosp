@@ -19,13 +19,13 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.router.url)
+    // console.log(this.router.url)
   }
 
   onChange() {
-    console.log(this.value)
+    // console.log(this.value)
     this.userService.getUsersByMail(this.value).subscribe(observe => {
-      console.log(observe);
+      // console.log(observe);
       this.exists = observe.email ? observe.email : false;
     })
   }

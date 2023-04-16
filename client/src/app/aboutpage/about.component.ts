@@ -13,6 +13,8 @@ export class AboutComponent implements OnInit, OnDestroy {
   observer3!: IntersectionObserver;
   observer4!: IntersectionObserver;
 
+  appName = 'United Hospital'
+
   e1!: Element | null;
   e2!: Element | null;
   e3!: Element | null;

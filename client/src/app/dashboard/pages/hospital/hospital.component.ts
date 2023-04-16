@@ -23,7 +23,7 @@ export class HospitalComponent implements AfterViewInit, OnChanges, OnInit {
 
   }
   ngAfterViewInit(): void {
-    console.log(this.mapElement.nativeElement);
+    // console.log(this.mapElement.nativeElement);
   }
 
   userService$ = this.userService.currentUser;
@@ -46,7 +46,7 @@ export class HospitalComponent implements AfterViewInit, OnChanges, OnInit {
       const { Map } = await google.maps.importLibrary('maps') as google.maps.MapsLibrary;
       const element = this.mapElement.nativeElement;
       const location = await this.getLocationData();
-      console.log(location)
+      // console.log(location)
       if (element) {
         this.map = new Map(element, {
           center: { lat: location.lat, lng: location.lng },
@@ -59,7 +59,7 @@ export class HospitalComponent implements AfterViewInit, OnChanges, OnInit {
 
   async getLocationData() {
     let location = { lat: 20.5937, lng: 78.9629 };
-    console.log('called');
+    // console.log('called');
 
     try {
       location = await new Promise((resolve, reject) => {
@@ -77,7 +77,7 @@ export class HospitalComponent implements AfterViewInit, OnChanges, OnInit {
         );
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return { lat: 20.5937, lng: 78.9629 };
     }
     return location;

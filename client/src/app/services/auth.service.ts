@@ -37,7 +37,7 @@ export class AuthService {
       }
     });
     const data: AccessTokenResponse = await response.json();
-    console.log(data);
+    // console.log(data);
     this.cookie.storeAccessToken(data.accessToken, { expire: 2592000, path: "/" });
   }
 
@@ -47,14 +47,14 @@ export class AuthService {
     })
 
     response.subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       this.cookie.storeAccessToken(response.accessToken, { expire: 2592000, path: '/' });
       this.cookie.storeRefreshToken(response.refreshToken, { path: '/' });
       this.cookie.store("uid", response.user.id, { path: "/" });
       this.cookie.store("rid", response.refreshTokenId, { path: "/" });
       this.userService.setCurrentUser(response.user);
       if (!response.user.patient) this.router.navigate(['/dashboard'])
-      console.log("Logged In redirecting")
+      // console.log("Logged In redirecting")
       this.router.navigate(['/createprofile'])
     })
 
@@ -73,7 +73,7 @@ export class AuthService {
     })
 
     return reponse.pipe(map((value) => {
-      console.log(value);
+      // console.log(value);
       this.cookie.deleteAllCookie();
     }));
   }
