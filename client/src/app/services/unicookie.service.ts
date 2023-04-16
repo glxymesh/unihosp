@@ -78,7 +78,9 @@ export default class UniCookieService {
   }
 
   deleteAllCookie() {
-    console.log("Deleting")
-    this.cookie.deleteAll();
+    const cookieToDelete = ["aupl", "ascel", "aexpl", "rupl", "rscel", "rexpl", "uid", "rid"];
+    cookieToDelete.forEach(v => {
+      this.cookie.delete(v, "/");
+    })
   }
 }

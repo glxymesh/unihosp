@@ -39,13 +39,13 @@ export class SidebarComponent {
     { routerLink: "history", title: "History", icon: "fa-file", hovered: false },
     { routerLink: "hospital", title: "Hospitals", icon: "fa-hospital", hovered: false },
     { routerLink: "appointments", title: "Appointments", icon: "fa-calendar", hovered: false },
-    { title: "Logout", icon: "fa-arrow-right-from-bracket", hovered: false, onClick: this.logout },
+    { title: "Logout", icon: "fa-arrow-right-from-bracket", hovered: false },
   ];
 
 
   logout() {
     this.authService.logout().subscribe(() => {
-      this.router.navigate([""])
+      this.router.navigate(["/"])
     });
   }
 

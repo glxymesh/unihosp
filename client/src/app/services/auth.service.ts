@@ -5,6 +5,7 @@ import { User } from 'src/app/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { AccessTokenResponse, LoginResponse, LogoutResponse } from '../auth/interfaces';
 import UniCookieService from './unicookie.service';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +71,10 @@ export class AuthService {
         refreshTokenId: this.cookie.retrieve('rid')
       }
     })
-    this.cookie.deleteAllCookie();
-    return reponse;
+
+    return reponse.pipe(map((value) => {
+      console.log(value);
+      this.cookie.deleteAllCookie();
+    }));
   }
 }

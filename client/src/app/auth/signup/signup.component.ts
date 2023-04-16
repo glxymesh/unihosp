@@ -88,7 +88,7 @@ export class SignupComponent implements OnInit {
   navigate(email: string, contact: string) {
     this.router
       .navigate([
-        '/auth/verify-otp',
+        '/auth/login',
       ], {
         state: {
           authData: {

@@ -23,7 +23,7 @@ export class CreateprofileComponent implements OnInit {
 
   trySubmit = false;
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) { }
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private router: Router) { }
 
   ngOnInit(): void {
     document.title = "Profile - UniHosp"
@@ -62,6 +62,7 @@ export class CreateprofileComponent implements OnInit {
         .subscribe((profile) => {
           console.log(profile);
           this.loading = false;
+          this.router.navigate(['/dashboard'])
         })
     }
   }

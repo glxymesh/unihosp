@@ -34,7 +34,9 @@ export class AuthService {
 
     if (user) {
       if (user.password === authData.password) {
-        const patientId = user.patient.id;
+        let patientId: string;
+        if (user.patient)
+          patientId = user.patient.id;
         const after = excludePassword(user, ['password', 'patient'])
         this.logger.log(JSON.stringify(after))
         let nUser = {

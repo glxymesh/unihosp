@@ -12,7 +12,7 @@
             <h3>{{route.title}}</h3>
           </div>
         </a>
-        <button *ngIf="route.onClick !== undefined" [ngClass]="{'hovered': route.hovered}" (mouseover)="mouseOver(i)"
+        <button *ngIf="route.routerLink === undefined" [ngClass]="{'hovered': route.hovered}" (mouseover)="mouseOver(i)"
           (click)="logout()" (mouseleave)="mouseOverOut(i)">
           <div class="circle1">
             <h3>{{route.title}}</h3>

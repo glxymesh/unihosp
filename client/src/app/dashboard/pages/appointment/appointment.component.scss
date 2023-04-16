@@ -110,11 +110,6 @@
 .hosDetail span {
   text-decoration: underline;
 }
-// .visited span {
-//   text-decoration: underline;
-// }
-
-/* add appointment button styles */
 
 .addmore {
   position: absolute;
@@ -171,15 +166,11 @@ input[type="checkbox"]:before {
   border-radius: 50%;
   transition: all 0.3s;
 }
-// .floatright {
-//   float: right;
-// }
 
 input[type="checkbox"]:checked:before {
   transform: translateX(20px);
 }
 
-/* end */
 .popupcont h1 {
   text-align: center;
   margin-bottom: 2rem;
@@ -213,21 +204,6 @@ input[type="checkbox"]:checked:before {
   margin-left: 0.7rem;
 }
 .close {
-  /* 
-    float: right;
-    font-size: 2rem;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 0.5rem;
-    margin-top: .5rem;
-    background-color: #285b54f3;
-    color: #f2f2f2;
-    padding: 0.2rem 0.8rem;
-    border-radius: .8rem;
-    transition: 250ms;
-    */
-
   float: right;
   font-size: 2rem;
   position: absolute;
@@ -359,19 +335,3 @@ input[type="file"] {
   box-shadow: 0px 0px 25px #3b887e;
   outline: 0;
 }
-// .mainsec {
-//   display: flex;
-//   padding: 0 4rem;
-//   margin: 1rem 0;
-// }
-// .firstsec {
-//   width: 50%;
-//   margin: 0 0 0 0;
-// }
-// .secondsec {
-//   margin: 0 0 0 0;
-// }
-// .fullsec {
-//   margin: 0 auto;
-//   width: 100%;
-// }

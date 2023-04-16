@@ -16,10 +16,6 @@
 }
 .homebutton {
   font-weight: 800 !important;
-  /* background: linear-gradient(90deg, #0b1516a8 20%,#c4e8c2 85%); */
-  /* background: linear-gradient(45deg, #40513B 00%, #9DC08B 30%, #EDF1D6 50%, #40513B 100%); */
-  /* background: linear-gradient(45deg, #77a1d3 0%, #79cbca 50%, #045256bd 100%); */
-  /* background:linear-gradient(45deg, #46a094 0%, #6bbd99 35%, #aecfa4 70%, #c4ebc2 100%); */
   background: linear-gradient(45deg, #045256 0%, #0452567e 50%, #0b1516 100%);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -79,11 +75,6 @@
   text-align: center;
   font-size: 5.5rem;
   font-weight: 700;
-  /* background: linear-gradient(65deg, #045256bd 10%, #9ab8ba 30%, #77f6fa 50%, #045256 100%); */
-  /* background: linear-gradient(65deg, #ddf7f8 10%, #9ab8ba 100%); */
-  /* background: linear-gradient(45deg, #40513B 00%, #9DC08B 30%, #EDF1D6 60%, #40513B 100%); */
-  /* background: linear-gradient(45deg, #77a1d3 0%, #79cbca 50%, #045256bd 100%); */
-  /* background:linear-gradient(45deg, #46a094 0%, #6bbd99 35%, #aecfa4 70%, #c4ebc2 100%); */
   background: linear-gradient(45deg, #045256 0%, #0452568f 50%, #0b1516 100%);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -91,7 +82,6 @@
   background-color: rgba(255, 255, 255, 0);
   margin-bottom: 0;
   position: relative;
-  /* color: #40513B; */
   margin-top: 0;
   padding: 0;
 }
@@ -108,7 +98,6 @@
   margin: 0.5rem 0;
   width: 100%;
   color: rgba(0, 0, 0, 0.8);
-  /* color: white; */
   font-size: medium;
   text-align: center;
   font-weight: 300;
@@ -166,7 +155,6 @@
 .wtnContent {
   height: fit-content;
   background-color: rgb(235, 235, 235);
-  /* background-color: white; */
   padding: 4.2rem 4.5rem;
   font-size: 1.5rem;
   font-family: "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
