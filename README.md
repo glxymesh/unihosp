@@ -94,7 +94,9 @@ UniHosp is a revolutionary digital platform that aims to make healthcare accessi
 3. Nisha Rawat
 4. Madhav Gupta
 
-If You See any issue with deployed app please contact us at: creator6774@gmail.com
+If You See any issue with deployed app please contact us at: 
+
+creator6774@gmail.com
 ---
 
 
