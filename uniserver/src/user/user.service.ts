@@ -15,8 +15,8 @@ export class UserService {
   async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput, include?: { patient: boolean, }) {
     return this.prismaService.user.findUnique({
       where: userWhereUniqueInput,
-      include: { ...include }
-    });
+      include
+    })
   }
 
   async users(params: {

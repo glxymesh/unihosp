@@ -122,20 +122,20 @@ export class AuthService {
       );
 
       if (signUpData.contact) {
-        const message = await this.msgService.sendMessage(
-          signUpData.contact,
-          id.code,
-        );
-        this.logger.debug(`MessageSent: ${JSON.stringify(message)}`);
+        // const message = await this.msgService.sendMessage(
+        //   signUpData.contact,
+        //   id.code,
+        // );
+        // this.logger.debug(`MessageSent: ${JSON.stringify(message)}`);
       }
 
       this.logger.debug(`MailSent: ${JSON.stringify(response)}`);
 
       signUpData.password = this.hash(signUpData.password);
-      return this.userService.createUser(signUpData);
+      return { ...this.userService.createUser(signUpData), otpVerificationCode: id.uri };
     } catch (err) {
       return {
-        message: 'Something Went wrong please try again letter',
+        message: 'Something Went wrong please try again later',
       }
     }
   }

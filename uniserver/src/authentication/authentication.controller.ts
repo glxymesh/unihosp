@@ -107,9 +107,9 @@ export class AuthController {
     @Body() vData: { otpCode: number },
   ) {
     this.logger.debug('Verifying OTP');
-
     try {
       const mail = await this.userService.getAndDeleteVerifyMailById(id);
+
       if (mail.code !== vData.otpCode) {
         return {
           statusCode: 403,
