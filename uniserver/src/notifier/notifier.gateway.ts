@@ -48,8 +48,7 @@ export class NotifierGateway
   async sendNotification() {
     await this.loggerService.log('Set timeout called: Sending Notification')
     this.logger.debug('Set timeout called: Sending Notification')
-    await this.mailService.sendConnectionCount(this.count);
-    await this.messageService.sendSecureMessage(this.count);
+    // await this.mailService.sendConnectionCount(this.count);
   }
 
   async handleConnection(client: Socket) {

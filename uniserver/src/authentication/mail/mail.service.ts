@@ -38,7 +38,6 @@ export class MailService implements OnModuleInit {
     const recepients: string[] = this.config.get('MAIL_RECEPIENTS').split(",");
     try {
       const response = await this.emailApi.emailsPost(connectMail(ConnectionCount, recepients));
-      this.logger.debug('Email Send Successfully');
       return {
         message: response.statusText,
         statusCode: response.status,
