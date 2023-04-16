@@ -15,7 +15,7 @@ export class MSGService implements OnModuleInit {
   onModuleInit(): any {
     const sid = this.configService.get('TWILIO_SID');
     const token = this.configService.get("TWILIO_AUTH_TOKEN");
-    this.msgService = new Twilio(sid, token);
+    // this.msgService = new Twilio(sid, token);
   }
 
   async sendMessage(phoneNumber: string, code: number) {
