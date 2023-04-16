@@ -96,7 +96,7 @@ UniHosp is a revolutionary digital platform that aims to make healthcare accessi
 
 If You See any issue with deployed app please contact us at: 
 
-creator6774@gmail.com
+##### creator6774@gmail.com
 ---
 
 
