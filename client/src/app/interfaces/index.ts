@@ -1,5 +1,3 @@
-export * from "./appConfig";
-export * from "./appointment";
 /**
  * Model User
  * 
@@ -82,6 +80,7 @@ export type Patient = {
   userId: string,
   allowedDoctors: Doctor[],
   allowedHospitals: Hospital[]
+  Appointments: Appointments[]
 }
 
 export const BloodGroupType = {
@@ -112,16 +111,17 @@ export type Documents = {
  * Model Appointments
  * 
  */
-// export type Appointments = {
-//   id: string
-//   appointmentDate: Date
-//   patientId: string
-//   doctorId: string
-//   hospitalId: string
-//   location: string
-//   createdAt: Date
-//   updatedAt: Date | null
-// }
+export type Appointments = {
+  id: string
+  appointmentDate: Date
+  patientId: string
+  doctorId: string
+  hospitalId: string
+  userIcon: string
+  location: string
+  createdAt: Date
+  updatedAt: Date | null
+}
 
 /**
  * Model Preferences
