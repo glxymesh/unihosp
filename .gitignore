@@ -4,7 +4,6 @@ uniserver/node_modules
 uniserver/dist
 uniserver/.env
 nginx.conf
-nginx.conf
 
 # client files to ignore
 
