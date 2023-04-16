@@ -1,8 +1,8 @@
-<!-- <div class="content" *ngIf="paitentProfile$|async as patient"> -->
-<div class="content">
-    <!-- <h1>Your Documents, {{patient.fName + " " + patient.lName}}</h1> -->
+<div class="content" *ngIf="paitentProfile$|async as patient">
+    <!-- <div class="content"> -->
+    <h1>Your Documents, </h1>
     <div class="tp-usr-dtls">
-        <h1>Past Medical Record, Abhishek</h1>
+        <h1>Past Medical Record, {{patient.fName}}</h1>
         <p id="p">
             This dashboard is wholeheartedly designed to manage almost everything about
             you health.
@@ -29,4 +29,4 @@
         <button><i class="fa-sharp fa-solid fa-plus"></i></button>
     </div>
 </div>
-<!-- <uni-loading *ngIf="!(paitentProfile$|async)"></uni-loading> -->
+<uni-loading *ngIf="!(paitentProfile$|async)"></uni-loading>

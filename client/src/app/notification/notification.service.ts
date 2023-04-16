@@ -11,8 +11,6 @@ export class NotificationService {
 
   constructor() {
     this.io = io("https://unihosp.live/shareupdate");
-
-    this.io.on("connect", () => console.log("Connected"))
   }
 
   listen() {

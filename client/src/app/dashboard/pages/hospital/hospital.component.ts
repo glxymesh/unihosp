@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'uni-hospital',
@@ -10,7 +11,10 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class HospitalComponent implements AfterViewInit, OnInit {
 
 
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService, private userService: UserService) { }
+
+  userService$ = this.userService.currentUser;
+
 
   ngOnInit(): void {
 

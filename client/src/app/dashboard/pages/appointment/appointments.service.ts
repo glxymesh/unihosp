@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Appointments } from 'src/app/interfaces';
+import { ProfileService } from 'src/app/services/profile.service';
 
 
 
@@ -9,17 +11,18 @@ export class AppointmentService {
 
   private appointments$ = new BehaviorSubject<Appointments[]>([]);
 
-  constructor() { }
+  constructor(private profileService: ProfileService, private http: HttpClient) { }
 
   get appointments() {
     return this.appointments$;
   }
 
   requestAppointments() {
-    this.appointments$.next([
-      { title: "Dr. Neelima Deshmukh", description: "Manak Hospital Indore", dateTime: new Date(), userIcon: "/assets/doctor1.jpg" },
-      { title: "Dr. Kushagra Jain", description: "MY Hospital Indore", dateTime: new Date(), userIcon: "/assets/doctor2.png" },
-    ]);
+    this.profileService.current.subscribe((profile) => {
+      if (profile && profile.Appointments) {
+        this.appointments$.next(profile.Appointments);
+      }
+    })
   }
 
 }

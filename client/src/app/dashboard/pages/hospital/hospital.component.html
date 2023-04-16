@@ -1,12 +1,15 @@
-<!-- <div class="content" *ngIf="paitentProfile$|async as patient"> -->
-<div class="content">
+<div class="content" *ngIf="paitentProfile$|async as patient">
+    <!-- <div class="content"> -->
     <div>
-        <div class="userimage">
-            <img src="/assets/profile.png" alt="" />
+        <div class="userimage" *ngIf="userService$ | async as user">
+            <div class="av_img" *ngIf="user.avatarUrl" style="background-image: url({{user.avatarUrl}});">
+            </div>
+            <div class="av_img" *ngIf="!user.avatarUrl" style="background-image: url('/assets/profile.png');">
+            </div>
         </div>
 
-        <!-- <h1 style="font-weight: 600">Nearby Hospitals, {{ patient.fName }}</h1> -->
-        <h1 style="font-weight: 600">Nearby Hospitals, Abhishek</h1>
+        <h1 style="font-weight: 600">Nearby Hospitals, {{ patient.fName }}</h1>
+        <!-- <h1 style="font-weight: 600">Nearby Hospitals, Abhishek</h1> -->
         <p id="p">
             This dashboard is wholeheartedly designed to manage almost everything about
             you health.

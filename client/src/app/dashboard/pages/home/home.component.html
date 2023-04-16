@@ -1,8 +1,11 @@
 <div class="content" *ngIf="paitentProfile$ | async as patient">
     <!-- <div class="content"> -->
     <div>
-        <div class="userimage">
-            <img src="/assets/profile.png" alt="" />
+        <div class="userimage" *ngIf="userService$ | async as user">
+            <div class="av_img" *ngIf="user.avatarUrl" style="background-image: url({{user.avatarUrl}});">
+            </div>
+            <div class="av_img" *ngIf="!user.avatarUrl" style="background-image: url('/assets/profile.png');">
+            </div>
         </div>
         <h1>Welcome, {{ patient.fName }}</h1>
         <p>
@@ -17,14 +20,14 @@
                 <li *ngFor="let appointment of lastTwoAppointments$ | async">
                     <a routerLink="/dashboard/appointments">
                         <div class="apt">
-                            <div class="usr-icon">
+                            <div class="usr-icon" *ngIf="appointment.userIcon">
                                 <img [src]="appointment.userIcon" />
                             </div>
                             <div class="dtls">
-                                <h3>{{ appointment.title }}</h3>
+                                <h3>{{ appointment.doctorId }}</h3>
                                 <p>
-                                    {{ appointment.description }} ~
-                                    {{ appointment.dateTime | date : "MMM d" }}
+                                    {{ appointment.location }} ~
+                                    {{ appointment.appointmentDate | date : "MMM d" }}
                                 </p>
                             </div>
                         </div>
@@ -56,10 +59,10 @@
                         <div class="apt">
                             <span class="arvl">{{ dt | date : 'h:mm a, MMM d' }}</span>
                             <div class="dtls">
-                                <h3>{{ appointment.title }}</h3>
+                                <h3>{{ appointment.hospitalId }}</h3>
                                 <p>
-                                    {{ appointment.description }} ~
-                                    {{ appointment.dateTime | date : "MMM d" }}
+                                    {{ appointment.location }} ~
+                                    {{ appointment.appointmentDate| date : "MMM d" }}
                                 </p>
                             </div>
                         </div>
@@ -67,7 +70,7 @@
                 </li>
             </ul>
             <div class="np" *ngIf="appointment.length === 0">
-                <h3>No, Upcoming Appointments</h3>
+                <h3>No, Notification</h3>
             </div>
         </div>
         <div class="boxmain b1" *ngIf="lastTwoAppointments$ | async as appointment">
@@ -78,10 +81,10 @@
                         <div class="apt">
                             <span class="arvl">{{ dt | date : 'h:mm a, MMM d' }}</span>
                             <div class="dtls">
-                                <h3>{{ appointment.title }}</h3>
+                                <h3>{{ appointment.hospitalId }}</h3>
                                 <p>
-                                    {{ appointment.description }} ~
-                                    {{ appointment.dateTime | date : "MMM d" }}
+                                    {{ appointment.location }} ~
+                                    {{ appointment.appointmentDate| date : "MMM d" }}
                                 </p>
                             </div>
                         </div>
@@ -89,7 +92,7 @@
                 </li>
             </ul>
             <div class="np" *ngIf="appointment.length === 0">
-                <h3>No, Upcoming Appointments</h3>
+                <h3>No, Emergency</h3>
             </div>
         </div>
     </div>
