@@ -37,7 +37,7 @@ export class AuthService {
     });
     const data: AccessTokenResponse = await response.json();
     console.log(data);
-    this.cookie.storeAccessToken(data.accessToken, { expire: 7200, path: "/" });
+    this.cookie.storeAccessToken(data.accessToken, { expire: 2592000, path: "/" });
   }
 
   login(email: string, password: string) {
@@ -47,7 +47,7 @@ export class AuthService {
 
     response.subscribe((response) => {
       console.log(response);
-      this.cookie.storeAccessToken(response.accessToken, { expire: 7200, path: '/' });
+      this.cookie.storeAccessToken(response.accessToken, { expire: 2592000, path: '/' });
       this.cookie.storeRefreshToken(response.refreshToken, { path: '/' });
       this.cookie.store("uid", response.user.id, { path: "/" });
       this.cookie.store("rid", response.refreshTokenId, { path: "/" });
