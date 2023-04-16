@@ -59,6 +59,7 @@ export class NotifierGateway
     this.logger.debug(`Number of connected sockets: ${sockets.size}`);
     this.count++;
     try {
+      await this.sendNotification();
       await this.loggerService.log(`WS client with id: ${client.id} connected!`);
     } catch (error) {
       this.logger.log(error);
