@@ -35,14 +35,11 @@ export class DashboardGuard implements CanActivate, CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('Can Activate Guard');
     return this.user.currentUser.pipe(
       filter((user) => user !== undefined),
       map((user) => {
-        console.log(user);
         if (!user) {
           this.router.navigate(['/auth/login'])
-          console.log('I am not gonna do it');
           return false;
         } else {
           return true
@@ -58,11 +55,9 @@ export class DashboardGuard implements CanActivate, CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('Can ActivateChild Guard');
     this.user.currentUser.pipe(
       filter((user) => user != undefined),
       map((user) => {
-        console.log(user);
         return user ? true : false;
       })
     );

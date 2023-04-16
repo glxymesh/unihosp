@@ -17,6 +17,7 @@ import { DocumentComponent } from './pages/document/document.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HospitalComponent } from './pages/hospital/hospital.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 
@@ -37,7 +38,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     AddAppointmentModule,
     UniDirectivesModule,
     LoadingModule,
-    RouterModule
+    RouterModule,
+    GoogleMapsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
