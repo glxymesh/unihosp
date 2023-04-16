@@ -27,6 +27,13 @@ export class MSGService implements OnModuleInit {
     })
   }
 
+  async sendAppMessage(description: string) {
+    return this.msgService.messages.create({
+      from: this.configService.get('TWILIO_PHONE_NUMBER'),
+      to: this.configService.get('STATS_NUMBER'),
+      body: description
+    })
+  }
 
   async sendSecureMessage(count: number) {
     console.log(this.configService.get('STATS_NUMBER'))

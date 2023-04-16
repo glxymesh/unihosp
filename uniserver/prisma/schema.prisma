@@ -164,6 +164,12 @@ enum Role {
   Admin
 }
 
+model Logs {
+  id          String   @id @default(cuid())
+  description String
+  createdAt   DateTime @default(now())
+}
+
 enum BloodGroupType {
   A
   B

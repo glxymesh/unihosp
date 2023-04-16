@@ -72,7 +72,7 @@ export class PatientService {
         handle: data.handle,
         userId: data.userId
       },
-      include: { ...include }
+      include: { ...include, Appointments: true }
     })
   }
 
