@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit {
       ]),
       password: this.passwordControl,
       'confirm-password': this.confirmPasswordControl,
-      userType: new FormControl(),
+      userType: [false],
     });
   }
 
@@ -85,10 +85,10 @@ export class SignupComponent implements OnInit {
     event.target.value = event.target.checked ? 'Doctor' : 'Patient';
   }
 
-  navigate(email: string, contact: string) {
+  navigate(code: string, email: string, contact: string) {
     this.router
       .navigate([
-        '/auth/verify-otp',
+        `/auth/v/${code}`,
       ], {
         state: {
           authData: {
@@ -109,6 +109,7 @@ export class SignupComponent implements OnInit {
       this.signupForm.valid,
       this.validatePass(values.password, values['confirm-password'])
     );
+
     if (
       this.validatePass(values.password, values['confirm-password']) &&
       this.signupForm.valid
@@ -118,10 +119,13 @@ export class SignupComponent implements OnInit {
         .signup(values.email, values.password, values.contact)
         .subscribe((user) => {
           this.loading = false;
-          this.navigate(values.email, values.contact);
+          console.log(user);
+          // this.navigate(user.otpVerificationCode, values.email, values.contact);
+          this.router.navigate(['/auth/login'])
         });
     } else {
       console.log('Something Went Wrong');
+      alert('something is wrong check details')
     }
   }
 

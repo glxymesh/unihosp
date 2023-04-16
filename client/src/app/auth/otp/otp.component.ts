@@ -14,7 +14,8 @@ export class OtpComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   handleOTPCheck() {
 

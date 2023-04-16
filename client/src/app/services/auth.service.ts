@@ -17,7 +17,7 @@ export class AuthService {
 
 
   signup(email: string, password: string, contact: string, role?: string) {
-    return this.http.post<User>(`/auth/signup`, {
+    return this.http.post<User & { otpVerificationCode: string }>(`/auth/signup`, {
       email,
       password,
       contact,
