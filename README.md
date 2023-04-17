@@ -91,6 +91,8 @@ UniHosp is a revolutionary digital platform that aims to make healthcare accessi
 #### Team Members
 1. Abhishek Mourya
 2. Aryan Karma
+3. Nisha Rawat
+4. Madhav Gupta
 
 If You See any issue with deployed app please contact us at: 
 
