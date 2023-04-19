@@ -34,12 +34,14 @@ export class SidebarComponent {
   }
 
   routes = [
-    { routerLink: "", title: "Home", icon: "fa-house", hovered: false },
-    { routerLink: "profile", title: "Profile", icon: "fa-user", hovered: false },
-    { routerLink: "history", title: "History", icon: "fa-file", hovered: false },
-    { routerLink: "hospital", title: "Hospitals", icon: "fa-hospital", hovered: false },
-    { routerLink: "appointments", title: "Appointments", icon: "fa-calendar", hovered: false },
+    { routerLink: "/dashboard/welcome", title: "Home", icon: "fa-house", hovered: false },
+    { routerLink: "/dashboard/profile", title: "Profile", icon: "fa-user", hovered: false },
+    { routerLink: "/dashboard/history", title: "History", icon: "fa-file", hovered: false },
+    { routerLink: "/dashboard/hospital", title: "Hospitals", icon: "fa-hospital", hovered: false },
+    { routerLink: "/dashboard/appointments", title: "Appointments", icon: "fa-calendar", hovered: false },
+    { routerLink: "about", title: "About", icon: "fa-info", hovered: false },
     { title: "Logout", icon: "fa-arrow-right-from-bracket", hovered: false },
+
   ];
 
 

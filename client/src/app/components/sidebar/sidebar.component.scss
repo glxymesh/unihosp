@@ -78,14 +78,16 @@ li.box1 {
     text-decoration: none;
     color: var(--sidebar-font-color);
 
-    &.hovered {
+    &.hovered,
+    &.active {
       color: var(--logo-color);
       .icon {
         color: var(--logo-color);
       }
     }
 
-    &.hovered div {
+    &.hovered div,
+    &.active div {
       background: rgb(228, 161, 161);
       transition: 0.2s;
     }

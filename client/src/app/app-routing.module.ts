@@ -44,7 +44,8 @@ const routes: Routes = [
     canActivateChild: [DashboardGuard],
     component: DashboardComponent,
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: 'welcome', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'hospital', component: HospitalComponent },
       { path: 'appointments', component: AppointmentComponent },

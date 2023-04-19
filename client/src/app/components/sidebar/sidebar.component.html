@@ -5,9 +5,8 @@
     </div>
     <ul>
       <li *ngFor="let route of routes;let i = index;" class="box1">
-        <a *ngIf="route
-        .routerLink !== undefined" [ngClass]="{'hovered': route.hovered}" [routerLink]="route.routerLink"
-          (mouseover)="mouseOver(i)" (mouseleave)="mouseOverOut(i)">
+        <a *ngIf="route.routerLink !== undefined" ngClass]=" {'hovered': route.hovered }" routerLinkActive='active'
+          [routerLink]="route.routerLink" (mouseover)="mouseOver(i)" (mouseleave)="mouseOverOut(i)">
           <div class="circle1">
             <h3>{{route.title}}</h3>
           </div>
@@ -28,9 +27,9 @@
     </div>
     <ul>
       <li class="box" *ngFor="let route of routes; let i = index;">
-        <a *ngIf="route
-        .routerLink !== undefined" class="linkNoDec" [ngClass]="{'hovered': route.hovered}"
-          [routerLink]="'/dashboard/'+route.routerLink" (mouseover)="mouseOver(i)" (mouseleave)="mouseOverOut(i)">
+        <a *ngIf="route.routerLink !== undefined" routerLinkActive='active' class="linkNoDec"
+          [ngClass]="{'hovered': route.hovered}" [routerLink]="route.routerLink" (mouseover)="mouseOver(i)"
+          (mouseleave)="mouseOverOut(i)">
           <div class="circle"><i [class]="['icon', 'fa-solid', route.icon]"></i></div>
         </a>
         <button *ngIf="route
