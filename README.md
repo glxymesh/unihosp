@@ -1,7 +1,6 @@
 # UniHosp - United Hospital
----
-UniHosp stands for United Hospitals acronym we made for our website name. We built this project with the thinking to convert entire health sector digital by recording all the medical history of the citizen of India into database and which they can by a given Uni ID which a user can create during the registration. We are trying built a prototype to connect  all the hospital like UPI connected all the banks for online revolution of Indian Financial Sector.
 
+UniHosp stands for United Hospitals acronym we made for our website name. We built this project with the thinking to convert entire health sector digital by recording all the medical history of the citizen of India into database and which they can by a given Uni ID which a user can create during the registration. We are trying built a prototype to connect  all the hospital like UPI connected all the banks for online revolution of Indian Financial Sector.
 
 ## Problem Being Addressed
 Suppose a person had a medical surgery in one state and changed city after few years. If he needed a new surgery the doctor might need past medical records and checkup reports. 
@@ -20,12 +19,16 @@ This service will work like UPI, Every Person will be given a Uni ID as we named
 4. Health Profile Access Management
 
 ### User Flow
-![userflow](https://github.com/glxymesh/unihosp/tree/main/source/userflow.png)
+
+![](https://github.com/glxymesh/unihosp/blob/main/source/userflow.png)
 
 ### Project Details
-![](https://github.com/glxymesh/unihosp/tree/main/source/project_structure.png)
+
+![](https://github.com/glxymesh/unihosp/blob/main/source/project_structure.png)
+
 
 To view the currently deployed app [Click Here](https://unihosp.live)
+
 
 There are two main folders and branches which are webfront (client) and uniserver.
 
@@ -35,13 +38,19 @@ In main branch it is located at:
 
 
 
+
 `client`
 client consists of our app frontend design and app flow logic
+
 It's not fully completed yet so we have deployed a development build right some features might break. 
-![userflow](https://github.com/glxymesh/unihosp/tree/main/source/registerpage.png)
+
+
+![](https://github.com/glxymesh/unihosp/blob/main/source/registerpage.png)
+
 
 ##### Dashboard
-![userflow](https://github.com/glxymesh/unihosp/tree/main/source/welcome.png)
+
+![](https://github.com/glxymesh/unihosp/blob/main/source/welcome.png)
 
 
 Note:
@@ -85,6 +94,13 @@ UniHosp is a revolutionary digital platform that aims to make healthcare accessi
 3. Nisha Rawat
 4. Madhav Gupta
 
---- 
-UNIHOSP - UNITED HOSPITAL
-Thank you for viewing
+If You See any issue with deployed app please contact us at: 
+
+##### creator6774@gmail.com
+---
+
+
+##### UNIHOSP - UNITED HOSPITAL
+---
+##### Thank you for viewing
+---
