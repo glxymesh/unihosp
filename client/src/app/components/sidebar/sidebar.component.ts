@@ -39,7 +39,7 @@ export class SidebarComponent {
     { routerLink: "/dashboard/history", title: "History", icon: "fa-file", hovered: false },
     { routerLink: "/dashboard/hospital", title: "Hospitals", icon: "fa-hospital", hovered: false },
     { routerLink: "/dashboard/appointments", title: "Appointments", icon: "fa-calendar", hovered: false },
-    { routerLink: "about", title: "About", icon: "fa-info", hovered: false },
+    { routerLink: "/about", title: "About", icon: "fa-info", hovered: false },
     { title: "Logout", icon: "fa-arrow-right-from-bracket", hovered: false },
 
   ];
