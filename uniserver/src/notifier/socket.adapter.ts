@@ -15,7 +15,7 @@ export class SocketIOAdapter extends IoAdapter {
     this.authentication = this.authentication.bind(this);
   }
 
-  authentication = (socket: SocketWithAuth, next) => {
+  authentication = (socket: SocketWithAuth, next: any) => {
     const token = socket.handshake.auth.token || socket.handshake.headers['token'];
     this.logger.debug(token);
 
@@ -56,6 +56,4 @@ export class SocketIOAdapter extends IoAdapter {
     io.of("/notifier").use(this.authentication);
     return io;
   }
-
-
 }
