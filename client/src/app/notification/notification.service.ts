@@ -10,7 +10,7 @@ export class NotificationService {
   io: Socket;
 
   constructor() {
-    this.io = io("https://unihosp.live/shareupdate");
+    this.io = io("http://localhost:3000/shareupdate");
   }
 
   listen() {

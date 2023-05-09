@@ -20,7 +20,8 @@ export class AuthService {
     private configService: ConfigService,
     private mailService: MailService,
     private msgService: MSGService
-  ) { }
+  ) {
+  }
 
 
   private logger = new Logger(AuthService.name);

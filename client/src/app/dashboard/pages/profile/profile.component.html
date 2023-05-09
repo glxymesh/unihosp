@@ -4,7 +4,8 @@
     <div>
         <div class="userimage editable">
             <label style="width: 100%; height: 100%;" *ngIf="userService$ | async as user">
-                <div class="av_img" *ngIf="user.avatarUrl" style="background-image: url({{user.avatarUrl}});">
+                <div title="Upload Profile Photo" class="av_img" *ngIf="user.avatarUrl"
+                    style="background-image: url({{user.avatarUrl}});">
                 </div>
                 <div class="av_img" *ngIf="!user.avatarUrl" style="background-image: url('/assets/profile.png');">
                 </div>

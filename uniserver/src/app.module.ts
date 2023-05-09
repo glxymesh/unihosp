@@ -10,6 +10,8 @@ import { AvatarsController } from './avatars/avatars.controller';
 import { AvatarsService } from './avatars/avatars.service';
 import { CronModule } from './cron/cron.module';
 import { PrismaService } from './database/prisma.service';
+import { DoctorController } from './doctor/doctor.controller';
+import { DoctorService } from './doctor/service/doctor.service';
 import { DevelopmentGuard } from './guards/development.guards';
 import { HospitalGuard } from './hospital/guard/hospital.guard';
 import { HospitalController } from './hospital/hospital.controller';
@@ -37,7 +39,7 @@ import { UserService } from './user/user.service';
     }),
     CronModule,
   ],
-  controllers: [AuthController, PatientController, HospitalController, AvatarsController],
+  controllers: [AuthController, PatientController, HospitalController, AvatarsController, DoctorController],
   providers: [
     PrismaService,
     AuthService,
@@ -51,14 +53,15 @@ import { UserService } from './user/user.service';
     NotifierGateway,
     NotifierService,
     AvatarsService,
-    LogToDbService
+    LogToDbService,
+    DoctorService
   ],
 })
 export class AppModule implements OnModuleDestroy {
 
   constructor(private msgService: MSGService) { }
   async onModuleDestroy() {
-    await this.msgService.sendAppMessage('Hello Boss, I guess something went wrong with app, it\'s going off.');
+    // await this.msgService.sendAppMessage('Hello Boss, I guess something went wrong with app, it\'s going off.');
   }
 
 }

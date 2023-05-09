@@ -177,6 +177,12 @@ export class AuthController {
     return this.msgService.sendTestMessage(data.phoneNumber, data.message);
   }
 
+  @Post("testmail")
+  sendTestMail(@Body() data: { recepient: string; username: string }) {
+    return this.mailService.sendMail(data.recepient, data.username, "Unknown", 123423);
+  }
+
+
   @Post('login')
   login(@Body() data: { email: string; password: string }) {
     console.log(data);

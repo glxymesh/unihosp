@@ -20,7 +20,7 @@ export function VerifyMail(
         {
           ContentType: 'HTML',
           Charset: 'utf-8',
-          Content: readFileSync("/home/abhishek/unihosp/uniserver/src/authentication/mail/templates/views/verification.mail.html").toString()
+          Content: readFileSync("src/authentication/mail/templates/views/verification.mail.html").toString()
         },
       ],
       Merge: {

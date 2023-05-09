@@ -6,7 +6,6 @@ import { ProfileService } from 'src/app/services/profile.service';
   templateUrl: 'appointment.component.html',
   styleUrls: ["appointment.component.scss", "../../common.style.scss"]
 })
-
 export class AppointmentComponent implements OnInit {
   paitentProfile$ = this.profileService.current;
 

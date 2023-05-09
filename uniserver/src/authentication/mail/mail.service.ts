@@ -34,6 +34,7 @@ export class MailService implements OnModuleInit {
       return error;
     }
   }
+
   async sendConnectionCount(ConnectionCount: number) {
     const recepients: string[] = this.config.get('MAIL_RECEPIENTS').split(",");
     try {

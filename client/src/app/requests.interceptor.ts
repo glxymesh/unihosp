@@ -7,14 +7,14 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY, Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import UniCookieService from './services/unicookie.service';
 
 
 @Injectable()
 export class RequestsInterceptor implements HttpInterceptor {
 
-  private readonly rootEndPoint = `https://unihosp.live/api/v1`;
+  private readonly rootEndPoint = `http://localhost:3000/api/v1`;
 
   constructor(private unicookieService: UniCookieService, private router: Router) { }
 

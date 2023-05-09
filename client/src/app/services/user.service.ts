@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, map, of, take } from 'rxjs';
+import { BehaviorSubject, Subject, filter, map, of, take } from 'rxjs';
 import { User } from '../interfaces';
 
 @Injectable({
@@ -11,7 +11,8 @@ export class UserService {
   private user = new BehaviorSubject<User | null | undefined>(undefined);
 
   get currentUser() {
-    return this.user;
+    return this.user.pipe(
+      map(user => (user ? { ...user, avatarUrl: user?.avatarUrl ? `http://localhost:3000/api/v1${user?.avatarUrl}` : undefined } : user)));
   }
 
   setCurrentUser(user: User) {

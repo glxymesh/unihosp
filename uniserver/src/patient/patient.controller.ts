@@ -1,8 +1,7 @@
-import { Body, Controller, Delete, Get, Header, Headers, Patch, Post, Put, UseGuards } from '@nestjs/common';
-import { Patient, Prisma, User } from '@prisma/client';
+import { Body, Controller, Delete, Get, Headers, Post, Put, UseGuards } from '@nestjs/common';
+import { Prisma, User } from '@prisma/client';
 import { AuthService } from 'src/authentication/services/auth.service';
 import { AccessTokenGuard } from 'src/guards/accesstoken.guard';
-import { UserService } from 'src/user/user.service';
 import { PatientGuard } from './guard/patient.guard';
 import { PatientService } from './service/patient.service';
 
@@ -52,6 +51,7 @@ export class PatientController {
   exists(@Body() data: { handle: string }) {
     return this.patientService.exists(data.handle);
   }
+
   @Post()
   createPatientProfile(@Headers('user') user: User, @Body() data: Prisma.PatientCreateInput) {
     console.log(user)

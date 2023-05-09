@@ -44,7 +44,7 @@ export class AvatarsService {
       }
       const update = await this.prismaService.user.update({
         where: { id: userId },
-        data: { avatarUrl: `https://unihosp.live/api/v1/avatars/${resp.model}/${resp.name}` }
+        data: { avatarUrl: `/avatars/${resp.model}/${resp.name}` }
       })
 
       return {

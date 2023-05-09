@@ -29,8 +29,16 @@ const routes: Routes = [
     component: AuthenticationComponent,
     children: [
       { path: '', pathMatch: 'full', redirectTo: '/auth/login' },
-      { path: 'signup', canActivate: [LoggedInGuard], component: SignupComponent },
-      { path: 'login', canActivate: [LoggedInGuard], component: LoginComponent },
+      {
+        path: 'signup',
+        // canActivate: [LoggedInGuard],
+        component: SignupComponent
+      },
+      {
+        path: 'login',
+        // canActivate: [LoggedInGuard],
+        component: LoginComponent
+      },
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'forgot-password', component: ForgotComponent },
       { path: 'v/:id', component: OtpComponent },
@@ -40,8 +48,8 @@ const routes: Routes = [
   { path: "addDocs", component: AddDocumentsComponent },
   {
     path: 'dashboard',
-    canActivate: [DashboardGuard],
-    canActivateChild: [DashboardGuard],
+    // canActivate: [DashboardGuard],
+    // canActivateChild: [DashboardGuard],
     component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -56,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: 'createprofile',
-    canActivate: [CreaterpofileGuard],
+    // canActivate: [CreaterpofileGuard],
     component: CreateprofileComponent,
   },
   { path: 'about', component: AboutComponent },
