@@ -87,6 +87,11 @@ hr {
   margin-top: 4rem;
 }
 
+.newClass{
+  background-color: #333;
+  color: white;
+}
+
 .topCont4.topCont1 {
   background-color: #333;
   color: white;
@@ -147,7 +152,8 @@ hr {
   transition: 150ms;
 }
 .img3{
-  width: 80%;
+  width: 20vw;
+  align-items: center;
 }
 @media screen and (width < 450px) {
   .imgCont {
@@ -201,6 +207,10 @@ hr {
       width: 100% !important;
       height: 45vh !important;
   }
+  .img3{
+    width: 80% !important;
+    align-items: center !important;
+  }
 }
 
 
@@ -213,6 +223,10 @@ hr {
     height: 50vh;
     background-image: url(/assets/aboutBackgroundFinalCropped.jpg);
     background-size: cover;
+  }
+  .img3{
+    width: 80% !important;
+    align-items: center !important;
   }
 }
 .animationtoRight {
