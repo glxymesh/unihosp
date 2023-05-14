@@ -3,7 +3,7 @@
     <div class="hamlogo" (click)="open ? closeSidebar() : openSidebar($event)">
       <i class="icon fa-solid fa-close"></i>
     </div>
-    <ul>
+    <ul> 
       <li *ngFor="let route of routes;let i = index;" class="box1">
         <a *ngIf="route.routerLink" [ngClass]="{'hovered': route.hovered }" routerLinkActive='active'
           [routerLink]="route.routerLink" (mouseover)="mouseOver(i)" (mouseleave)="mouseOverOut(i)">

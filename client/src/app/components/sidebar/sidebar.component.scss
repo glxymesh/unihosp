@@ -5,7 +5,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  top: 70px;
+  top: 70px; 
   z-index: 2;
 }
 
@@ -19,7 +19,6 @@
   position: absolute;
   top: 0;
   left: 0;
-
   border: 1px solid var(--border-color);
 }
 
@@ -180,4 +179,20 @@ li.box1 {
   z-index: 1;
   background: rgb(146 146 146 / 30%);
   backdrop-filter: blur(1px);
+}
+
+@media screen and (width < 535px){
+  .hamlogo{
+    padding: 0.5rem 0.5rem;
+  }
+  .sidepannel,.sidepanelextended {
+    height: 95vh;
+    bottom: 0;
+  }
+  .circle,.circle1{
+    border: #333 solid 2px;
+  }
+  .box1{
+    width: 100% !important;
+  }
 }
