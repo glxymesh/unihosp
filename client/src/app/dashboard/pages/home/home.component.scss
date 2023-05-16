@@ -188,4 +188,9 @@
       font-size: .8rem;
     }
   }
+  .content {
+    & > div:nth-child(2) {
+      grid-auto-rows:auto;
+    }
+  }
 }
