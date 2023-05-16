@@ -124,3 +124,24 @@
     }
   }
 }
+
+@media screen and (width < 535px){
+  .profile-data {
+    .det-con{
+      width: 65vw;
+      min-height: 0;
+      overflow: auto;
+      padding: 1rem;
+      font-size: 0.8rem;
+      .det{
+        gap: 4px;
+      }
+    }
+    .prof{
+      grid-template-columns: auto;
+    }
+    // .det{
+    //   font-size: 0.8rem;
+    // }
+  }
+}
