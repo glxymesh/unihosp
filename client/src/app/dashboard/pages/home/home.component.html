@@ -8,12 +8,12 @@
             </div>
         </div>
         <h1>Welcome, {{ patient.fName }}</h1>
-        <p>
+        <p class="fontSize">
             This dashboard is wholeheartedly designed to manage almost everything
             about you health.
-        </p>
+        </p> 
     </div> 
-    <div>
+    <div class="lessmargin">
         <div class="boxmain b1" *ngIf="lastTwoAppointments$ | async as appointment">
             <h1>Future Appointments.</h1>
             <ul class="appointments" *ngIf="appointment.length > 0">

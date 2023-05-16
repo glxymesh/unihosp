@@ -11,7 +11,7 @@
   grid-template-columns: 60px calc(100% - 60px);
   gap: 10px;
 }
-
+ 
 uni-atp {
   grid-area: topbar;
 }
@@ -30,3 +30,12 @@ utp-sde {
   margin-bottom: 2rem;
 }
 
+@media screen and (width < 535px){
+  .ctn{
+    margin: 0;
+    padding: 0;
+  }
+  .dashboard-container{
+    grid-template-columns: 60px calc(100% - 80px);
+  }
+}

@@ -21,7 +21,6 @@
     align-items: center;
     gap: 1.2rem;
     user-select: none;
-
     h1 {
       font-size: 1.8rem;
     }
@@ -43,4 +42,22 @@
   border-radius: 500px;
   border: 1px black solid;
   background-size: cover;
+}
+
+@media screen and (width < 535px){
+  .userimage{
+    margin-top: 0.5rem;
+  }
+  .content{
+    & > div:nth-child(1) {
+      gap: .6rem;
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .fontSize{
+    text-align: justify;
+    font-size: .8rem;
+  }
 }

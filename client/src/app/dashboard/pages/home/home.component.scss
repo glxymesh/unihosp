@@ -8,7 +8,7 @@
     grid-auto-rows: minmax(clamp(200px, 40vh, 400px), auto);
   }
 }
-
+ 
 
 .boxmain {
   padding: 1.5rem 2rem;
@@ -58,7 +58,6 @@
   margin-bottom: 1.5rem;
   text-decoration: none;
 }
-
 .appointments,
 .notification {
   list-style: none;
@@ -175,5 +174,18 @@
 }
 
 @media screen and (width < 535px){
-  
+  .lessmargin{
+    margin-top: 1rem !important;
+  }
+  .boxmain h1{
+    font-size: 1rem;
+  }
+  .boxmain{
+    padding: 1rem 1.5rem;
+    height: auto;
+    
+    ul li{
+      font-size: .8rem;
+    }
+  }
 }
