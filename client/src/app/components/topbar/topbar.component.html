@@ -5,19 +5,27 @@
 
   <div *ngIf="searchBar" class="searchBar">
     <uni-searchbar></uni-searchbar>
-  </div> 
+  </div>  
  
   <div class="navright">
-    <div class="darkcontainer">
+
+    <!-- changed the class name from darkcontainer to darkcontainer1 -->
+
+    <div class="darkcontainer1">
       <a class="ddark0" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="/dashboard"
         rel="noopener noreferrer">
         <i class="sociallogo fa-solid fa-house"></i> <span>Home</span>
       </a>
     </div>
-    <div class="darkcontainer">
+    <div class="darkcontainer1">
       <a class="ddark0" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"
         routerLink="/dashboard/profile">
         <i class="sociallogo fa-solid fa-user"></i><span>Profile</span>
+      </a>
+    </div>
+    <div class="darkcontainer">
+      <a class="ddark0"rel="noopener noreferrer">
+        <i class="sociallogo fa-solid fa-bars"></i>
       </a>
     </div>
     <!-- <div class="darkcontainer">

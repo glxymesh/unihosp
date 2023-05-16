@@ -110,7 +110,7 @@ uni-searchbar {
     width: 130px;
     border-radius: 5rem;
   }
-}
+} 
 
 @media screen and (max-width: 460px) {
   .navbar {
@@ -133,5 +133,8 @@ uni-searchbar {
 @media screen and (width < 535px){
   .logo0{
     font-size: 1.5rem;
+  }
+  .darkcontainer1{
+    display: none;
   }
 }
