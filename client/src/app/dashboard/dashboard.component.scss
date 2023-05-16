@@ -34,8 +34,11 @@ utp-sde {
   .ctn{
     margin: 0;
     padding: 0;
+    position: absolute;
+    left:0;
+    top: 65px;
   }
   .dashboard-container{
     grid-template-columns: 60px calc(100% - 80px);
   }
-}
+} 
