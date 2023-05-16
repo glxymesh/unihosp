@@ -124,7 +124,7 @@ uni-searchbar {
     font-size: 1rem;
 
     &.active {
-      width: 100px;
+      width: 0;
       padding: 0;
     }
   }
@@ -136,5 +136,42 @@ uni-searchbar {
   }
   .darkcontainer1{
     display: none;
+  }
+  .ddark0{
+    &::before {
+      content: "";
+      position: none;
+      width: 0%;
+      height: 0%;
+      left: 0px;
+      border: none;
+      border-radius: none;
+      transition: none;
+    }
+  
+    &.active {
+      width: none;
+      color: none;
+      width: none;
+      justify-content: none;
+  
+      &:before {
+        width: none;
+        height: none;
+      }
+    }
+    &:hover:before {
+      width: 0;
+      height: 0;
+    }
+    span { 
+      transition: none;
+    }
+  
+    &:hover {
+      color: #da8049;
+      width: auto;
+      border-radius: auto;
+    }
   }
 }
