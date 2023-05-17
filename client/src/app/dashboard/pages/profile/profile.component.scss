@@ -128,7 +128,7 @@
 @media screen and (width < 535px){
   .profile-data {
     .det-con{
-      width: 65vw;
+      width: 100%;
       min-height: 0;
       overflow: auto;
       padding: 1rem;
@@ -139,6 +139,7 @@
     }
     .prof{
       grid-template-columns: auto;
+      padding:0;
     }
     // .det{
     //   font-size: 0.8rem;
