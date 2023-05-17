@@ -62,7 +62,7 @@ uni-searchbar {
   color: var(--logo-color-2);
   font-size: 1.3rem;
   display: flex;
-  width: 40px;
+  width: 40px !important;
   height: 40px;
   overflow: hidden;
   align-items: center;
@@ -72,7 +72,8 @@ uni-searchbar {
   gap: 10px;
   text-decoration: none;
   transition: 500ms;
-  margin-left: 0.5rem;
+  // margin-left: 0.5rem;
+
 
   &::before {
     content: "";
@@ -90,7 +91,6 @@ uni-searchbar {
     color: var(--logo-color-1);
     width: 130px;
     justify-content: center;
-
     &:before {
       width: 100%;
       height: 100%;
@@ -111,6 +111,9 @@ uni-searchbar {
     border-radius: 5rem;
   }
 } 
+.darkcontainer{
+  display: none;
+}
 
 @media screen and (max-width: 460px) {
   .navbar {
@@ -124,7 +127,7 @@ uni-searchbar {
     font-size: 1rem;
 
     &.active {
-      width: 0;
+      width: 100px;
       padding: 0;
     }
   }
@@ -136,6 +139,14 @@ uni-searchbar {
   }
   .darkcontainer1{
     display: none;
+  }
+  .darkcontainer{
+    display: block;
+    margin-left: 1rem;
+  }
+
+  .ddark0:hover{
+    color: rgb(44, 148, 212) !important;
   }
   .ddark0{
     &::before {
@@ -154,7 +165,7 @@ uni-searchbar {
       color: none;
       width: none;
       justify-content: none;
-  
+
       &:before {
         width: none;
         height: none;
@@ -167,8 +178,7 @@ uni-searchbar {
     span { 
       transition: none;
     }
-  
-    &:hover {
+    &:hover { 
       color: #da8049;
       width: auto;
       border-radius: auto;
