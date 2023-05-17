@@ -1,6 +1,7 @@
-import { Logger } from '@nestjs/common';
+import { Logger, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
+  ConnectedSocket,
   MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -13,10 +14,11 @@ import {
 import { Namespace, Socket } from 'socket.io';
 import { MailService } from 'src/authentication/mail/mail.service';
 import { MSGService } from 'src/authentication/services/msg.service';
+import { AppAccessGuard } from 'src/guards/app-access.guard';
 import { LogToDbService } from 'src/log-to-db/log-to-db.service';
 
 @WebSocketGateway({
-  namespace: 'shareupdate',
+  namespace: /\w*/,
 })
 export class NotifierGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -38,9 +40,9 @@ export class NotifierGateway
   }
 
   @SubscribeMessage('message')
-  handleMessage(@MessageBody() data: string) {
+  handleMessage(@ConnectedSocket() client: Socket, @MessageBody() data: string) {
     this.logger.debug(`Received Message: ${data}`);
-    this.notifier.emit('message', data);
+    client.broadcast.emit('message', data);
   }
 
   count = 0;
@@ -51,19 +53,29 @@ export class NotifierGateway
     // await this.mailService.sendConnectionCount(this.count);
   }
 
+
+  @SubscribeMessage("user-room")
+  handleRoomJoining(client: Socket, data: string, room: string) {
+    console.log(client.rooms);
+
+    client.join(data);
+    client.to(data).emit("message", `Greetings, I am ${client.id}`)
+  }
+
   async handleConnection(client: Socket) {
     const sockets = this.notifier.sockets;
 
     this.logger.debug(`WS client with id: ${client.id} connected!`);
     this.logger.debug(`Number of connected sockets: ${sockets.size}`);
     this.count++;
+    this.logger.debug(`Notifier Name: ${this.notifier.name}`);
     try {
       await this.sendNotification();
       await this.loggerService.log(`WS client with id: ${client.id} connected!`);
     } catch (error) {
       this.logger.log(error);
     }
-    client.emit('message', 'Hi');
+    client.broadcast.emit('message', 'Hi');
   }
 
   async handleDisconnect(client: Socket) {

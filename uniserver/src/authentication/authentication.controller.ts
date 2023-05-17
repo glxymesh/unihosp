@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Header,
   Headers,
   Logger,
   Param,
@@ -15,8 +14,9 @@ import {
 
 import { Role, User } from '@prisma/client';
 import { AccessTokenGuard } from 'src/guards/accesstoken.guard';
+import { AppAccessGuard } from 'src/guards/app-access.guard';
 import { DevelopmentGuard } from 'src/guards/development.guards';
-import { PatientService } from 'src/patient/service/patient.service';
+import { LogToDbService } from 'src/log-to-db/log-to-db.service';
 import { UserService } from 'src/user/user.service';
 import { MailService } from './mail/mail.service';
 import { AuthService } from './services/auth.service';
@@ -26,14 +26,24 @@ enum ToCheckType {
   Email,
   Handle,
 }
+
+interface cSignUpData {
+  email: string;
+  password: string;
+  contact: string;
+  role?: Role;
+}
+
 @Controller('auth')
+// @UseGuards(AppAccessGuard)
 export class AuthController {
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
     private mailService: MailService,
     private msgService: MSGService,
-    private patientService: PatientService,
+    private dbLogger: LogToDbService,
   ) { }
 
   private logger = new Logger(AuthController.name);
@@ -46,20 +56,21 @@ export class AuthController {
   @Get('user')
   @UseGuards(AccessTokenGuard)
   getCurrentUser(@Headers('user') user: User) {
-    return this.userService.user({
-      id: user.id,
-    }, {
-      patient: true
-    });
+    return this.userService.user(
+      {
+        id: user.id,
+      },
+      {
+        patient: true,
+      },
+    );
   }
 
   @Post('exists')
   async doesExists(@Body() data: { email?: string }) {
     const { email } = data;
 
-    const toCheck = email
-      ? ToCheckType.Email
-      : null;
+    const toCheck = email ? ToCheckType.Email : null;
     let response: any;
 
     switch (toCheck) {
@@ -79,38 +90,28 @@ export class AuthController {
         };
     }
 
-    return response ? response : {
-      error: '401',
-      email: false,
-      handle: false,
-    };
+    return response
+      ? response
+      : {
+        error: '401',
+        email: false,
+        handle: false,
+      };
   }
 
   @Post('signup')
-  async signup(
-    @Body()
-    signUpData: {
-      email: string;
-      password: string;
-      contact: string;
-      role?: Role;
-    },
-  ) {
+  async signup(@Body() signUpData: cSignUpData) {
     return this.authService.signup(signUpData);
   }
 
-
   @Post('v/:id')
   @Redirect()
-  async verifyCode(
-    @Param('id') id: string,
-    @Body() vData: { otpCode: number },
-  ) {
+  async verifyCode(@Param('id') id: string, @Body() { otpCode }: { otpCode: number }) {
     this.logger.debug('Verifying OTP');
     try {
       const mail = await this.userService.getAndDeleteVerifyMailById(id);
 
-      if (mail.code !== vData.otpCode) {
+      if (mail.code !== otpCode) {
         return {
           statusCode: 403,
           message: "OTP doesn't match",
@@ -127,11 +128,10 @@ export class AuthController {
         },
       });
 
-
-      this.logger.debug(
-        `Mail ${mail.email}  is Verified With Code: ${mail.id}`,
-      );
+      this.logger.debug(`Mail ${mail.email}  is Verified With Code: ${mail.id}`);
+      this.dbLogger.log(`Mail ${mail.email}  is Verified With Code: ${mail.id}`);
       this.logger.debug(`Email Verified using OTP: ${update.email} = ${update.verified}`);
+      this.dbLogger.log(`Email Verified using OTP: ${update.email} = ${update.verified}`);
 
       return {
         uri: 'http://localhost:4200',
@@ -177,11 +177,16 @@ export class AuthController {
     return this.msgService.sendTestMessage(data.phoneNumber, data.message);
   }
 
-  @Post("testmail")
+  @Post('testmail')
+  @UseGuards(DevelopmentGuard)
   sendTestMail(@Body() data: { recepient: string; username: string }) {
-    return this.mailService.sendMail(data.recepient, data.username, "Unknown", 123423);
+    return this.mailService.sendMail(
+      data.recepient,
+      data.username,
+      'Unknown',
+      123423,
+    );
   }
-
 
   @Post('login')
   login(@Body() data: { email: string; password: string }) {
@@ -195,9 +200,7 @@ export class AuthController {
   }
 
   @Post('accesstoken')
-  getAccessToken(
-    @Headers('refreshToken') authorization: string,
-  ) {
+  getAccessToken(@Headers('refreshToken') authorization: string) {
     this.logger.debug(`RefreshToken: ${authorization}`);
     try {
       return this.authService.generateFromToken(authorization);
@@ -205,11 +208,6 @@ export class AuthController {
       this.logger.error(err);
     }
   }
-
-  // @Post('verify')
-  // checkLoggedInStatus() {
-
-  // }
 
   @Delete('logout')
   deleteRefreshToken(@Body('refreshTokenId') refreshTokenId: string) {

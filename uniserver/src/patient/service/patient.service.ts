@@ -28,7 +28,7 @@ export class PatientService {
         name: fName + " " + lName,
       }
     });
-    // try {
+
     return this.prismaService.patient.create({
       data: {
         fName,

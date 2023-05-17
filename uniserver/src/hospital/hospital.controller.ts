@@ -12,8 +12,22 @@ export class HospitalController {
 
   constructor(private hospitalService: HospitalService) { }
 
+
+  @Post()
+  createHospital(@Body() data: { name: string, handle?: string }) {
+    return this.hospitalService.createOneHospital({
+      name: data.name,
+      handle: data.handle || this.generateHandle(data.name)
+    })
+  }
+
+  @Post()
+  updateHospital() {
+
+  }
+
   @Get()
-  getHospital(@Body() data: { id: string, handle: string }) {
+  getHospital(@Body() data: { id?: string, handle?: string }) {
     return this.hospitalService.getHospitalById({ id: data.id, handle: data.handle })
   }
 
@@ -47,18 +61,6 @@ export class HospitalController {
     return "@" + handle.toLowerCase();
   }
 
-  @Post()
-  createHospital(@Body() data: { name: string, handle?: string }) {
-    return this.hospitalService.createOneHospital({
-      name: data.name,
-      handle: data.handle || this.generateHandle(data.name)
-    })
-  }
-
-  @Post()
-  updateHospital() {
-
-  }
 
   @Delete()
   deleteHospitalById(@Body('hospitalId') hospitalId: string) {

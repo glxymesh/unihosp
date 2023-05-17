@@ -53,7 +53,10 @@ export class UserService {
       where: {
         id: refreshTokenId,
       },
-    });
+    }).catch((err) => ({
+      reason: err,
+      statusCode: 401
+    }));
   }
 
   async refreshTokens(userId: string) {

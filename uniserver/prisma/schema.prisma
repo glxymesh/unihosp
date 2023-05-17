@@ -54,7 +54,7 @@ model Patient {
   fName            String
   lName            String
   dateOfBirth      DateTime?
-  bloodGroup       BloodGroupType
+  bloodGroup       String
   Appointments     Appointments[]
   owner            User           @relation(fields: [userId], references: [id])
   allowedHospitals Hospital[]
@@ -170,9 +170,9 @@ model Logs {
   createdAt   DateTime @default(now())
 }
 
-enum BloodGroupType {
-  A
-  B
-  AB
-  O
-}
+// enum BloodGroupType {
+//   A
+//   B
+//   AB
+//   O
+// }

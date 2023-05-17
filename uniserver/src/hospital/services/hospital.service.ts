@@ -29,7 +29,12 @@ export class HospitalService {
 
   getHospitalById(input: Prisma.HospitalWhereUniqueInput) {
     return this.prismaService.hospital.findUnique({
-      where: input
+      where: { ...input },
+      include: {
+        doctor: true,
+        allowedPatientProfiles: true,
+        Appointments: true
+      }
     })
   }
 

@@ -58,7 +58,7 @@ export class CreateprofileComponent implements OnInit {
     const value = this.createProfileForm.value;
     if (this.createProfileForm.valid) {
       this.loading = true;
-      this.profileService.createPatientProfile({ ...value, handle: value['handle'] + this.predefinedSuffix, fName: value['firstname'], lName: value['lastname'] })
+      this.profileService.createPatientProfile({ ...value, handle: value['handle'], fName: value['firstname'], lName: value['lastname'] })
         .subscribe((profile) => {
           // console.log(profile);
           this.loading = false;

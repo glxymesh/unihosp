@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+
 import { NotificationService } from './notification/notification.service';
 import { UserService } from './services/user.service';
 

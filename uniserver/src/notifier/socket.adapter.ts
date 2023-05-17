@@ -1,18 +1,22 @@
 import { INestApplication, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { IoAdapter } from "@nestjs/platform-socket.io";
-import { Server, ServerOptions } from "socket.io";
+import { Server, ServerOptions, Socket } from "socket.io";
+import { AppAuthentication } from "src/app.auth.service";
 import { SocketWithAuth } from "src/interfaces/socketWithAuth";
 
 export class SocketIOAdapter extends IoAdapter {
   private readonly logger = new Logger(SocketIOAdapter.name);
 
   jwtService: JwtService;
+  appAuthService: AppAuthentication;
 
   constructor(private app: INestApplication) {
     super(app);
     this.jwtService = app.get(JwtService);
+    this.appAuthService = app.get(AppAuthentication);
     this.authentication = this.authentication.bind(this);
+    this.appAuthentication = this.appAuthentication.bind(this)
   }
 
   authentication = (socket: SocketWithAuth, next: any) => {
@@ -21,7 +25,7 @@ export class SocketIOAdapter extends IoAdapter {
 
     try {
       const payload = this.jwtService.verify(token);
-      this.logger.debug(payload);
+      // this.logger.debug(payload);
 
       socket.userId = payload.id;
       socket.name = payload.name;
@@ -33,6 +37,13 @@ export class SocketIOAdapter extends IoAdapter {
     }
   }
 
+  appAuthentication(socket: Socket, next: any) {
+    const appID = socket.handshake.headers["app-id"] as string;
+    if (this.appAuthService.verifyAppWithID(appID)) {
+      return next();
+    }
+    next(new Error("FORBIDDEN, Wrong app Not allowed"));
+  }
 
   createIOServer(port: number, options?: ServerOptions) {
     this.logger.debug('Configuring SocketIO Server');
@@ -53,7 +64,9 @@ export class SocketIOAdapter extends IoAdapter {
       }
     };
     const io: Server = super.createIOServer(port, options);
-    io.of("/notifier").use(this.authentication);
+    io.of(/\w*/).use(this.appAuthentication);
+    // io.of(/w*/).use(this.authentication);
+
     return io;
   }
 }

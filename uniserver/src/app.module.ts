@@ -1,7 +1,9 @@
 import { Module, OnModuleDestroy } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { ThrottlerModule } from "@nestjs/throttler";
 
+import { AppAuthentication } from './app.auth.service';
 import { AuthController } from './authentication/authentication.controller';
 import { MailService } from './authentication/mail/mail.service';
 import { AuthService } from './authentication/services/auth.service';
@@ -38,6 +40,10 @@ import { UserService } from './user/user.service';
       inject: [ConfigService],
     }),
     CronModule,
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 30,
+    })
   ],
   controllers: [AuthController, PatientController, HospitalController, AvatarsController, DoctorController],
   providers: [
@@ -54,7 +60,8 @@ import { UserService } from './user/user.service';
     NotifierService,
     AvatarsService,
     LogToDbService,
-    DoctorService
+    DoctorService,
+    AppAuthentication
   ],
 })
 export class AppModule implements OnModuleDestroy {

@@ -18,7 +18,8 @@ export class HospitalGuard implements CanActivate {
     const role = this.reflector.get<Role>('role', context.getClass());
 
     const request: Request = context.switchToHttp().getRequest();
-    const user: User = request['user'];
+    const user: User = request.body['user'];
+    console.log(user);
 
     this.logger.debug(`Matching roles: ${this.matchRoles(role, user.role)}`)
     return this.matchRoles(role, user.role)
