@@ -32,8 +32,10 @@ utp-sde {
 
 @media screen and (width < 535px){
   .ctn{
-    margin: 0;
+    margin: 1rem;
+    margin-bottom: 1rem !important;
     padding: 0;
+    height: auto;
     position: absolute;
     left:0;
     top: 65px;
