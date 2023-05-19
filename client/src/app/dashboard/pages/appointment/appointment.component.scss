@@ -313,12 +313,35 @@ input[type="file"] {
     }
   }
 }
+@media screen and (width < 535px) {
 
-@media screen and (width < 535px){
   .content {
     width: 100%;
-    & > div:nth-child(2) {
-      grid-auto-rows:auto;
+    
+    &>div:nth-child(2) {
+      margin-top:0;
+      grid-auto-rows: auto;
     }
   }
+  
+  h1 {
+    font-size: 1.3rem;
+    font-weight:600;
+  }
+
+  .searchCont{
+    width:85vw;
+    button{
+      width:30%;
+      font-size:.8rem;
+    }
+  }
+  .a-cont{
+    h1.hd1 {
+      margin: 0;
+      margin-top: 0.5rem;
+    } 
+  }
+
+
 }
