@@ -8,7 +8,7 @@
 
   h1.hd1 {
     margin: 2rem 0;
-  }
+  } 
 }
 .searchCont {
   background-color: rgb(255, 255, 255);
@@ -16,7 +16,7 @@
   height: 3rem;
   border-radius: 2rem;
   display: flex;
-  border: 3px solid #045256;
+  border: 3px solid #045256; 
   position: relative;
 
   input {
@@ -301,4 +301,24 @@ input[type="file"] {
   transition: 250ms;
   box-shadow: 0px 0px 25px #3b887e;
   outline: 0;
+}
+
+@media screen and (width < 750px) {
+  .content {
+    & > div:nth-child(2) {
+      gap: 24px 0px;
+      margin-top: 2rem;
+      width: 100%;
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media screen and (width < 535px){
+  .content {
+    width: 100%;
+    & > div:nth-child(2) {
+      grid-auto-rows:auto;
+    }
+  }
 }
