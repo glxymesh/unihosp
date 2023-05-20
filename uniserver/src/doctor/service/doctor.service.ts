@@ -31,12 +31,19 @@ export class DoctorService {
     })
   }
 
-  getDoctorById() {
+  getDoctorById(input: Prisma.DoctorWhereUniqueInput) {
     return this.prismaService.doctor.findFirst({
-      where: {
-
+      where: input,
+      include: {
+        owner: true,
+        allowedPatientProfiles: true,
+        Appointments: true,
+        hospital: true,
+        notification: true
       }
-    })
+    }).catch((reason) => ({
+      message: reason
+    }));
   }
 
   async updateDoctor(handle: string, data: { fName?: string, lName?: string, handle?: string }) {

@@ -40,6 +40,11 @@ export class PatientController {
     })
   }
 
+  @Get(":handle")
+  async getPatientProfile() {
+
+  }
+
   @Get("/search")
   findAllPatient(@Body('query') query: string) {
     return this.patientService.findPatientProfiles({
@@ -83,6 +88,8 @@ export class PatientController {
         })
     }
   }
+
+
 
   @Delete()
   deletePatientProfile(@Body() data: PatientDeleteInput) {

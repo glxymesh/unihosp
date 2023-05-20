@@ -28,6 +28,14 @@ export class UserService {
   }) {
     const response = await this.prismaService.user.findMany({
       ...params,
+      include: {
+        patient: true,
+        doctor: true,
+        Avatars: true,
+        History: true,
+        preferences: true,
+        refreshTokens: true
+      }
     });
     return response.map((user) => excludePassword(user, ['password']));
   }

@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { SocketIOAdapter } from './notifier/socket.adapter';
+import { SocketIOAdapter } from './socketServices/socket.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

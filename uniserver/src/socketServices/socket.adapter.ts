@@ -65,7 +65,7 @@ export class SocketIOAdapter extends IoAdapter {
     };
     const io: Server = super.createIOServer(port, options);
     io.of(/\w*/).use(this.appAuthentication);
-    // io.of(/w*/).use(this.authentication);
+    // io.of(/\w*/).use(this.authentication);
 
     return io;
   }

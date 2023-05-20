@@ -1,6 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { BloodGroupType, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
+
+enum BloodGroupType { "A+", "A-", "B+", "B-", "O+", "O-" }
 
 @Injectable()
 export class PatientService {

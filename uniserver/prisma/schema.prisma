@@ -14,17 +14,19 @@ model User {
   name          String?
   contact       String?
   avatarUrl     String?
+  country       String?
   role          Role            @default(Patient)
   patient       Patient?
   doctor        Doctor?
   refreshTokens RefreshTokens[]
-  notification  Notification[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime?
   preferences   Preferences?
   verified      Boolean         @default(false)
   History       History?
   Avatars       Avatars?
+  ChatRoom      ChatRoom[]
+  Notification  Notification[]
 }
 
 model RefreshTokens {
@@ -49,19 +51,21 @@ model Hospital {
 }
 
 model Patient {
-  id               String         @id @default(uuid())
-  handle           String         @unique
-  fName            String
-  lName            String
-  dateOfBirth      DateTime?
-  bloodGroup       String
-  Appointments     Appointments[]
-  owner            User           @relation(fields: [userId], references: [id])
-  allowedHospitals Hospital[]
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime?
-  userId           String         @unique
-  allowedDoctors   Doctor[]
+  id                  String         @id @default(uuid())
+  handle              String         @unique
+  fName               String
+  lName               String
+  dateOfBirth         DateTime?
+  bloodGroup          String
+  Appointments        Appointments[]
+  notification        Notification[]
+  owner               User           @relation(fields: [userId], references: [id])
+  allowedHospitals    Hospital[]
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime?
+  userId              String         @unique
+  notificationChannel String         @default(cuid())
+  allowedDoctors      Doctor[]
 }
 
 model Doctor {
@@ -71,11 +75,13 @@ model Doctor {
   hospital               Hospital       @relation(fields: [hospitalId], references: [id])
   handle                 String         @unique
   Appointments           Appointments[]
+  notification           Notification[]
   hospitalId             String
   allowedPatientProfiles Patient[]
   owner                  User           @relation(fields: [userId], references: [id])
   createdAt              DateTime       @default(now())
   updatedAt              DateTime?
+  notificationChannel    String         @default(cuid())
   userId                 String         @unique
 }
 
@@ -141,11 +147,15 @@ model Notification {
   description String
   createAt    DateTime  @default(now())
   user        User      @relation(fields: [userId], references: [id])
-  userId      String
   redirectUrl String?
   checked     Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime?
+  patient     Patient?  @relation(fields: [patientId], references: [id])
+  patientId   String?
+  doctor      Doctor?   @relation(fields: [doctorId], references: [id])
+  doctorId    String?
+  userId      String
 }
 
 model VerificationMailRequest {
@@ -170,9 +180,18 @@ model Logs {
   createdAt   DateTime @default(now())
 }
 
-// enum BloodGroupType {
-//   A
-//   B
-//   AB
-//   O
-// }
+model Message {
+  id         String    @id @default(cuid())
+  value      String
+  createAt   DateTime  @default(now())
+  ChatRoom   ChatRoom? @relation(fields: [chatRoomId], references: [id])
+  chatRoomId String?
+}
+
+model ChatRoom {
+  id        String    @id @default(cuid())
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+}

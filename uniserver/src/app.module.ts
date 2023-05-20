@@ -19,10 +19,14 @@ import { HospitalGuard } from './hospital/guard/hospital.guard';
 import { HospitalController } from './hospital/hospital.controller';
 import { HospitalService } from './hospital/services/hospital.service';
 import { LogToDbService } from './log-to-db/log-to-db.service';
-import { NotifierGateway } from './notifier/notifier.gateway';
-import { NotifierService } from './notifier/notifier.service';
 import { PatientController } from './patient/patient.controller';
 import { PatientService } from './patient/service/patient.service';
+import { SearchController } from './search/search.controller';
+import { SearchService } from './search/search.service';
+import { ChattingGateway } from './socketServices/chatting/chatting.gateway';
+import { ChatService } from './socketServices/chatting/service/chat.service';
+import { NotifierGateway } from './socketServices/notifier/notifier.gateway';
+import { NotifierService } from './socketServices/notifier/service/notifier.service';
 import { UserService } from './user/user.service';
 
 
@@ -45,7 +49,7 @@ import { UserService } from './user/user.service';
       limit: 30,
     })
   ],
-  controllers: [AuthController, PatientController, HospitalController, AvatarsController, DoctorController],
+  controllers: [AuthController, PatientController, HospitalController, AvatarsController, DoctorController, SearchController],
   providers: [
     PrismaService,
     AuthService,
@@ -61,7 +65,10 @@ import { UserService } from './user/user.service';
     AvatarsService,
     LogToDbService,
     DoctorService,
-    AppAuthentication
+    AppAuthentication,
+    SearchService,
+    ChatService,
+    ChattingGateway
   ],
 })
 export class AppModule implements OnModuleDestroy {

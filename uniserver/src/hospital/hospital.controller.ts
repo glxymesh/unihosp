@@ -5,13 +5,12 @@ import { HospitalService } from './services/hospital.service';
 
 @Roles('Admin')
 @Controller('hospital')
-@UseGuards(HospitalGuard)
+// @UseGuards(HospitalGuard)
 export class HospitalController {
 
   private logger = new Logger(HospitalController.name);
 
   constructor(private hospitalService: HospitalService) { }
-
 
   @Post()
   createHospital(@Body() data: { name: string, handle?: string }) {

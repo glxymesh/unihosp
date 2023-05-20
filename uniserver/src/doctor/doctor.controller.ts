@@ -24,9 +24,8 @@ export class DoctorController {
     }, data.hospitalHandle, data.userId);
   }
 
-
   @Get()
-  getDoctor() {
-    return this.doctorService
+  getDoctor(@Body() input?: Prisma.DoctorWhereUniqueInput,) {
+    return this.doctorService.getDoctorById(input);
   }
 }
