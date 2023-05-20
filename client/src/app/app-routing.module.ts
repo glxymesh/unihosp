@@ -31,12 +31,12 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: '/auth/login' },
       {
         path: 'signup',
-        // canActivate: [LoggedInGuard],
+        canActivate: [LoggedInGuard],
         component: SignupComponent
       },
       {
         path: 'login',
-        // canActivate: [LoggedInGuard],
+        canActivate: [LoggedInGuard],
         component: LoginComponent
       },
       { path: 'reset-password', component: ResetPasswordComponent },

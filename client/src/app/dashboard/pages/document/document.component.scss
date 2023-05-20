@@ -6,8 +6,10 @@
   width: 100%;
   height: 100%;
   padding: 24px;
+} 
+.det-con{
+  width: 65vw;
 }
-
 details {
   margin-bottom: 24px;
   border: 2px solid var(--border-color);
@@ -87,5 +89,26 @@ details {
     &:active {
       transform: scale(0.95);
     }
+  }
+}
+
+@media screen and (width < 535px){
+  .recsss {
+    padding: 0 ;
+    .det-con{
+      width: 65vw;
+      min-height: 0;
+      overflow: auto;
+      font-size: 0.8rem;
+      .det{
+        gap: 4px;
+      }
+    }
+    .prof{
+      grid-template-columns: auto;
+    }
+    // .det{
+    //   font-size: 0.8rem;
+    // }
   }
 }

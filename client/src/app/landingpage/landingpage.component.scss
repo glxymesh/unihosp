@@ -43,12 +43,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row-reverse;
+  flex-direction: row-reverse; 
 }
 .content {
   width: 85vw;
   height: 80vh;
-  margin-top: 4rem;
+  margin-top: 4rem; 
 }
 .rightcontent {
   float: left;
@@ -73,7 +73,7 @@
 .rightcontent h1 {
   font-family: "Oxanium", cursive;
   text-align: center;
-  font-size: 5.5rem;
+  font-size: 8vw;
   font-weight: 700;
   background: linear-gradient(45deg, #045256 0%, #0452568f 50%, #0b1516 100%);
   -webkit-text-fill-color: transparent;
@@ -86,32 +86,33 @@
   padding: 0;
 }
 .rightcontent h3 {
-  font-size: 2rem;
+  font-size: 2vw;
   font-weight: lighter;
   color: rgb(245, 245, 245);
   font-family: "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
+  color: black;
 }
 .rightcontent h6 {
   margin: 0.5rem 0;
   width: 100%;
   color: rgba(0, 0, 0, 0.8);
-  font-size: medium;
+  font-size: 1.3vw;
   text-align: center;
   font-weight: 300;
   font-family: system-ui, "Open Sans", "Helvetica Neue", sans-serif;
 }
-.content p {
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: rgba(0, 0, 0, 1);
-  font-family: system-ui, "Open Sans", "Helvetica Neue", sans-serif;
-  text-align: justify;
-  display: inline-block;
-}
+// .content p {
+//   text-align: center;
+//   font-size: 1.2rem;
+//   font-weight: 300;
+//   color: rgba(0, 0, 0, 1);
+//   font-family: system-ui, "Open Sans", "Helvetica Neue", sans-serif;
+//   text-align: justify;
+//   display: inline-block;
+// }
 .signlogbtn {
   width: 100%;
   height: auto;
@@ -121,7 +122,7 @@
   margin-top: 2rem;
 }
 .loginbtn {
-  font-size: 1.5rem;
+  font-size: 2vw;
   color: white;
   border: 0;
   background: linear-gradient(90deg, #045256 10%, #045256 60%, #0b1516c2 100%);
@@ -137,7 +138,7 @@
   /* transform: translate(-1px,-1px); */
 }
 .signupbtn {
-  font-size: 1.2rem;
+  font-size: 1.6vw;
   color: #0b1516c2;
   border: 0;
   padding: 0.6em 2em;
@@ -290,4 +291,71 @@ footer {
 .ddark:hover {
   color: #2f776d;
   transition: 250ms;
+}
+
+
+
+
+
+
+// Media queries for mobile
+@media screen and (width < 535px){
+  .content{
+    height: 80vh;
+    width: 100vw;
+    margin: 5vh 5vw;
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    flex-direction: column;
+  }
+  .leftcontent{
+    // width: 75%;
+    width: 95%;
+    height: auto;
+    margin-top: 40px;
+  }
+  .rightcontent{
+    width: 75%;
+    height: auto;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    flex-direction: column;
+    h1{
+      font-size: 4rem;
+      margin-bottom: 0.2rem;
+    }h3{
+      font-size: 1rem;
+    }h6{
+      font-size: medium;
+    }
+  }
+  .loginbtn{
+    font-size: 1.5rem;
+  }
+  .signupbtn{
+    font-size: 1.2rem;
+  }
+  .wtnContent{
+    padding: 1.5rem 2rem;
+  }
+  .wtnContent p{
+    text-align: justify ;
+    font-size: 1rem !important;
+  }
+  .disNone{
+    height: 0.1rem !important;
+  }
+  .footercontent{
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+// Media queries for tablet/pc
+@media screen and (width > 535px){
+
 }

@@ -8,17 +8,7 @@
     grid-auto-rows: minmax(clamp(200px, 40vh, 400px), auto);
   }
 }
-
-@media screen and (width < 750px) {
-  .content {
-    & > div:nth-child(2) {
-      gap: 24px 0px;
-      margin-top: 2rem;
-      width: 100%;
-      grid-template-columns: 1fr;
-    }
-  }
-}
+ 
 
 .boxmain {
   padding: 1.5rem 2rem;
@@ -68,7 +58,6 @@
   margin-bottom: 1.5rem;
   text-decoration: none;
 }
-
 .appointments,
 .notification {
   list-style: none;
@@ -124,13 +113,13 @@
           font-size: 0.9rem;
           font-weight: 500;
         }
-
+        
         p {
           font-size: 0.75rem;
         }
       }
     }
-
+    
     &.ntfy {
       a {
         .apt {
@@ -145,7 +134,7 @@
         }
       }
     }
-
+    
     &:last-child {
       border: none;
     }
@@ -158,10 +147,10 @@
 
 .notification {
   list-style: none;
-  margin: 0;
+  margin: 0; 
   padding: 0;
   width: 100%;
-
+  
   li {
     width: 100%;
     height: 80px;
@@ -170,5 +159,38 @@
     position: relative;
     padding-bottom: 5px;
     border-bottom: 1px solid var(--border-color);
+  }
+}
+
+@media screen and (width < 750px) {
+  .content {
+    & > div:nth-child(2) {
+      gap: 24px 0px;
+      margin-top: 2rem;
+      width: 100%;
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media screen and (width < 535px){
+  .lessmargin{
+    margin-top: 1rem !important;
+  }
+  .boxmain h1{
+    font-size: 1rem;
+  }
+  .boxmain{
+    padding: 1rem 1.5rem;
+    height: auto;
+    
+    ul li{
+      font-size: .8rem;
+    }
+  }
+  .content {
+    & > div:nth-child(2) {
+      grid-auto-rows:auto;
+    }
   }
 }

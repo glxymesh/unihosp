@@ -2,16 +2,16 @@
     <!-- <div class="content"> -->
     <div class="tp-usr-dtls">
         <h1>Past Medical Record, {{patient.fName}}</h1>
-        <p id="p">
+        <p id="p" class="fontSize">
             This dashboard is wholeheartedly designed to manage almost everything about
             you health.
-        </p>
+        </p> 
     </div>
 
-    <div class="recs">
-        <div *ngFor="let rec of recs">
-            <details>
-                <summary>
+    <div class="prof">
+        <div class="recsss" *ngFor="let rec of recs">
+            <details class="det-con">
+                <summary class="det">
                     <h2 class="rec-tle">{{ rec.title }}</h2>
                     <span class="dte">{{ rec.createdAt | date: 'mediumDate'}}</span>
                 </summary>

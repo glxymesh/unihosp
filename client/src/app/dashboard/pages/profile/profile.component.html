@@ -14,10 +14,10 @@
             </label>
         </div>
         <h1>Your Profile, {{ patient.fName }} </h1>
-        <p id="p">
+        <p id="p" class="fontSize">
             This dashboard is wholeheartedly designed to manage almost everything about
             you health.
-        </p>
+        </p> 
     </div>
     <div class="profile-data">
         <div class="prof">
@@ -26,7 +26,7 @@
                     <h2>Full Name: </h2>
                     <span> {{ patient.fName + " " + patient.lName}} </span>
                 </div>
-            </div>
+            </div> 
             <div class="det-con">
                 <div class="det">
                     <h2>Uni Id: </h2>
@@ -57,9 +57,11 @@
                     <span>{{user.contact}}</span>
                 </div>
             </div>
-            <!-- <div class="ed-btn">
-                <button>Edit</button>
+
+            <!-- <div>
+                <button class="ed-btn">Edit</button>
             </div> -->
+
         </div>
         <!-- <div class="prof" *ngIf="!editable">
 
