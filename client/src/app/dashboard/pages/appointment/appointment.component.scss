@@ -52,6 +52,7 @@
 }
 
 .hosInfo {
+  width: 45vw;
   margin: 1.5rem 8rem;
   display: flex;
   border-radius: 1.5rem;
@@ -302,6 +303,12 @@ input[type="file"] {
   box-shadow: 0px 0px 25px #3b887e;
   outline: 0;
 }
+.askApp{
+  display: none;
+}
+.topmargin{
+  margin-top: 1rem;
+}
 
 @media screen and (width < 750px) {
   .content {
@@ -323,7 +330,11 @@ input[type="file"] {
       grid-auto-rows: auto;
     }
   }
-  
+  .a-cont{
+    h1.hd1{
+      margin: 0.5rem;
+    }
+  }
   h1 {
     font-size: 1.3rem;
     font-weight:600;
@@ -336,12 +347,46 @@ input[type="file"] {
       font-size:.8rem;
     }
   }
-  .a-cont{
-    h1.hd1 {
-      margin: 0;
-      margin-top: 0.5rem;
-    } 
+  .hosInfo{
+    width:80vw;
+    margin-bottom: 0;
+    img{
+      width: 35vw;
+      height:35vw;
+    }h2{
+      font-size: medium;
+    }h3{
+      font-size: small;
+      margin: 0.3rem 0;
+    }
   }
-
-
+  .addmore {
+    display: none;
+  }
+  br{
+    display:block;
+  }
+  #btn2{
+    margin-bottom: 1.2rem;
+  }
+  .askApp{
+    display: block;
+    width: 75vw;
+    background-color: #285b54f3;
+    font-size: .8rem;
+    color: #f2f2f2;
+    outline: 1px solid #3b887e;
+    padding: .5rem;
+    border-radius: 2.5rem;
+    box-shadow: 0px 0px 10px #3b887e;
+    transition: 250ms;
+    cursor: pointer;
+  }
+  .askApp:hover{
+    background-color: #2f776d;
+    // box-shadow: 0px 0px 25px #00000093;
+    // box-shadow: 0px 0px 25px #f2f2f285;
+    transition: 250ms;
+    outline: 0;
+  }
 }
