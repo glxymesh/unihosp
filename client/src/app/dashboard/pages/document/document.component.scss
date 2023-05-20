@@ -7,7 +7,9 @@
   height: 100%;
   padding: 24px;
 } 
-
+.det-con{
+  width: 65vw;
+}
 details {
   margin-bottom: 24px;
   border: 2px solid var(--border-color);
@@ -94,7 +96,7 @@ details {
   .recsss {
     padding: 0 ;
     .det-con{
-      width: 100%;
+      width: 65vw;
       min-height: 0;
       overflow: auto;
       font-size: 0.8rem;

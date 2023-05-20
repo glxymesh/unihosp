@@ -22,7 +22,8 @@ utp-sde {
 
 .ctn {
   grid-area: content;
-  max-width: 1200px;
+  // to make the white content responsive
+  // max-width: 1200px;
   padding: 1rem 1.5rem;
   margin: 60px 60px;
   border: 1px solid var(--border-color);

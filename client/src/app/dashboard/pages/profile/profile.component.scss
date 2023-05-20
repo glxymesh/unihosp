@@ -125,6 +125,27 @@
   }
 }
 
+.ed-btn{
+  display: block;
+  width: 100%;
+  background-color: #285b54f3;
+  font-size: .8rem;
+  color: #f2f2f2;
+  outline: 1px solid #3b887e;
+  padding: .5rem;
+  border-radius: 2.5rem;
+  box-shadow: 0px 0px 10px #3b887e;
+  transition: 250ms;
+  cursor: pointer;
+}
+.ed-btn:hover{
+  background-color: #2f776d;
+  // box-shadow: 0px 0px 25px #00000093;
+  // box-shadow: 0px 0px 25px #f2f2f285;
+  transition: 250ms;
+  outline: 0;
+}
+
 @media screen and (width < 535px){
   .profile-data {
     .det-con{
@@ -133,7 +154,7 @@
       overflow: auto;
       padding: 1rem;
       font-size: 0.8rem;
-      .det{
+      .det{ 
         gap: 4px;
       }
     }
