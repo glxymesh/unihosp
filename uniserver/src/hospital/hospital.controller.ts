@@ -20,6 +20,15 @@ export class HospitalController {
     })
   }
 
+  @Post("/multi")
+  createHospitals(@Body() data: { name: string, handle?: string }[]) {
+    return this.hospitalService.createManyHospital({
+      data: [
+
+      ]
+    })
+  }
+
   @Post()
   updateHospital() {
 

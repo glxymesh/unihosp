@@ -15,9 +15,28 @@ export class HospitalService {
     });
   }
 
-  createManyHospital(input: Prisma.HospitalCreateManyInput) {
+  async createHandle(name: string, count = 0): Promise<string> {
+    const splittedName = name.split(" ");
+    const generated = "@" + splittedName.map(v => v.slice(-3 - count)).join("")
+    const alreadyThere = await this.prismaService.hospital.findUnique({ where: { handle: generated } });
+    if (alreadyThere) {
+      return this.createHandle(name, - count);
+    }
+    return generated;
+  }
+
+  async createManyHospital(inputs: { name: string, handle?: string, location?: string }[]) {
+    let data: { name: string, handle: string, location?: string }[] = [];
+    for (const input of inputs) {
+      let handle = "";
+      if (!input.handle) {
+        handle = await this.createHandle(input.name);
+      }
+      data.push({ ...input, handle });
+    }
     return this.prismaService.hospital.createMany({
-      data: input
+      data,
+      skipDuplicates: true
     });
   }
 
