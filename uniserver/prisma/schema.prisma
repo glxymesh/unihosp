@@ -48,6 +48,15 @@ model Hospital {
   Appointments           Appointments[]
   createdAt              DateTime       @default(now())
   updatedAt              DateTime?
+  Coordinates            Coordinates?
+}
+
+model Coordinates {
+  id         String   @id @default(cuid())
+  longitude  Int
+  latitude   Int
+  hospital   Hospital @relation(fields: [hospitalId], references: [id])
+  hospitalId String   @unique
 }
 
 model Patient {

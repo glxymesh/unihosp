@@ -37,7 +37,9 @@ export class HospitalService {
     return this.prismaService.hospital.createMany({
       data,
       skipDuplicates: true
-    });
+    }).catch((err) => ({
+      message: err.message
+    }));
   }
 
   getHospitals(input: Prisma.HospitalWhereInput) {
