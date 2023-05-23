@@ -8,15 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
       <div class="msg">
         <button>x</button>
         <div class="left">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFKuvjmj5syIRX22nP4OBMaQtR32ziUhaVOvXt7bYm&s"
-            alt="">
+          <img [src]="imgSrc" [alt]="title">
         </div>
         <div class="right">
           <div class="title">
-            Yaha pe title rakh
+            {{ title }}
           </div>
           <div class="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            {{ description }}
           </div>
         </div>
       </div>
@@ -128,6 +127,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class NotificationComponent implements OnInit {
 
   constructor() { }
+
+  @Input("titile") title: string = "";
+  @Input("description") description: string = "";
+  @Input("src") imgSrc = "";
 
   ngOnInit() { }
 }

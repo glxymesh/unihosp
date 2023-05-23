@@ -48,7 +48,7 @@ model Hospital {
   Appointments           Appointments[]
   createdAt              DateTime       @default(now())
   updatedAt              DateTime?
-  Coordinates            Coordinates?
+  coordinates            Coordinates?
 }
 
 model Coordinates {
