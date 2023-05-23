@@ -53,8 +53,8 @@ model Hospital {
 
 model Coordinates {
   id         String   @id @default(cuid())
-  longitude  Int
-  latitude   Int
+  longitude  Float
+  latitude   Float
   hospital   Hospital @relation(fields: [hospitalId], references: [id])
   hospitalId String   @unique
 }

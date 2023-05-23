@@ -3,6 +3,8 @@ import { HospitalGuard } from './guard/hospital.guard';
 import Roles from './metadata/roles.metadata';
 import { HospitalService } from './services/hospital.service';
 
+interface CreateMultipleHospitalInput { name: string, handle?: string, location?: string, coordinates: { longitude: number, latitude: number } }
+
 @Roles('Admin')
 @Controller('hospital')
 // @UseGuards(HospitalGuard)
@@ -21,12 +23,8 @@ export class HospitalController {
   }
 
   @Post("/multi")
-  createHospitals(@Body() data: { name: string, handle?: string }[]) {
-    return this.hospitalService.createManyHospital({
-      data: [
-
-      ]
-    })
+  createHospitals(@Body() data: []) {
+    return this.hospitalService.createManyHospital(data);
   }
 
   @Post()
